@@ -1,0 +1,484 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Valey - Home</title>
+    <link rel="icon" href="icon.webp"/>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600&family=Quicksand:wght@400;500;600;700&family=Mali:wght@400;500;600&display=swap" rel="stylesheet" />
+    <style>
+      .font-caveat  { font-family: 'Caveat', cursive; }
+      .font-mali    { font-family: 'Mali', cursive; }
+      .font-quick   { font-family: 'Quicksand', sans-serif; }
+
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      html { scroll-behavior: smooth; }
+      body { font-family: 'Quicksand', sans-serif; background-color: #fff5f7; color: #5c4a4a; overflow-x: hidden; }
+
+      .nav-tab {
+        font-family: 'Quicksand', sans-serif;
+        font-weight: 500;
+        font-size: 15px;
+        padding: 8px 20px;
+        border-radius: 20px 20px 0 0;
+        text-decoration: none;
+        line-height: 1.5;
+        transition: all 0.2s ease;
+      }
+      .nav-tab.active   { background: #ffb3c6; color: #fff; box-shadow: 0 2px 6px rgba(255,179,198,0.4); }
+      .nav-tab.inactive { background: #fff9fa; color: #5c4a4a; border: 1px solid #ffb3c6; }
+      .nav-tab.inactive:hover { background: #fff0f4; }
+
+      #mobile-nav { display: none; position: fixed; top: 64px; left: 0; width: 100%; background: #fff; z-index: 99; flex-direction: column; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+      #mobile-nav a { padding: 14px 24px; color: #5c4a4a; font-weight: 500; text-decoration: none; border-bottom: 1px solid #fff0f4; font-family: 'Quicksand', sans-serif; }
+      #mobile-nav a:hover { background: #fff5f7; color: #ffb3c6; }
+      #mobile-nav.open { display: flex; }
+
+      .polaroid-wrap {
+        position: relative;
+        flex-shrink: 0;
+        transform-origin: top center;
+        transform: rotate(2deg);
+        transition: transform 0.45s cubic-bezier(0.34,1.56,0.64,1), filter 0.35s ease;
+        will-change: transform;
+      }
+      .polaroid-wrap:hover {
+        transform: rotate(1.5deg) scale(1.02);
+        filter: drop-shadow(0 28px 48px rgba(0,0,0,0.18));
+      }
+      .polaroid-wrap img { display: block; filter: drop-shadow(0 20px 40px rgba(0,0,0,0.12)); }
+
+      .about-polaroid {
+        flex-shrink: 0;
+        transform-origin: top center;
+        transform: rotate(-3deg);
+        transition: transform 0.45s cubic-bezier(0.34,1.56,0.64,1), filter 0.35s ease;
+      }
+      .about-polaroid:hover {
+        transform: rotate(-1.5deg) scale(1.02);
+        filter: drop-shadow(0 24px 44px rgba(0,0,0,0.16));
+      }
+      .about-polaroid img { display: block; }
+
+      .deco { position: absolute; pointer-events: none; }
+      .deco-circle-lg { width: 32px;  height: 32px;  border-radius: 50%; background: rgba(255,179,198,0.2); }
+      .deco-circle-sm { width: 20px;  height: 20px;  border-radius: 50%; background: rgba(255,179,198,0.25); }
+      .deco-pill      { width: 64px;  height: 8px;   border-radius: 99px; background: rgba(255,179,198,0.2); }
+      .deco-square    { width: 24px;  height: 24px;  background: rgba(255,229,236,0.45); transform: rotate(45deg); }
+      .deco-ring      { width: 40px;  height: 40px;  border-radius: 50%; border: 3px solid rgba(255,179,198,0.3); background: transparent; }
+      .deco-dot       { width: 10px;  height: 10px;  border-radius: 50%; background: rgba(255,179,198,0.35); }
+      .deco-ring-lg   { width: 56px;  height: 56px;  border-radius: 50%; border: 2px solid rgba(255,179,198,0.2); background: transparent; }
+
+      @keyframes floatA { 0%,100%{transform:translateY(0)   rotate(0deg)}  50%{transform:translateY(-12px) rotate(4deg)} }
+      @keyframes floatB { 0%,100%{transform:translateY(0)   rotate(0deg)}  50%{transform:translateY(-8px)  rotate(-3deg)} }
+      @keyframes floatC { 0%,100%{transform:translateY(0)   rotate(45deg)} 50%{transform:translateY(-10px) rotate(50deg)} }
+      @keyframes spinSlow { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+      @keyframes pulse   { 0%,100%{opacity:.25;transform:scale(1)} 50%{opacity:.5;transform:scale(1.15)} }
+
+      .fa  { animation: floatA 4s ease-in-out infinite; }
+      .fb  { animation: floatB 5s ease-in-out infinite 0.5s; }
+      .fc  { animation: floatC 4.5s ease-in-out infinite 1s; }
+      .fd  { animation: spinSlow 12s linear infinite; }
+      .fp  { animation: pulse 3.5s ease-in-out infinite; }
+
+      .sym-deco { font-size: 36px; color: #ffa3ba; opacity: 0.7; position: absolute; line-height: 1; animation: floatA 5s ease-in-out infinite; }
+
+      @keyframes iconBounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-5px)} }
+      .hero-sym:hover { animation: iconBounce 0.6s ease-in-out; cursor: default; }
+
+      .social-icons { display: flex; gap: 14px; margin-top: 16px; }
+      .social-icons a {
+        width: 38px; height: 38px; border-radius: 10px;
+        border: 1.5px solid #ffb3c6;
+        display: flex; align-items: center; justify-content: center;
+        color: #5c4a4a; font-size: 16px; text-decoration: none;
+        transition: background 0.25s ease, color 0.25s ease, transform 0.25s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.25s ease;
+      }
+      .social-icons a:hover {
+        background: #ffb3c6;
+        color: #fff;
+        transform: translateY(-4px) scale(1.12);
+        box-shadow: 0 6px 18px rgba(255,179,198,0.4);
+      }
+
+      .achievement-card {
+        background: #fff;
+        border-radius: 28px;
+        border: 4px solid #ffb3c6;
+        box-shadow: 0 4px 16px rgba(255,179,198,0.15);
+        padding: 32px 24px;
+        display: flex; flex-direction: column; align-items: center; text-align: center;
+        cursor: default;
+        transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.4s ease;
+      }
+      .achievement-card:hover { transform: translateY(-8px) scale(1.02); box-shadow: 0 16px 40px rgba(255,179,198,0.3); }
+      .achievement-icon {
+        width: 64px; height: 64px; border-radius: 16px;
+        background: rgba(255,154,184,0.12);
+        display: flex; align-items: center; justify-content: center;
+        font-size: 26px; color: #ffb3c6; margin-bottom: 14px;
+      }
+
+      .timeline-line { position: absolute; left: 31px; top: 8px; bottom: 8px; width: 4px; background: #ffb3c6; border-radius: 99px; }
+      .org-dot {
+        width: 64px; height: 64px; border-radius: 50%; flex-shrink: 0;
+        background: linear-gradient(180deg,#ffb3c6 0%,#ffc9d9 100%);
+        border: 4px solid #fff;
+        box-shadow: 0 4px 12px rgba(255,179,198,0.35);
+        display: flex; align-items: center; justify-content: center;
+        color: #fff; font-size: 22px; z-index: 1;
+      }
+      .org-card {
+        flex: 1; background: #fff; border-radius: 24px;
+        border: 2px solid #f4c4b0;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+        padding: 28px 28px 20px;
+        transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.4s ease;
+      }
+      .org-card:hover { transform: translateY(-6px); box-shadow: 0 16px 36px rgba(255,179,198,0.25); }
+      .org-badge {
+        background: #ffe5ec; color: #5c4a4a; font-size: 13px;
+        padding: 5px 16px; border-radius: 999px; white-space: nowrap;
+        font-family: 'Quicksand', sans-serif; font-weight: 500;
+      }
+      .org-divider { font-size: 18px; color: #5c4a4a; opacity: 0.35; margin-top: 16px; letter-spacing: 6px; }
+
+      .reveal {
+        opacity: 0; transform: translateY(40px);
+        transition: opacity 0.7s cubic-bezier(0.25,0.46,0.45,0.94), transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94);
+      }
+      .reveal.visible { opacity: 1; transform: translateY(0); }
+      .reveal-delay-1 { transition-delay: 0.1s; }
+      .reveal-delay-2 { transition-delay: 0.2s; }
+      .reveal-delay-3 { transition-delay: 0.3s; }
+
+      .footer-links a { display: block; color: rgba(255,255,255,0.65); font-size: 13px; margin-bottom: 8px; text-decoration: none; transition: color 0.2s; }
+      .footer-links a:hover { color: #ffb3c6; }
+      .footer-social a {
+        width: 38px; height: 38px; border-radius: 10px;
+        border: 1.5px solid rgba(255,179,198,0.5);
+        display: flex; align-items: center; justify-content: center;
+        color: rgba(255,255,255,0.8); font-size: 16px; text-decoration: none;
+        transition: all 0.25s ease;
+      }
+      .footer-social a:hover { background: #ffb3c6; color: #fff; border-color: #ffb3c6; }
+
+      @media (max-width: 768px) {
+        .nav-tabs { display: none !important; }
+        .mobile-menu-btn { display: flex !important; }
+        .hero-inner { flex-direction: column !important; gap: 32px !important; text-align: center !important; align-items: center !important; }
+        .polaroid-wrap img { width: 240px !important; }
+        .hero-title { font-size: 56px !important; }
+        .about-card-inner { flex-direction: column !important; align-items: center !important; text-align: center !important; padding: 32px 24px !important; gap: 24px !important; }
+        .about-polaroid img { width: 160px !important; }
+        .org-dot { width: 48px !important; height: 48px !important; font-size: 18px !important; }
+        .timeline-line { display: none !important; }
+      }
+    </style>
+  </head>
+  <body class="bg-[#fff5f7] text-[#5c4a4a] font-quick overflow-x-hidden">
+
+    <header class="fixed top-0 left-0 w-full z-[100] bg-white/85 backdrop-blur-md shadow-[0_2px_8px_rgba(0,0,0,0.08)] h-16 flex items-center px-8 justify-between">
+      <img src="valey-logo.webp" alt="Valey logo" class="h-11 object-contain" />
+
+      <nav class="nav-tabs flex items-end gap-1">
+        <a href="home.html" class="nav-tab active">Home</a>
+        <a href="hobbies.html" class="nav-tab inactive">Hobbies</a>
+        <a href="gallery.html" class="nav-tab inactive">Gallery</a>
+      </nav>
+
+      <button class="mobile-menu-btn hidden items-center justify-center bg-transparent border-0 cursor-pointer text-2xl text-[#ffb3c6]" id="menuBtn">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </header>
+
+    <div id="mobile-nav">
+      <a href="home.html">Home</a>
+      <a href="hobbies.html">Hobbies</a>
+      <a href="gallery.html">Gallery</a>
+    </div>
+
+    <section id="home" class="relative min-h-screen flex items-center bg-[#fff5f7] pt-20 pb-10 px-6 md:px-12 overflow-hidden">
+
+      <div class="deco deco-circle-lg fa"  style="top:12%;right:8%"></div>
+      <div class="deco deco-circle-sm fb"  style="top:8%;right:14%"></div>
+      <div class="deco deco-pill fa"       style="top:22%;left:8%;transform:rotate(-12deg)"></div>
+      <div class="deco deco-square fc"     style="top:60%;left:5%"></div>
+      <div class="deco deco-ring fb"       style="bottom:20%;right:6%"></div>
+      <div class="deco deco-circle-sm fa"  style="bottom:30%;left:12%"></div>
+      <div class="deco deco-pill fb"       style="top:75%;right:15%;transform:rotate(12deg)"></div>
+      <div class="deco deco-ring fa"       style="top:15%;left:40%;opacity:0.3"></div>
+      <div class="deco deco-dot fp"        style="top:35%;right:22%"></div>
+      <div class="deco deco-ring-lg fd"    style="bottom:10%;left:30%;opacity:0.18"></div>
+      <div class="deco deco-square fb"     style="top:48%;right:28%;opacity:0.3"></div>
+      <div class="sym-deco fb"             style="bottom:15%;left:5%;font-size:28px">✿</div>
+
+      <div class="hero-inner max-w-[1100px] mx-auto w-full flex items-center justify-center gap-16 lg:gap-20">
+
+        <div class="polaroid-wrap" id="polaroidEl">
+          <img src="polaroid.webp" alt="Portrait of Valerie"
+               class="w-[300px] md:w-[380px] lg:w-[420px] max-w-[90vw]" />
+        </div>
+
+        <div class="max-w-[520px]">
+          <h1 class="font-caveat hero-title text-[80px] leading-[1.1] text-[#5c4a4a] mb-5">
+            Hi, I'm <span class="text-[#ffb3c6]">Valerie!</span>
+          </h1>
+          <p class="text-base leading-[1.75] text-[#5c4a4a] mb-8 max-w-[440px]">
+            This is my personal website where I share my passions, creativity,
+            and journey as an informatics student. Here, you can explore my
+            hobbies and gallery.
+          </p>
+
+          <div class="flex gap-4 flex-wrap mb-7">
+            <a href="#"
+               class="font-quick font-bold bg-[#ffb3c6] text-white px-7 py-[13px] rounded-full no-underline shadow-[0_6px_20px_rgba(255,179,198,0.45)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_28px_rgba(255,179,198,0.5)]">
+              View My Portfolio <i class="fa-solid fa-arrow-right"></i>
+            </a>
+            <a href="#"
+               class="font-quick font-bold bg-white text-[#ffb3c6] px-7 py-[13px] rounded-full no-underline border-2 border-[#ffb3c6] shadow-[0_4px_12px_rgba(255,179,198,0.2)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_22px_rgba(255,179,198,0.3)]">
+              Learn More
+            </a>
+          </div>
+
+          <div class="flex gap-4 opacity-45 text-[22px] text-[#5c4a4a]">
+            <span class="hero-sym inline-block">✿</span>
+            <span class="hero-sym inline-block">✦</span>
+            <span class="hero-sym inline-block">♡</span>
+            <span class="hero-sym inline-block">✿</span>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="about-section" class="bg-white py-16 px-6 md:px-12 relative overflow-hidden">
+
+      <div class="deco deco-ring-lg fb" style="top:10%;right:5%;opacity:0.25"></div>
+      <div class="deco deco-dot fp"     style="top:20%;left:3%;opacity:0.5"></div>
+      <div class="deco deco-square fa"  style="bottom:15%;right:10%;opacity:0.3"></div>
+      <div class="deco deco-circle-sm fb" style="bottom:10%;left:8%;opacity:0.4"></div>
+
+      <div class="about-card-inner reveal max-w-[1000px] mx-auto bg-white rounded-3xl border-4 border-[#ffb3c6] shadow-[0_8px_32px_rgba(255,179,198,0.18)] p-12 md:p-14 flex items-start gap-14 relative">
+
+        <div class="about-polaroid">
+          <img src="about-me.webp" alt="Valerie portrait"
+               class="w-[160px] md:w-[210px] lg:w-[240px] max-w-[90vw]" />
+        </div>
+
+        <div class="flex-1">
+          <h2 class="font-caveat text-[48px] text-[#5c4a4a] mb-5">About Me ✿</h2>
+          <p class="text-[17px] leading-[1.75] text-[#5c4a4a] mb-6 max-w-[560px]">
+            Hello, I'm Valerie. I'm a second-semester Informatics student at
+            Universitas Ciputra who loves being creative and expressing myself
+            through different forms of art and crafts. I enjoy turning ideas
+            into something meaningful and believe in growing a little every day.
+          </p>
+          <p class="text-[17px] text-black font-medium mb-3">Connect with me</p>
+          <div class="social-icons">
+            <a href="https://www.instagram.com/marshavalerie_?igsh=NXNwZXV4bnZldGtt" title="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://github.com/hellohello823" title="GitHub"><i class="fa-brands fa-github"></i></a>
+            <a href="mailto:marsha.valerie.wibowo@gmail.com" title="Gmail"><i class="fas fa-envelope"></i></a>
+            <a href="https://www.linkedin.com/in/marsha-valerie-wibowo-90baa137a/" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="achievements-section" class="bg-white pt-4 pb-16 px-6 md:px-12 relative overflow-hidden">
+
+      <div class="deco deco-circle-lg fb" style="top:20px;right:50px"></div>
+      <div class="deco deco-ring fa"      style="top:-20px;right:80px"></div>
+      <div class="deco deco-pill fb"      style="top:60px;left:180px;transform:rotate(-12deg)"></div>
+      <div class="deco deco-square fc"    style="bottom:40px;left:8px"></div>
+      <div class="deco deco-pill fa"      style="bottom:60px;right:120px;transform:rotate(-45deg)"></div>
+      <div class="deco deco-circle-sm fb" style="top:30px;left:80px"></div>
+      <div class="deco deco-dot fp"       style="bottom:30px;right:200px;opacity:0.5"></div>
+
+      <h2 class="font-caveat text-[48px] text-[#5c4a4a] text-center mb-10 reveal">★ My Achievements ★</h2>
+
+      <div class="max-w-[900px] mx-auto grid grid-cols-1 sm:grid-cols-2 gap-6 reveal reveal-delay-1 achievements-grid">
+        <article class="achievement-card">
+          <div class="achievement-icon"><i class="fas fa-medal"></i></div>
+          <h3 class="font-mali text-[20px] text-[#5c4a4a] mb-2 font-medium">Silver Medalist</h3>
+          <p class="text-[14px] text-[#5c4a4a] leading-[1.6]">Drawing Competition,<br />Robins Art Course — Surabaya, 2021</p>
+        </article>
+        <article class="achievement-card">
+          <div class="achievement-icon"><i class="fas fa-trophy"></i></div>
+          <h3 class="font-mali text-[20px] text-[#5c4a4a] mb-2 font-medium">Second Place</h3>
+          <p class="text-[14px] text-[#5c4a4a] leading-[1.6]">ITASE 6.0 UX Design Competition,<br />Universitas Telkom — Purwokerto, 2025</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="org-section" class="bg-[#fff5f7] py-16 px-6 md:px-12 relative overflow-hidden">
+
+      <div class="deco deco-ring-lg fd"    style="top:8%;right:4%;opacity:0.2"></div>
+      <div class="deco deco-circle-sm fp"  style="top:15%;left:5%;opacity:0.45"></div>
+      <div class="deco deco-square fb"     style="bottom:12%;right:8%;opacity:0.3"></div>
+      <div class="deco deco-dot fa"        style="bottom:20%;left:15%;opacity:0.5"></div>
+      <div class="sym-deco fa"             style="top:5%;right:18%;font-size:22px;opacity:0.4">✦</div>
+
+      <h2 class="font-caveat text-[48px] text-[#5c4a4a] text-center mb-12 reveal">✿ Organization Experiences ✿</h2>
+
+      <div class="org-timeline max-w-[900px] mx-auto relative">
+        <div class="timeline-line hidden md:block"></div>
+
+        <div class="org-item flex gap-6 items-start mb-8 relative reveal">
+          <div class="org-dot hidden md:flex"><i class="fas fa-laptop-code"></i></div>
+          <div class="org-card">
+            <div class="flex justify-between items-start gap-3 flex-wrap mb-3">
+              <div>
+                <h3 class="font-mali text-[22px] text-[#ffb3c6] font-semibold mb-1">Internship - PULSE</h3>
+                <p class="text-[14px] text-[#5c4a4a] flex items-center gap-1.5">
+                  <i class="fas fa-map-marker-alt text-[#ffb3c6] text-[12px]"></i>
+                  IMT UC Student Union - (Tech, LO, and Event division)
+                </p>
+              </div>
+              <span class="org-badge">2025 - Present</span>
+            </div>
+            <p class="text-[15px] text-[#5c4a4a] leading-[1.7]">Participating in website development, event hosting as an MC, and marketing activities within the student union.</p>
+            <div class="org-divider">✦ ✿ ✦</div>
+          </div>
+        </div>
+
+        <div class="org-item flex gap-6 items-start mb-8 relative reveal reveal-delay-1">
+          <div class="org-dot hidden md:flex"><i class="fas fa-globe"></i></div>
+          <div class="org-card">
+            <div class="flex justify-between items-start gap-3 flex-wrap mb-3">
+              <div>
+                <h3 class="font-mali text-[22px] text-[#ffb3c6] font-semibold mb-1">Rector Cup 2026 Committee</h3>
+                <p class="text-[14px] text-[#5c4a4a] flex items-center gap-1.5">
+                  <i class="fas fa-map-marker-alt text-[#ffb3c6] text-[12px]"></i>
+                  PDD Website Division
+                </p>
+              </div>
+              <span class="org-badge">2025 - Present</span>
+            </div>
+            <p class="text-[15px] text-[#5c4a4a] leading-[1.7]">Responsible for website content, updates, and digital publication for the Rector Cup event.</p>
+            <div class="org-divider">✦ ✿ ✦</div>
+          </div>
+        </div>
+
+        <div class="org-item flex gap-6 items-start mb-8 relative reveal reveal-delay-2">
+          <div class="org-dot hidden md:flex"><i class="fab fa-google"></i></div>
+          <div class="org-card">
+            <div class="flex justify-between items-start gap-3 flex-wrap mb-3">
+              <div>
+                <h3 class="font-mali text-[22px] text-[#ffb3c6] font-semibold mb-1">GDGoC Core Team 2025/2026</h3>
+                <p class="text-[14px] text-[#5c4a4a] flex items-center gap-1.5">
+                  <i class="fas fa-map-marker-alt text-[#ffb3c6] text-[12px]"></i>
+                  Event Division
+                </p>
+              </div>
+              <span class="org-badge">2025 - Present</span>
+            </div>
+            <p class="text-[15px] text-[#5c4a4a] leading-[1.7]">Participating in event planning, coordination, and execution for Google Developer Groups on Campus activities.</p>
+            <div class="org-divider">✦ ✿ ✦</div>
+          </div>
+        </div>
+
+        <div class="org-item flex gap-6 items-start mb-8 relative reveal reveal-delay-3">
+          <div class="org-dot hidden md:flex"><i class="fas fa-heart-pulse"></i></div>
+          <div class="org-card">
+            <div class="flex justify-between items-start gap-3 flex-wrap mb-3">
+              <div>
+                <h3 class="font-mali text-[22px] text-[#ffb3c6] font-semibold mb-1">Ciputra Fair Volunteer</h3>
+                <p class="text-[14px] text-[#5c4a4a] flex items-center gap-1.5">
+                  <i class="fas fa-map-marker-alt text-[#ffb3c6] text-[12px]"></i>
+                  Security &amp; Health Division
+                </p>
+              </div>
+              <span class="org-badge">2026 - Present</span>
+            </div>
+            <p class="text-[15px] text-[#5c4a4a] leading-[1.7]">Assisting with event safety, crowd management, and health support during Ciputra Color Run 2026.</p>
+            <div class="org-divider">✦ ✿ ✦</div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <footer class="text-white pt-16 pb-8 px-6 md:px-12" style="background:linear-gradient(180deg,#111111 0%,#1a0a0a 55%,#2d1a1a 100%)">
+      <div class="footer-inner max-w-[1000px] mx-auto grid grid-cols-1 md:grid-cols-[1fr_160px_1fr] gap-10 pb-10 border-b border-white/15">
+
+        <div class="footer-logo">
+          <img src="valey-logo-white.webp" alt="Valey logo" class="h-14 object-contain mb-4" />
+          <p class="text-[13px] text-white/60 leading-[1.7] max-w-[260px]">
+            Informatics student passionate about creativity, technology, and artistic expression. Exploring the intersection of code and craft.
+          </p>
+        </div>
+
+        <nav class="footer-links">
+          <h2 class="text-[15px] font-bold mb-4">Quick Links</h2>
+          <a href="home.html">Home</a>
+          <a href="hobbies.html">Hobby</a>
+          <a href="gallery.html">Gallery</a>
+        </nav>
+
+        <div class="footer-connect">
+          <h2 class="text-[15px] font-bold mb-4">Connect</h2>
+          <div class="footer-social flex gap-3 mb-3">
+            <a href="https://www.instagram.com/marshavalerie_?igsh=NXNwZXV4bnZldGtt" title="Instagram"><i class="fab fa-instagram"></i></a>
+            <a href="https://github.com/hellohello823" title="GitHub"><i class="fa-brands fa-github"></i></a>
+            <a href="mailto:marsha.valerie.wibowo@gmail.com" title="Gmail"><i class="fas fa-envelope"></i></a>
+            <a href="https://www.linkedin.com/in/marsha-valerie-wibowo-90baa137a/" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          </div>
+          <p class="text-[12px] text-white/50">Follow along on my creative journey</p>
+        </div>
+      </div>
+
+      <div class="max-w-[1000px] mx-auto pt-7 text-center">
+        <p class="text-[13px] text-white/50">© 2026 Valey. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script>
+      (function () {
+        const menuBtn  = document.getElementById('menuBtn');
+        const mobileNav = document.getElementById('mobile-nav');
+        menuBtn.addEventListener('click', () => mobileNav.classList.toggle('open'));
+        mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileNav.classList.remove('open')));
+
+        const reveals = document.querySelectorAll('.reveal');
+        const revealObs = new IntersectionObserver(entries => {
+          entries.forEach(entry => {
+            entry.isIntersecting
+              ? entry.target.classList.add('visible')
+              : entry.target.classList.remove('visible');
+          });
+        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+        reveals.forEach(el => revealObs.observe(el));
+
+        const sections  = ['home', 'hobbies', 'gallery'];
+        const navLinks  = document.querySelectorAll('.nav-tabs .nav-tab');
+
+        function updateNav() {
+          navLinks.forEach(link => {
+            const href = link.getAttribute('href');
+
+            if (href === 'home.html') {
+              link.classList.add('active');
+              link.classList.remove('inactive');
+            } else {
+              link.classList.remove('active');
+              link.classList.add('inactive');
+            }
+          });
+        }
+        window.addEventListener('scroll', updateNav, { passive: true });
+        updateNav();   
+
+        function checkGrid() {
+          const grid = document.querySelector('.achievements-grid');
+          if (!grid) return;
+          grid.style.gridTemplateColumns = window.innerWidth < 640 ? '1fr' : '1fr 1fr';
+        }
+        checkGrid();
+        window.addEventListener('resize', checkGrid);
+      })();
+    </script>
+  </body>
+</html>
