@@ -46,10 +46,6 @@
         transition: transform 0.45s cubic-bezier(0.34,1.56,0.64,1), filter 0.35s ease;
         will-change: transform;
       }
-      .polaroid-wrap:hover {
-        transform: rotate(1.5deg) scale(1.02);
-        filter: drop-shadow(0 28px 48px rgba(0,0,0,0.18));
-      }
       .polaroid-wrap img { display: block; filter: drop-shadow(0 20px 40px rgba(0,0,0,0.12)); }
 
       .about-polaroid {
@@ -78,6 +74,19 @@
       @keyframes floatC { 0%,100%{transform:translateY(0)   rotate(45deg)} 50%{transform:translateY(-10px) rotate(50deg)} }
       @keyframes spinSlow { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
       @keyframes pulse   { 0%,100%{opacity:.25;transform:scale(1)} 50%{opacity:.5;transform:scale(1.15)} }
+
+      @keyframes swing {
+        0% {transform:rotate(1.5deg); }
+        20% {transform:rotate(-1.5deg); }
+        40% {transform:rotate(1deg); }
+        60% {transform:rotate(-0.5deg); }
+        80% {transform:rotate(0.2deg); }
+        100% {transform:rotate(0deg); }
+      }
+
+      .swing-effect {
+        animation: swing 0.7s ease-in-out forwards;
+      }
 
       .fa  { animation: floatA 4s ease-in-out infinite; }
       .fb  { animation: floatB 5s ease-in-out infinite 0.5s; }
@@ -197,7 +206,7 @@
       <img src="valey-logo.webp" alt="Valey logo" class="h-11 object-contain" />
 
       <nav class="nav-tabs flex items-end gap-1">
-        <a href="home.html" class="nav-tab active">Home</a>
+        <a href="index.html" class="nav-tab active">Home</a>
         <a href="hobbies.html" class="nav-tab inactive">Hobbies</a>
         <a href="gallery.html" class="nav-tab inactive">Gallery</a>
       </nav>
@@ -208,7 +217,7 @@
     </header>
 
     <div id="mobile-nav">
-      <a href="home.html">Home</a>
+      <a href="index.html">Home</a>
       <a href="hobbies.html">Hobbies</a>
       <a href="gallery.html">Gallery</a>
     </div>
@@ -229,7 +238,7 @@
 
       <div class="hero-inner max-w-[1100px] mx-auto w-full flex items-center justify-center gap-12 lg:gap-14">
 
-        <div class="polaroid-wrap hero-slide slide-in-left delay-1" id="polaroidEl">
+        <div class="polaroid-wrap hero-slide slide-in-left delay-1 hover:rotate-[1.5deg]" id="polaroidEl">
           <img src="polaroid.webp" alt="Portrait of Valerie"
                class="w-[300px] md:w-[380px] lg:w-[500px] max-w-[90vw]" />
         </div>
@@ -249,7 +258,7 @@
                class="font-quick font-bold bg-[#ffb3c6] text-white px-7 py-[13px] rounded-full no-underline shadow-[0_6px_20px_rgba(255,179,198,0.45)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_28px_rgba(255,179,198,0.5)]">
               View My Portfolio <i class="fa-solid fa-arrow-right"></i>
             </a>
-            <a href="#"
+            <a href="#about-section"
                class="font-quick font-bold bg-white text-[#ffb3c6] px-7 py-[13px] rounded-full no-underline border-2 border-[#ffb3c6] shadow-[0_4px_12px_rgba(255,179,198,0.2)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_22px_rgba(255,179,198,0.3)]">
               Learn More
             </a>
@@ -423,7 +432,7 @@
 
         <nav class="footer-links">
           <h2 class="text-[15px] font-bold mb-4">Quick Links</h2>
-          <a href="home.html">Home</a>
+          <a href="index.html">Home</a>
           <a href="hobbies.html">Hobby</a>
           <a href="gallery.html">Gallery</a>
         </nav>
@@ -469,7 +478,7 @@
           navLinks.forEach(link => {
             const href = link.getAttribute('href');
 
-            if (href === 'home.html') {
+            if (href === 'index.html') {
               link.classList.add('active');
               link.classList.remove('inactive');
             } else {
@@ -497,6 +506,19 @@
           if (event.persisted) revealLanding();
         });
       })();
+
+      document.addEventListener('DOMContentLoaded', () => {
+        const cards = document.querySelectorAll('.polaroid-wrap');
+
+        cards.forEach(card => {
+          card.addEventListener('mouseleave', () => {
+            card.classList.add('swing-effect');
+            setTimeout(() => {
+              card.classList.remove('swing-effect');
+            }, 700);
+          });
+        });
+      });
     </script>
   </body>
 </html>
