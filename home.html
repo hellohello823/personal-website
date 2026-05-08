@@ -147,6 +147,17 @@
       }
       .org-divider { font-size: 18px; color: #5c4a4a; opacity: 0.35; margin-top: 16px; letter-spacing: 6px; }
 
+      .hero-slide {
+        opacity: 0;
+        transition: opacity 0.8s cubic-bezier(0.22,1,0.36,1), transform 0.8s cubic-bezier(0.22,1,0.36,1);
+      }
+      .slide-in-left { transform: translateX(-80px); }
+      .slide-in-right { transform: translateX(80px); }
+      .hero-slide.visible { opacity: 1; transform: translateX(0); }
+      .hero-slide.delay-1 { transition-delay: 0.1s; }
+      .hero-slide.delay-2 { transition-delay: 0.2s; }
+      .hero-slide.delay-3 { transition-delay: 0.3s; }
+
       .reveal {
         opacity: 0; transform: translateY(40px);
         transition: opacity 0.7s cubic-bezier(0.25,0.46,0.45,0.94), transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94);
@@ -215,20 +226,19 @@
       <div class="deco deco-dot fp"        style="top:35%;right:22%"></div>
       <div class="deco deco-ring-lg fd"    style="bottom:10%;left:30%;opacity:0.18"></div>
       <div class="deco deco-square fb"     style="top:48%;right:28%;opacity:0.3"></div>
-      <div class="sym-deco fb"             style="bottom:15%;left:5%;font-size:28px">✿</div>
 
-      <div class="hero-inner max-w-[1100px] mx-auto w-full flex items-center justify-center gap-16 lg:gap-20">
+      <div class="hero-inner max-w-[1100px] mx-auto w-full flex items-center justify-center gap-12 lg:gap-14">
 
-        <div class="polaroid-wrap" id="polaroidEl">
+        <div class="polaroid-wrap hero-slide slide-in-left delay-1" id="polaroidEl">
           <img src="polaroid.webp" alt="Portrait of Valerie"
-               class="w-[300px] md:w-[380px] lg:w-[420px] max-w-[90vw]" />
+               class="w-[300px] md:w-[380px] lg:w-[500px] max-w-[90vw]" />
         </div>
 
-        <div class="max-w-[520px]">
-          <h1 class="font-caveat hero-title text-[80px] leading-[1.1] text-[#5c4a4a] mb-5">
+        <div id="heroText" class="max-w-[550px] hero-slide slide-in-right delay-2">
+          <h1 class="font-caveat hero-title text-[100px] leading-[1.1] text-[#5c4a4a] mb-5">
             Hi, I'm <span class="text-[#ffb3c6]">Valerie!</span>
           </h1>
-          <p class="text-base leading-[1.75] text-[#5c4a4a] mb-8 max-w-[440px]">
+          <p class="text-base md:text-lg leading-[1.75] text-[#5c4a4a] mb-8 max-w-[480px]">
             This is my personal website where I share my passions, creativity,
             and journey as an informatics student. Here, you can explore my
             hobbies and gallery.
@@ -478,6 +488,14 @@
         }
         checkGrid();
         window.addEventListener('resize', checkGrid);
+
+        function revealLanding() {
+          document.querySelectorAll('.hero-slide').forEach(el => el.classList.add('visible'));
+        }
+        window.addEventListener('load', revealLanding);
+        window.addEventListener('pageshow', event => {
+          if (event.persisted) revealLanding();
+        });
       })();
     </script>
   </body>

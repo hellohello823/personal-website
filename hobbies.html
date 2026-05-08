@@ -1,443 +1,533 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Valey - Hobbies</title>
-    <link rel="icon" href="icon.webp"/>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600&family=Quicksand:wght@400;500;600;700&family=Mali:wght@400;500;600&display=swap" rel="stylesheet" />
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <style>
-      .font-caveat { font-family: 'Caveat', cursive; }
-      .font-mali   { font-family: 'Mali', cursive; }
-      .font-quick  { font-family: 'Quicksand', sans-serif; }
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Valey - Hobbies</title>
+  <link rel="icon" href="icon.webp"/>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Quicksand:wght@400;500;600;700&family=Dancing+Script:wght@400;600&display=swap" rel="stylesheet"/>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <style>
+    :root {
+      --pink:      #ffb3c6;
+      --pink-deep: #ff8fab;
+      --pink-soft: #ffe0ec;
+      --pink-pale: #fff0f6;
+      --brown:     #4a3a3a;
+      --brown-mid: #7a5c5c;
+    }
 
-      * { box-sizing: border-box; margin: 0; padding: 0; }
-      html { scroll-behavior: smooth; }
-      body { font-family: 'Quicksand', sans-serif; background-color: #fff5f7; color: #5c4a4a; overflow-x: hidden; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: "Quicksand", sans-serif; background: #fff5f7; color: var(--brown); overflow-x: hidden; }
 
-      .nav-tab {
-        font-family: 'Quicksand', sans-serif;
-        font-weight: 500;
-        font-size: 15px;
-        padding: 8px 20px;
-        border-radius: 20px 20px 0 0;
-        text-decoration: none;
-        line-height: 1.5;
-        transition: all 0.2s ease;
-      }
-      .nav-tab.active   { background: #ffb3c6; color: #fff; box-shadow: 0 2px 6px rgba(255,179,198,0.4); }
-      .nav-tab.inactive { background: #fff9fa; color: #5c4a4a; border: 1px solid #ffb3c6; }
-      .nav-tab.inactive:hover { background: #fff0f4; }
+    .nav-tab { font-family: "Quicksand", sans-serif; font-weight: 500; font-size: 15px; padding: 8px 20px; border-radius: 20px 20px 0 0; text-decoration: none; line-height: 1.5; transition: all .2s ease; }
+    .nav-tab.active   { background: var(--pink); color: #fff; box-shadow: 0 2px 6px rgba(255,179,198,.4); }
+    .nav-tab.inactive { background: #fff9fa; color: var(--brown); border: 1px solid var(--pink); }
+    .nav-tab.inactive:hover { background: #fff0f4; }
+    #mobile-nav { display:none; position:fixed; top:64px; left:0; width:100%; background:#fff; z-index:99; flex-direction:column; box-shadow:0 4px 12px rgba(0,0,0,.1); }
+    #mobile-nav a { padding:14px 24px; color:var(--brown); font-weight:500; text-decoration:none; border-bottom:1px solid #fff0f4; }
+    #mobile-nav a:hover { background:#fff5f7; color:var(--pink); }
+    #mobile-nav.open { display:flex; }
 
-      #mobile-nav { display: none; position: fixed; top: 64px; left: 0; width: 100%; background: #fff; z-index: 99; flex-direction: column; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
-      #mobile-nav a { padding: 14px 24px; color: #5c4a4a; font-weight: 500; text-decoration: none; border-bottom: 1px solid #fff0f4; font-family: 'Quicksand', sans-serif; }
-      #mobile-nav a:hover { background: #fff5f7; color: #ffb3c6; }
-      #mobile-nav.open { display: flex; }
+    @keyframes floatA  { 0%,100%{transform:translateY(0) rotate(0deg)} 50%{transform:translateY(-10px) rotate(3deg)} }
+    @keyframes floatB  { 0%,100%{transform:translateY(0) rotate(0deg)} 50%{transform:translateY(-7px)  rotate(-2deg)} }
+    @keyframes floatC  { 0%,100%{transform:translateY(0) rotate(45deg)} 50%{transform:translateY(-9px) rotate(50deg)} }
+    @keyframes spinSlow{ from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+    @keyframes pulse   { 0%,100%{opacity:.3;transform:scale(1)} 50%{opacity:.6;transform:scale(1.15)} }
+    @keyframes shimmer { 0%,100%{opacity:.4} 50%{opacity:.9} }
+    .float-a { animation: floatA 4s ease-in-out infinite; }
+    .float-b { animation: floatB 5.5s ease-in-out infinite .8s; }
+    .float-c { animation: floatC 4.5s ease-in-out infinite 1s; }
+    .spin-slow { animation: spinSlow 14s linear infinite; }
+    .pulse-a { animation: pulse 3.5s ease-in-out infinite; }
+    .shimmer-a { animation: shimmer 2.8s ease-in-out infinite; }
 
-      .deco { position: absolute; pointer-events: none; }
-      .deco-circle-lg { width: 32px; height: 32px; border-radius: 50%; background: rgba(255,179,198,0.2); }
-      .deco-circle-sm { width: 20px; height: 20px; border-radius: 50%; background: rgba(255,179,198,0.25); }
-      .deco-pill      { width: 64px; height: 8px; border-radius: 99px; background: rgba(255,179,198,0.2); }
-      .deco-square    { width: 24px; height: 24px; background: rgba(255,229,236,0.45); transform: rotate(45deg); }
-      .deco-ring      { width: 40px; height: 40px; border-radius: 50%; border: 3px solid rgba(255,179,198,0.3); background: transparent; }
-      .deco-dot       { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,179,198,0.35); }
-      .deco-ring-lg   { width: 56px; height: 56px; border-radius: 50%; border: 2px solid rgba(255,179,198,0.2); background: transparent; }
-      .deco-tape      { width: 96px; height: 24px; border-radius: 2px; }
+    .reveal { opacity:0; transform:translateY(36px); transition:opacity .75s cubic-bezier(.25,.46,.45,.94), transform .75s cubic-bezier(.25,.46,.45,.94); }
+    .reveal.visible { opacity:1; transform:translateY(0); }
+    .rd1 { transition-delay: .12s; }
+    .rd2 { transition-delay: .24s; }
+    .rd3 { transition-delay: .36s; }
+    .rd4 { transition-delay: .48s; }
 
-      @keyframes floatA { 0%,100%{transform:translateY(0) rotate(0deg)} 50%{transform:translateY(-12px) rotate(4deg)} }
-      @keyframes floatB { 0%,100%{transform:translateY(0) rotate(0deg)} 50%{transform:translateY(-8px) rotate(-3deg)} }
-      @keyframes floatC { 0%,100%{transform:translateY(0) rotate(45deg)} 50%{transform:translateY(-10px) rotate(50deg)} }
-      @keyframes spinSlow { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
-      @keyframes pulse   { 0%,100%{opacity:.25;transform:scale(1)} 50%{opacity:.5;transform:scale(1.15)} }
+    .deco { position:absolute; pointer-events:none; }
 
-      .fa-anim { animation: floatA 4s ease-in-out infinite; }
-      .fb-anim { animation: floatB 5s ease-in-out infinite 0.5s; }
-      .fc-anim { animation: floatC 4.5s ease-in-out infinite 1s; }
-      .fd-anim { animation: spinSlow 12s linear infinite; }
-      .fp-anim { animation: pulse 3.5s ease-in-out infinite; }
+    .hobby-card {
+      background: #fff;
+      border-radius: 0;
+      border: 4px solid rgba(255,155,185,0.2);  
+      box-shadow:
+        0 2px 6px  rgba(0,0,0,.04),
+        0 8px 28px rgba(200,100,130,.10),
+        0 22px 52px rgba(200,100,130,.07);
+      position: relative;
+      overflow: visible;
+      transition: transform .42s cubic-bezier(.34,1.56,.64,1), box-shadow .42s ease;
+    }
 
-      .reveal {
-        opacity: 0;
-        transform: translateY(40px);
-        transition: opacity 0.7s cubic-bezier(0.25,0.46,0.45,0.94), transform 0.7s cubic-bezier(0.25,0.46,0.45,0.94);
-      }
-      .reveal.visible { opacity: 1; transform: translateY(0); }
-      .reveal-delay-1 { transition-delay: 0.1s; }
-      .reveal-delay-2 { transition-delay: 0.2s; }
-      .reveal-delay-3 { transition-delay: 0.3s; }
-      .reveal-delay-4 { transition-delay: 0.4s; }
+    .hobby-card:hover {
+      border-color: rgba(255,143,171,.40);
+      box-shadow:
+        0 4px 12px rgba(0,0,0,.06),
+        0 16px 44px rgba(200,100,130,.16),
+        0 34px 70px rgba(200,100,130,.10);
+    }
 
-      .hobby-card {
-        background: #fff;
-        border-radius: 20px;
-        border: 4px solid rgba(255,179,198,0.2);
-        transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.4s ease;
-      }
-      .hobby-card:hover { transform: translateY(-6px); }
+    .card-body {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 0;
+      padding: 0;
+    }
+    .card-body.reversed { flex-direction: row-reverse; }
 
-      .hobby-img-frame {
-        border: 2px solid rgba(255,179,198,0.3);
-        border-radius: 12px;
-        overflow: hidden;
-        position: relative;
-      }
-      .hobby-img-frame img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        display: block;
-      }
-      .img-caption {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        padding: 8px 12px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-      }
+    .washi {
+      position: absolute;
+      top: -14px;
+      left: 45%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 30px;
+      border-radius: 3px;
+      z-index: 10;
+    }
+    .washi::after {
+      content: '';
+      position: absolute; inset: 0;
+      border-radius: 3px;
+      background: repeating-linear-gradient(90deg, rgba(255,255,255,.22) 0, rgba(255,255,255,.22) 5px, transparent 5px, transparent 10px);
+    }
 
-      .since-badge {
-        background: #ffb3c6;
-        color: #fff;
-        font-family: 'Quicksand', sans-serif;
-        font-size: 11px;
-        font-weight: 500;
-        padding: 4px 14px;
-        border-radius: 999px;
-        border: 2px solid #fff;
-        transform: rotate(6deg);
-        display: inline-block;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.12);
-        white-space: nowrap;
-      }
+    .polaroid-col {
+      flex-shrink: 0;
+      width: 46%;        
+      padding: 32px 28px 28px 32px;
+      position: relative;
+    }
+    .card-body.reversed .polaroid-col {
+      padding: 32px 32px 28px 28px;
+    }
 
-      .icon-circle {
-        width: 48px;
-        height: 48px;
-        border-radius: 50%;
-        background: linear-gradient(180deg, #ffb3c6 0%, #ffa3ba 100%);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: #fff;
-        font-size: 18px;
-        flex-shrink: 0;
-      }
+    .polaroid-frame {
+      background: #fff;
+      padding: 30px 30px 58px 30px;
+      position: relative;
+      border: 2px solid rgba(255,179,198,0.3);
+      box-shadow:
+        0 1px 4px rgba(0,0,0,.07),
+        0 6px 22px rgba(180,80,110,.13),
+        0 18px 40px rgba(180,80,110,.08);
+    }
+    .polaroid-photo {
+      width: 100%;
+      height: 220px;
+      overflow: hidden;
+      display: block;
+      transform: rotate(0.4deg);
+    }
+    .polaroid-photo img {
+      width: 100%; height: 100%;
+      object-fit: cover; display: block;
+    }
 
-      .desc-box {
-        background: rgba(255,229,236,0.3);
-        border-radius: 16px;
-        border: 2px solid rgba(255,179,198,0.2);
-        padding: 20px;
-        flex: 1;
-      }
+    .polaroid-corner-deco {
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      background: #ffb3c6;
+      border: 3px solid #fff;
+      box-shadow: 0 2px 8px rgba(255,143,171,.45);
+      z-index: 6;
+    }
+  
+    .photo-label {
+      position:absolute;
+      bottom: 14px;
+      left: 14px;
+      padding-left: 2px;
+      font-family: "Caveat", cursive;
+      font-size: 1.2rem;
+      color: var(--brown-mid);
+    }
 
-      .dot-row { display: flex; gap: 10px; justify-content: flex-end; }
-      .dot-row span { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,179,198,0.6); display: inline-block; }
+    .since-pill {
+      position: absolute;
+      bottom: 14px;
+      right: 14px;
+      background: linear-gradient(135deg, #ff8fab, #ffb3c6);
+      color: #fff;
+      font-family: "Quicksand", sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 5px 16px;
+      border-radius: 999px;
+      border: 2.5px solid #fff;
+      box-shadow: 0 3px 12px rgba(255,143,171,.50);
+      white-space: nowrap;
+      z-index: 5;
+      letter-spacing: .03em;
+    }
 
-      .footer-links a { display: block; color: rgba(255,255,255,0.65); font-size: 13px; margin-bottom: 8px; text-decoration: none; transition: color 0.2s; }
-      .footer-links a:hover { color: #ffb3c6; }
-      .footer-social a {
-        width: 38px; height: 38px; border-radius: 10px;
-        border: 1.5px solid rgba(255,179,198,0.5);
-        display: flex; align-items: center; justify-content: center;
-        color: rgba(255,255,255,0.8); font-size: 16px; text-decoration: none;
-        transition: all 0.25s ease;
-      }
-      .footer-social a:hover { background: #ffb3c6; color: #fff; border-color: #ffb3c6; }
+    .content-col {
+      flex: 1;
+      padding: 32px 32px 32px 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .card-body.reversed .content-col {
+      padding: 32px 8px 32px 32px;
+    }
 
-      @media (max-width: 768px) {
-        .nav-tabs { display: none !important; }
-        .mobile-menu-btn { display: flex !important; }
-        .hobby-card-inner { flex-direction: column !important; }
-        .hobby-card-inner.reverse { flex-direction: column !important; }
-        .hobby-img-frame { height: 220px !important; width: 100% !important; }
-      }
-    </style>
-  </head>
-  <body class="bg-[#fff5f7] text-[#5c4a4a] font-quick overflow-x-hidden">
+    .title-row { display: flex; align-items: center; gap: 14px; }
 
-    <header class="fixed top-0 left-0 w-full z-[100] bg-white/85 backdrop-blur-md shadow-md h-16 flex items-center px-8 justify-between">
-      <img src="valey-logo.webp" alt="Valey" class="h-11 object-contain" />
-      <nav class="nav-tabs flex items-end gap-1">
-        <a href="home.html" class="nav-tab inactive">Home</a>
-        <a href="hobbies.html" class="nav-tab active">Hobbies</a>
-        <a href="gallery.html" class="nav-tab inactive">Gallery</a>
-      </nav>
-      <button class="mobile-menu-btn hidden items-center justify-center bg-transparent border-0 cursor-pointer text-2xl text-[#ffb3c6]" id="menuBtn">
-        <i class="fas fa-bars"></i>
-      </button>
-    </header>
+    .icon-circle {
+      width: 52px; height: 52px;
+      border-radius: 50%;
+      background: linear-gradient(145deg, #ffd6e5 0%, #ffb3c6 100%);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      box-shadow:
+        0 0 0 6px rgba(255,179,198,.20),
+        0 4px 14px rgba(255,143,171,.30),
+        inset 0 1px 3px rgba(255,255,255,.5);
+      transition: transform .3s ease, box-shadow .3s ease;
+    }
+    .icon-circle img { width: 22px; height: 22px; fill: #fff; }
+    .icon-circle i {
+      font-size: 22px;
+      color: #fff;
+    }
+    .hobby-card:hover .icon-circle {
+      transform: scale(1.12);
+      box-shadow: 0 0 0 9px rgba(255,179,198,.22), 0 6px 18px rgba(255,143,171,.38), inset 0 1px 3px rgba(255,255,255,.5);
+    }
 
-    <div id="mobile-nav">
-      <a href="home.html">Home</a>
-      <a href="hobbies.html">Hobbies</a>
-      <a href="gallery.html">Gallery</a>
+    .card-title {
+      font-family: "Caveat", cursive;
+      font-size: 2.15rem;
+      font-weight: 400;
+      color: var(--brown);
+      line-height: 1.15;
+    }
+
+    .desc-box {
+      background: rgba(255,229,236,.22);
+      border-radius: 14px;
+      border: 1.5px solid rgba(255,179,198,.20);
+      padding: 20px 22px;
+    }
+    .desc-box p {
+      font-family: "Quicksand", sans-serif;
+      font-size: 14.5px;
+      line-height: 1.8;
+      color: var(--brown);
+    }
+
+    .dot-row { display: flex; gap: 7px; justify-content: flex-end; }
+    .dot-row span { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,143,171,.55); display: inline-block; }
+
+    .cd { position: absolute; pointer-events: none; }
+    .cd-ring    { border-radius: 50%; border: 2px solid rgba(255,179,198,.45); background: transparent; }
+    .cd-circle  { border-radius: 50%; background: rgba(255,224,236,.70); }
+    .cd-diamond { background: rgba(255,200,220,.55); transform: rotate(45deg); }
+    .sparkle    { position: absolute; pointer-events: none; color: rgba(255,143,171,.65); font-size: 13px; }
+
+    @keyframes quoteFloat { 0%,100%{transform:translateY(0) scale(1)} 50%{transform:translateY(-6px) scale(1.02)} }
+    .quote-box {
+      transition: box-shadow .4s ease, border-color .4s ease;
+      cursor: default;
+    }
+    .quote-box:hover {
+      animation: quoteFloat .8s ease-in-out forwards;
+      box-shadow: 0 12px 40px rgba(255,143,171,.22), 0 4px 16px rgba(255,143,171,.14) !important;
+      border-color: rgba(255,143,171,.45) !important;
+    }
+    .quote-box:hover .quote-text {
+      color: #c0607a !important;
+    }
+
+    .footer-links a { display: block; color: rgba(255,255,255,.65); font-size: 13px; margin-bottom: 8px; text-decoration: none; transition: color .2s; }
+    .footer-links a:hover { color: var(--pink); }
+    .footer-social a { width:38px; height:38px; border-radius:10px; border:1.5px solid rgba(255,179,198,.5); display:flex; align-items:center; justify-content:center; color:rgba(255,255,255,.8); font-size:16px; text-decoration:none; transition:all .25s ease; }
+    .footer-social a:hover { background:var(--pink); color:#fff; border-color:var(--pink); }
+
+    @media (max-width: 900px) {
+      .card-body, .card-body.reversed { flex-direction: column !important; }
+      .polaroid-col { width: 100% !important; max-width: 380px; margin: 0 auto; padding: 24px 24px 0 !important; }
+      .content-col  { padding: 20px 24px 28px !important; }
+      .nav-tabs { display: none !important; }
+      .mobile-menu-btn { display: flex !important; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="fixed top-0 left-0 w-full z-[100] bg-white/85 backdrop-blur-md shadow-md h-16 flex items-center px-8 justify-between">
+  <img src="valey-logo.webp" alt="Valey" class="h-11 object-contain"/>
+  <nav class="nav-tabs flex items-end gap-1">
+    <a href="home.html"    class="nav-tab inactive">Home</a>
+    <a href="hobbies.html" class="nav-tab active">Hobbies</a>
+    <a href="gallery.html" class="nav-tab inactive">Gallery</a>
+  </nav>
+  <button class="mobile-menu-btn hidden items-center justify-center bg-transparent border-0 cursor-pointer text-2xl text-[#ffb3c6]" id="menuBtn">
+    <i class="fas fa-bars"></i>
+  </button>
+</header>
+<div id="mobile-nav">
+  <a href="home.html">Home</a>
+  <a href="hobbies.html">Hobbies</a>
+  <a href="gallery.html">Gallery</a>
+</div>
+
+<main class="pt-24 pb-16 relative overflow-x-hidden">
+
+  <div class="deco float-a" style="width:46px;height:46px;border-radius:50%;border:2.5px solid rgba(255,179,198,.35);top:68px;right:7%"></div>
+  <div class="deco float-b" style="width:20px;height:20px;border-radius:50%;background:rgba(255,179,198,.2);top:44px;right:13%"></div>
+  <div class="deco float-a" style="width:32px;height:32px;border-radius:50%;background:rgba(255,224,236,.5);top:130px;left:5%"></div>
+  <div class="deco float-c" style="width:16px;height:16px;background:rgba(255,220,234,.6);top:196px;left:3.5%"></div>
+  <div class="deco float-d" style="width:58px;height:58px;border-radius:50%;border:2px solid rgba(255,179,198,.22);top:218px;right:4.5%"></div>
+  <div class="deco pulse-a" style="width:10px;height:10px;border-radius:50%;background:rgba(255,143,171,.4);top:166px;right:20%"></div>
+
+  <div class="max-w-[1100px] mx-auto px-6 md:px-12">
+
+    <div class="text-center mb-20 reveal relative">
+      <div class="absolute top-4 left-[22%] w-14 h-4 rounded-full bg-[rgba(255,179,198,0.4)] rotate-[-45deg] opacity-70"></div>
+      <div class="absolute top-8 right-[24%] w-16 h-4 rounded-full bg-[rgba(255,179,198,0.4)] rotate-[40deg] opacity-70"></div>
+      <h1 style="font-family:'Caveat',cursive;font-size:5.4rem;font-weight:500;color:#4a3a3a;margin-bottom:14px;">My Hobbies</h1>
+      <p style="font-size:1.2rem;color:#7a5c5c;max-width:660px;margin:0 auto;line-height:1.75; font-weight:500;">
+        Here are all the things that bring joy to my everyday life. Each hobby is a way for me to express creativity, relax, and connect with what I love!
+      </p>
+      <div style="display:flex;justify-content:center;gap:10px;margin-top:18px;">
+        <span style="width:8px;height:8px;border-radius:50%;background:#ffb3c6;opacity:.65;display:inline-block;"></span>
+        <span style="width:8px;height:8px;border-radius:50%;background:#ffb3c6;opacity:.65;display:inline-block;"></span>
+        <span style="width:8px;height:8px;border-radius:50%;background:#ffb3c6;opacity:.65;display:inline-block;"></span>
+      </div>
     </div>
 
-    <main class="pt-24 pb-16 px-6 md:px-12 relative overflow-x-hidden">
+    <div style="display:flex;flex-direction:column;gap:56px;">
 
-      <div class="deco deco-circle-lg fa-anim" style="top:60px;right:8%"></div>
-      <div class="deco deco-circle-sm fb-anim" style="top:40px;right:14%"></div>
-      <div class="deco deco-pill fa-anim"       style="top:120px;left:6%;transform:rotate(-12deg)"></div>
-      <div class="deco deco-square fc-anim"     style="top:180px;left:3%"></div>
-      <div class="deco deco-ring fb-anim"       style="top:80px;left:40%;opacity:0.3"></div>
-      <div class="deco deco-dot fp-anim"        style="top:160px;right:22%"></div>
-      <div class="deco deco-ring-lg fd-anim"    style="top:200px;right:5%;opacity:0.2"></div>
+      <div class="hobby-card reveal" style="transform:rotate(1deg);">
+        <div class="washi" style="background:rgba(255,179,198,.72);transform:rotate(1.5deg);"></div>
+        <div class="cd cd-ring  float-a" style="width:36px;height:36px;top:-20px;right:64px;"></div>
+        <div class="cd cd-circle pulse-a" style="width:13px;height:13px;top:-5px;right:26px;"></div>
 
-      <div class="max-w-[1100px] mx-auto">
+        <div class="card-body">
+          <div class="polaroid-col">
+            <div class="polaroid-frame">
+              <div class="polaroid-corner-deco"></div>
+              <div class="polaroid-photo"><img src="crochet.webp" alt="Crochet"/></div>
+              <div class="photo-label" style="transform:rotate(0.5deg);">Crochet</div>
+              <div class="since-pill" style="transform:rotate(0.5deg);">Since 2019</div>
+            </div>
+          </div>
 
-        <div class="text-center mb-16 reveal">
-          <h1 class="font-caveat text-6xl md:text-7xl text-[#5c4a4a] mb-4">My Hobbies</h1>
-          <p class="font-quick text-base md:text-lg text-[#5c4a4a] max-w-[600px] mx-auto leading-relaxed">
-            Here are all the things that bring joy to my everyday life. Each hobby is a way for me to express creativity, relax, and connect with what I love!
-          </p>
-          <div class="flex justify-center gap-3 mt-5">
-            <span class="w-2 h-2 rounded-full bg-[#ffb3c6] opacity-60 inline-block"></span>
-            <span class="w-2 h-2 rounded-full bg-[#ffb3c6] opacity-60 inline-block"></span>
-            <span class="w-2 h-2 rounded-full bg-[#ffb3c6] opacity-60 inline-block"></span>
+          <div class="content-col">
+            <div class="title-row">
+              <div class="icon-circle">
+                <img src="yarn-icon.svg" alt="yarn-icon">
+              </div>
+              <h2 class="card-title">Crochet</h2>
+            </div>
+            <div class="desc-box">
+              <p>Crochet is one of my favorite hobbies because it helps me relax and be creative. I enjoy working with yarn and slowly turning it into something meaningful, from simple pieces to cute handmade creations. The process feels calming and helps me take a break from screens. I love that I can crochet anytime, while watching TV, listening to music, or enjoying a quiet moment—finishing a project always feels rewarding.</p>
+            </div>
+            <div class="dot-row"><span></span><span></span><span></span></div>
           </div>
         </div>
-
-        <div class="space-y-10">
-
-          <div class="hobby-card shadow-lg relative reveal">
-            <div class="deco-tape absolute -top-3 left-[18%] bg-[#ffb3c6] opacity-80 shadow-md" style="transform:rotate(6deg)"></div>
-            <div class="deco deco-ring" style="top:-16px;right:48px"></div>
-            <div class="hobby-card-inner flex flex-col md:flex-row gap-6 p-6 md:p-8" style="transform:rotate(1deg)">
-              <div class="hobby-img-frame w-full md:w-[340px] h-56 md:h-[280px] flex-shrink-0">
-                <img src="crochet.webp" alt="Crochet" />
-                <div class="img-caption bg-white/70 backdrop-blur-sm">
-                  <span class="font-caveat text-lg text-[#5c4a4a]">Crochet</span>
-                  <span class="since-badge">Since 2019</span>
-                </div>
-              </div>
-              <div class="flex flex-col gap-4 flex-1">
-                <div class="flex items-center gap-3">
-                  <div class="icon-circle shadow-md">
-                    <i class="fas fa-scissors"></i>
-                  </div>
-                  <h2 class="font-caveat text-3xl text-[#5c4a4a]">Crochet</h2>
-                </div>
-                <div class="desc-box">
-                  <p class="font-quick text-[15px] leading-[1.7] text-[#5c4a4a]">
-                    Crochet is one of my favorite hobbies because it helps me relax and be creative. I enjoy working with yarn and slowly turning it into something meaningful, from simple pieces to cute handmade creations. The process feels calming and helps me take a break from screens. I love that I can crochet anytime, while watching TV, listening to music, or enjoying a quiet moment and finishing a project always feels rewarding.
-                  </p>
-                </div>
-                <div class="dot-row">
-                  <span></span><span></span><span></span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="hobby-card shadow-lg relative reveal reveal-delay-1">
-            <div class="deco-tape absolute -top-3 left-[24%] bg-[#f8c7d8] opacity-90 shadow-md" style="transform:rotate(6deg)"></div>
-            <div class="deco deco-ring" style="top:-16px;left:0"></div>
-            <div class="hobby-card-inner reverse flex flex-col md:flex-row-reverse gap-6 p-6 md:p-8" style="transform:rotate(-1deg)">
-              <div class="hobby-img-frame w-full md:w-[340px] h-56 md:h-[280px] flex-shrink-0">
-                <img src="dance.webp" alt="Dancing" />
-                <div class="img-caption bg-white/70 backdrop-blur-sm">
-                  <span class="font-caveat text-lg text-[#5c4a4a]">Dancing</span>
-                  <span class="since-badge">Since 2018</span>
-                </div>
-              </div>
-              <div class="flex flex-col gap-4 flex-1">
-                <div class="flex items-center gap-3">
-                  <div class="icon-circle shadow-md">
-                    <i class="fas fa-music"></i>
-                  </div>
-                  <h2 class="font-caveat text-3xl text-[#5c4a4a]">Dancing</h2>
-                </div>
-                <div class="desc-box">
-                  <p class="font-quick text-[15px] leading-[1.7] text-[#5c4a4a]">
-                    Dance is a way for me to express myself when words are not enough. I enjoy exploring different styles, from contemporary to hip-hop, as each one allows me to show different sides of who I am. Dancing makes me feel free and energized, whether I am performing on stage, practicing a new move, or dancing with friends. It is more than just physical activity—it is a source of happiness, confidence, and self-expression through music and movement.
-                  </p>
-                </div>
-                <div class="dot-row">
-                  <span></span><span></span><span></span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="hobby-card shadow-lg relative reveal reveal-delay-2">
-            <div class="deco-tape absolute -top-3 left-[18%] bg-[#fdd8e5] opacity-90 shadow-md" style="transform:rotate(6deg)"></div>
-            <div class="deco deco-ring" style="top:-16px;right:48px"></div>
-            <div class="hobby-card-inner flex flex-col md:flex-row gap-6 p-6 md:p-8" style="transform:rotate(1deg)">
-              <div class="hobby-img-frame w-full md:w-[340px] h-56 md:h-[280px] flex-shrink-0">
-                <img src="mahjong.webp" alt="Playing Mahjong" />
-                <div class="img-caption bg-white/70 backdrop-blur-sm">
-                  <span class="font-caveat text-lg text-[#5c4a4a]">Playing Mahjong</span>
-                  <span class="since-badge">Since 2022</span>
-                </div>
-              </div>
-              <div class="flex flex-col gap-4 flex-1">
-                <div class="flex items-center gap-3">
-                  <div class="icon-circle shadow-md">
-                    <i class="fas fa-gamepad"></i>
-                  </div>
-                  <h2 class="font-caveat text-3xl text-[#5c4a4a]">Playing Mahjong</h2>
-                </div>
-                <div class="desc-box">
-                  <p class="font-quick text-[15px] leading-[1.7] text-[#5c4a4a]">
-                    Playing Mahjong is a hobby I enjoy because it combines strategy, focus, and social interaction. I like the challenge of thinking ahead, making decisions, and understanding patterns throughout the game. Mahjong is also a great way to spend time with others, creating moments of fun, conversation, and friendly competition. It helps me relax while keeping my mind active and engaged.
-                  </p>
-                </div>
-                <div class="dot-row">
-                  <span></span><span></span><span></span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="hobby-card shadow-lg relative reveal reveal-delay-3">
-            <div class="deco-tape absolute -top-3 left-[24%] bg-[#ffe0ec] opacity-90 shadow-md" style="transform:rotate(6deg)"></div>
-            <div class="deco deco-ring" style="top:-16px;left:0"></div>
-            <div class="hobby-card-inner reverse flex flex-col md:flex-row-reverse gap-6 p-6 md:p-8" style="transform:rotate(-1deg)">
-              <div class="hobby-img-frame w-full md:w-[340px] h-56 md:h-[280px] flex-shrink-0">
-                <img src="kdrama.webp" alt="Watching K-Dramas" />
-                <div class="img-caption bg-white/70 backdrop-blur-sm">
-                  <span class="font-caveat text-lg text-[#5c4a4a]">Watching K-Dramas</span>
-                  <span class="since-badge">Since 2020</span>
-                </div>
-              </div>
-              <div class="flex flex-col gap-4 flex-1">
-                <div class="flex items-center gap-3">
-                  <div class="icon-circle shadow-md">
-                    <i class="fas fa-tv"></i>
-                  </div>
-                  <h2 class="font-caveat text-3xl text-[#5c4a4a]">Watching K-Dramas</h2>
-                </div>
-                <div class="desc-box">
-                  <p class="font-quick text-[15px] leading-[1.7] text-[#5c4a4a]">
-                    K-dramas are my favorite way to relax and escape into different stories and emotions. I enjoy following interesting plots, beautiful visuals, and characters that feel relatable and comforting. From romantic stories to exciting mysteries, each drama offers new perspectives and life lessons. Watching K-dramas during my free time, especially on cozy weekends, helps me unwind and enjoy simple moments.
-                  </p>
-                </div>
-                <div class="dot-row">
-                  <span></span><span></span><span></span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="hobby-card shadow-lg relative reveal reveal-delay-4">
-            <div class="deco-tape absolute -top-3 left-[24%] bg-[#ffc9dd] opacity-90 shadow-md" style="transform:rotate(6deg)"></div>
-            <div class="deco deco-ring" style="top:-16px;right:48px"></div>
-            <div class="hobby-card-inner flex flex-col md:flex-row gap-6 p-6 md:p-8" style="transform:rotate(1deg)">
-              <div class="hobby-img-frame w-full md:w-[340px] h-56 md:h-[280px] flex-shrink-0">
-                <img src="crafting.webp" alt="Crafting & DIY" />
-                <div class="img-caption bg-white/70 backdrop-blur-sm">
-                  <span class="font-caveat text-lg text-[#5c4a4a]">Crafting &amp; DIY</span>
-                  <span class="since-badge">Since 2018</span>
-                </div>
-              </div>
-              <div class="flex flex-col gap-4 flex-1">
-                <div class="flex items-center gap-3">
-                  <div class="icon-circle shadow-md">
-                    <i class="fas fa-paint-brush"></i>
-                  </div>
-                  <h2 class="font-caveat text-3xl text-[#5c4a4a]">Crafting &amp; DIY</h2>
-                </div>
-                <div class="desc-box">
-                  <p class="font-quick text-[15px] leading-[1.7] text-[#5c4a4a]">
-                    Crafting is something I truly enjoy because it allows me to create meaningful things with my hands. From crocheting cozy items to making handmade cards for friends, I love turning simple materials into something special. Crafting helps me slow down, stay present, and focus on the process rather than perfection. Each finished piece reflects my creativity, care, and the joy of making something personal.
-                  </p>
-                </div>
-                <div class="dot-row">
-                  <span></span><span></span><span></span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-        </div>
-
-        <div class="flex justify-center mt-16 reveal">
-          <div class="bg-white rounded-3xl border-4 border-[#ffb3c6] border-opacity-30 shadow-lg px-10 py-6 text-center relative">
-            <div class="deco-tape absolute -top-3 left-[30%] bg-[#ffe6c8] opacity-80 shadow-md" style="transform:rotate(12deg)"></div>
-            <p class="font-caveat text-2xl text-[#5c4a4a]">Life is better with hobbies that make you smile!</p>
-            <div class="flex justify-center gap-2 mt-3">
-              <span class="w-2 h-2 rounded-full bg-[#ffb3c6] opacity-60 inline-block"></span>
-              <span class="w-2 h-2 rounded-full bg-[#ffb3c6] opacity-60 inline-block"></span>
-              <span class="w-2 h-2 rounded-full bg-[#ffb3c6] opacity-60 inline-block"></span>
-            </div>
-          </div>
-        </div>
-
       </div>
-    </main>
 
-    <footer class="text-white pt-16 pb-8 px-6 md:px-12" style="background:linear-gradient(180deg,#111111 0%,#1a0a0a 55%,#2d1a1a 100%)">
-      <div class="max-w-[1000px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 pb-10 border-b border-white/15">
-
-        <div>
-          <img src="valey-logo-white.webp" alt="Valey logo" class="h-14 object-contain mb-4" />
-          <p class="text-[13px] text-white/60 leading-[1.7] max-w-[260px]">
-            Informatics student passionate about creativity, technology, and artistic expression. Exploring the intersection of code and craft.
-          </p>
-        </div>
-
-        <nav class="footer-links">
-          <h2 class="text-[15px] font-bold mb-4">Quick Links</h2>
-          <a href="home.html">Home</a>
-          <a href="hobbies.html">Hobby</a>
-          <a href="gallery.html">Gallery</a>
-        </nav>
-
-        <div>
-          <h2 class="text-[15px] font-bold mb-4">Connect</h2>
-          <div class="footer-social flex gap-3 mb-3">
-            <a href="https://www.instagram.com/marshavalerie_?igsh=NXNwZXV4bnZldGtt" title="Instagram"><i class="fab fa-instagram"></i></a>
-            <a href="https://github.com/hellohello823" title="GitHub"><i class="fab fa-github"></i></a>
-            <a href="mailto:marsha.valerie.wibowo@gmail.com" title="Gmail"><i class="fas fa-envelope"></i></a>
-            <a href="https://www.linkedin.com/in/marsha-valerie-wibowo-90baa137a/" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+      <div class="hobby-card reveal rd1" style="transform:rotate(-1deg);">
+        <div class="washi" style="background:rgba(248,199,216,.82);transform:translateX(-50%) rotate(-1.5deg);"></div>
+        <div class="cd cd-ring  fb-a" style="width:38px;height:38px;top:-20px;left:60px;"></div>
+        <div class="cd cd-circle fp-a" style="width:12px;height:12px;top:-5px;left:24px;"></div>
+        
+        <div class="card-body reversed">
+          <div class="polaroid-col">
+            <div class="polaroid-frame">
+              <div class="polaroid-corner-deco"></div>
+              <div class="polaroid-photo"><img src="dance.webp" alt="Dancing"/></div>
+              <div class="photo-label" style="transform:rotate(0.2deg)">Dancing</div>
+              <div class="since-pill" style="transform:rotate(0.2deg)">Since 2018</div>
+            </div>
           </div>
-          <p class="text-[12px] text-white/50">Follow along on my creative journey</p>
+          <div class="content-col">
+            <div class="title-row">
+              <div class="icon-circle">
+                <i class="fas fa-music" style="color: rgb(255, 255, 255);"></i>
+              </div>
+              <h2 class="card-title">Dancing</h2>
+            </div>
+            <div class="desc-box">
+              <p>Dance is a way for me to express myself when words are not enough. I enjoy exploring different styles, from contemporary to hip-hop, as each one allows me to show different sides of who I am. Dancing makes me feel free and energized, whether I am performing on stage, practicing a new move, or dancing with friends. It is more than just physical activity—it is a source of happiness, confidence, and self-expression through music and movement.</p>
+            </div>
+            <div class="dot-row"><span></span><span></span><span></span></div>
+          </div>
         </div>
-
       </div>
-      <div class="max-w-[1000px] mx-auto pt-7 text-center">
-        <p class="text-[13px] text-white/50">© 2026 Valey. All rights reserved.</p>
+
+      <div class="hobby-card reveal rd2" style="transform:rotate(1deg);">
+        <div class="washi" style="background:rgba(253,216,229,.90);transform:translateX(-50%) rotate(1.5deg);"></div>
+        <div class="cd cd-ring  float-a" style="width:34px;height:34px;top:-18px;right:72px;"></div>
+        <div class="cd cd-circle pulse-a" style="width:14px;height:14px;top:-4px;right:30px;"></div>
+
+        <div class="card-body">
+          <div class="polaroid-col">
+            <div class="polaroid-frame">
+              <div class="polaroid-corner-deco"></div>
+              <div class="polaroid-photo"><img src="mahjong.webp" alt="Playing Mahjong"/></div>
+              <div class="since-pill" style="transform:rotate(0.5deg);">Since 2022</div>
+              <div class="photo-label" style="transform:rotate(0.5deg);">Playing Mahjong</div>
+            </div>
+          </div>
+          <div class="content-col">
+            <div class="title-row">
+              <div class="icon-circle">
+                <img src="mahjong-icon.svg" alt="mahjong-icon">
+              </div>
+              <h2 class="card-title">Playing Mahjong</h2>
+            </div>
+            <div class="desc-box">
+              <p>Playing Mahjong is a hobby I enjoy because it combines strategy, focus, and social interaction. I like the challenge of thinking ahead, making decisions, and understanding patterns throughout the game. Mahjong is also a great way to spend time with others, creating moments of fun, conversation, and friendly competition. It helps me relax while keeping my mind active and engaged.</p>
+            </div>
+            <div class="dot-row"><span></span><span></span><span></span></div>
+          </div>
+        </div>
       </div>
-    </footer>
 
-    <script>
-      $(function () {
-        $('#menuBtn').on('click', function () {
-          $('#mobile-nav').toggleClass('open');
-        });
-        $('#mobile-nav a').on('click', function () {
-          $('#mobile-nav').removeClass('open');
-        });
+      <div class="hobby-card reveal rd3" style="transform:rotate(-1deg);">
+        <div class="washi" style="background:rgba(255,224,236,.92);transform:translateX(-50%) rotate(-1.5deg);"></div>
+        <div class="cd cd-ring  fb-a" style="width:38px;height:38px;top:-20px;left:60px;"></div>
+        <div class="cd cd-circle fp-a" style="width:12px;height:12px;top:-5px;left:26px;"></div>
 
-        var revealObs = new IntersectionObserver(function (entries) {
-          entries.forEach(function (entry) {
-            if (entry.isIntersecting) {
-              $(entry.target).addClass('visible');
-            } else {
-              $(entry.target).removeClass('visible');
-            }
-          });
-        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+        <div class="card-body reversed">
+          <div class="polaroid-col">
+            <div class="polaroid-frame">
+              <div class="polaroid-corner-deco"></div>
+              <div class="polaroid-photo"><img src="kdrama.webp" alt="Watching K-Dramas"/></div>
+              <div class="photo-label" style="transform:rotate(0.2deg)">Watching K-Dramas</div>
+              <div class="since-pill" style="transform:rotate(0.2deg)">Since 2020</div>
+            </div>
+          </div>
+          <div class="content-col">
+            <div class="title-row">
+              <div class="icon-circle">
+                <img src="film-icon.svg" alt="film-icon">
+              </div>
+              <h2 class="card-title">Watching K-Dramas</h2>
+            </div>
+            <div class="desc-box">
+              <p>K-dramas are my favorite way to relax and escape into different stories and emotions. I enjoy following interesting plots, beautiful visuals, and characters that feel relatable and comforting. From romantic stories to exciting mysteries, each drama offers new perspectives and life lessons. Watching K-dramas during my free time, especially on cozy weekends, helps me unwind and enjoy simple moments.</p>
+            </div>
+            <div class="dot-row"><span></span><span></span><span></span></div>
+          </div>
+        </div>
+      </div>
 
-        $('.reveal').each(function () {
-          revealObs.observe(this);
-        });
+      <div class="hobby-card reveal rd4" style="transform:rotate(1deg);">
+        <div class="washi" style="background:rgba(255,201,221,.90);transform:translateX(-50%) rotate(1.5deg);"></div>
+        <div class="cd cd-ring  float-a" style="width:40px;height:40px;top:-22px;right:60px;"></div>
+        <div class="cd cd-circle pulse-a" style="width:13px;height:13px;top:-6px;right:24px;"></div>
 
-        $('.hobby-card').on('mouseenter', function () {
-          $(this).find('.icon-circle').css('transform', 'scale(1.15)');
-        }).on('mouseleave', function () {
-          $(this).find('.icon-circle').css('transform', 'scale(1)');
-        });
+        <div class="card-body">
+          <div class="polaroid-col">
+            <div class="polaroid-frame">
+              <div class="polaroid-corner-deco"></div>
+              <div class="polaroid-photo"><img src="crafting.webp" alt="Crafting &amp; DIY"/></div>
+              <div class="photo-label" style="transform:rotate(0.5deg);">Crafting &amp; DIY</div>
+              <div class="since-pill" style="transform:rotate(0.5deg);">Since 2018</div>
+            </div>
+          </div>
+          <div class="content-col">
+            <div class="title-row">
+              <div class="icon-circle">
+                <i class="fa-solid fa-scissors" style="color: rgb(255, 255, 255);"></i>
+              </div>
+              <h2 class="card-title">Crafting &amp; DIY</h2>
+            </div>
+            <div class="desc-box">
+              <p>Crafting is something I truly enjoy because it allows me to create meaningful things with my hands. From crocheting cozy items to making handmade cards for friends, I love turning simple materials into something special. Crafting helps me slow down, stay present, and focus on the process rather than perfection. Each finished piece reflects my creativity, care, and the joy of making something personal.</p>
+            </div>
+            <div class="dot-row"><span></span><span></span><span></span></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="flex justify-center mt-20 reveal">
+      <div class="quote-box" style="background:#fff;border:4px solid rgba(255,179,198,0.3); border-radius:24px; box-shadow:0 6px 28px rgba(255,143,171,.10);padding:28px 52px;text-align:center;position:relative;">
+        <div style="position:absolute;top:-13px;left:50%;transform:translateX(-50%) rotate(-1deg);width:80px;height:22px;border-radius:3px;background:rgba(255,230,200,0.6);"></div>
+        <p class="quote-text" style="font-family:'Caveat',cursive;font-size:1.6rem;color:#4a3a3a;transition:color .4s ease;">Life is better with hobbies that make you smile!</p>
+        <div style="display:flex;justify-content:center;gap:8px;margin-top:12px;">
+          <span style="width:8px;height:8px;border-radius:50%;background:#ffb3c6;opacity:.6;display:inline-block;"></span>
+          <span style="width:8px;height:8px;border-radius:50%;background:#ffb3c6;opacity:.6;display:inline-block;"></span>
+          <span style="width:8px;height:8px;border-radius:50%;background:#ffb3c6;opacity:.6;display:inline-block;"></span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer class="text-white pt-16 pb-8 px-6 md:px-12 border-[rgba(255,179,198,0.3)]" style="background:linear-gradient(180deg,#111111 0%,#1a0a0a 55%,#2d1a1a 100%);">
+  <div class="max-w-[1000px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 pb-10 border-b border-white/15">
+    <div>
+      <img src="valey-logo-white.webp" alt="Valey logo" class="h-14 object-contain mb-4"/>
+      <p class="text-[13px] text-white/60 leading-[1.7] max-w-[260px]">Informatics student passionate about creativity, technology, and artistic expression. Exploring the intersection of code and craft.</p>
+    </div>
+    <nav class="footer-links">
+      <h2 class="text-[15px] font-bold mb-4">Quick Links</h2>
+      <a href="home.html">Home</a>
+      <a href="hobbies.html">Hobby</a>
+      <a href="gallery.html">Gallery</a>
+    </nav>
+    <div>
+      <h2 class="text-[15px] font-bold mb-4">Connect</h2>
+      <div class="footer-social flex gap-3 mb-3">
+        <a href="https://www.instagram.com/marshavalerie_?igsh=NXNwZXV4bnZldGtt" title="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="https://github.com/hellohello823" title="GitHub"><i class="fab fa-github"></i></a>
+        <a href="mailto:marsha.valerie.wibowo@gmail.com" title="Gmail"><i class="fas fa-envelope"></i></a>
+        <a href="https://www.linkedin.com/in/marsha-valerie-wibowo-90baa137a/" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+      </div>
+      <p class="text-[12px] text-white/50">Follow along on my creative journey</p>
+    </div>
+  </div>
+  <div class="max-w-[1000px] mx-auto pt-7 text-center">
+    <p class="text-[13px] text-white/50">© 2026 Valey. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+  $(function () {
+    $("#menuBtn").on("click", function () { $("#mobile-nav").toggleClass("open"); });
+    $("#mobile-nav a").on("click", function () { $("#mobile-nav").removeClass("open"); });
+
+    // Hover: on hover reset rotation to 0, restore on leave
+    $(".hobby-card").each(function () {
+      const original = $(this).css("transform");
+      $(this).on("mouseenter", function () {
+        $(this).css({ transform: "rotate(0deg) translateY(-6px)", transition: "transform .42s cubic-bezier(.34,1.56,.64,1)" });
+      }).on("mouseleave", function () {
+        $(this).css({ transform: original });
       });
-    </script>
-  </body>
+    });
+
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) $(e.target).addClass("visible");
+        else $(e.target).removeClass("visible");
+      });
+    }, { threshold: 0.08, rootMargin: "0px 0px -40px 0px" });
+    $(".reveal").each(function () { obs.observe(this); });
+  });
+</script>
+</body>
 </html>
