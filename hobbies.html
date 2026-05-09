@@ -6,6 +6,7 @@
     <title>Valey - Hobbies</title>
     <link rel="icon" href="icon.webp" />
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
@@ -17,555 +18,44 @@
       rel="stylesheet"
     />
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-
-    <style>
-      /* ─── Reset ─────────────────────────────────────────── */
-      *,
-      *::before,
-      *::after {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-      }
-      html {
-        scroll-behavior: smooth;
-      }
-      body {
-        font-family: "Quicksand", sans-serif;
-        background: #fff5f7;
-        color: #4a3a3a;
-        overflow-x: hidden;
-      }
-
-      /* ─── Nav tabs ──────────────────────────────────────── */
-      .nav-tab {
-        font-family: "Quicksand", sans-serif;
-        font-weight: 500;
-        font-size: 15px;
-        padding: 8px 20px;
-        border-radius: 20px 20px 0 0;
-        text-decoration: none;
-        line-height: 1.5;
-        transition: all 0.2s ease;
-      }
-      .nav-tab.active {
-        background: #ffb3c6;
-        color: #fff;
-        box-shadow: 0 2px 6px rgba(255, 179, 198, 0.4);
-      }
-      .nav-tab.inactive {
-        background: #fff9fa;
-        color: #4a3a3a;
-        border: 1px solid #ffb3c6;
-      }
-      .nav-tab.inactive:hover {
-        background: #fff0f4;
-      }
-
-      /* ─── Mobile nav ────────────────────────────────────── */
-      #mobile-nav {
-        display: none;
-        position: fixed;
-        top: 64px;
-        left: 0;
-        width: 100%;
-        background: #fff;
-        z-index: 99;
-        flex-direction: column;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-      }
-      #mobile-nav a {
-        padding: 14px 24px;
-        color: #4a3a3a;
-        font-weight: 500;
-        text-decoration: none;
-        border-bottom: 1px solid #fff0f4;
-        font-family: "Quicksand", sans-serif;
-      }
-      #mobile-nav a:hover {
-        background: #fff5f7;
-        color: #ffb3c6;
-      }
-      #mobile-nav.open {
-        display: flex;
-      }
-
-      /* ─── Scroll reveal ─────────────────────────────────── */
-      .reveal {
-        opacity: 0;
-        transform: translateY(36px);
-        transition:
-          opacity 0.75s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-          transform 0.75s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      }
-      .reveal.visible {
-        opacity: 1;
-        transform: translateY(0);
-      }
-      .rd1 {
-        transition-delay: 0.12s;
-      }
-      .rd2 {
-        transition-delay: 0.24s;
-      }
-      .rd3 {
-        transition-delay: 0.36s;
-      }
-      .rd4 {
-        transition-delay: 0.48s;
-      }
-
-      /* ─── Absolute deco helpers ──────────────────────────── */
-      .deco,
-      .cd {
-        position: absolute;
-        pointer-events: none;
-      }
-      .cd-ring {
-        border-radius: 50%;
-        border: 2px solid rgba(255, 179, 198, 0.45);
-        background: transparent;
-      }
-      .cd-circle {
-        border-radius: 50%;
-        background: rgba(255, 224, 236, 0.7);
-      }
-
-      /* ─── Hobby card ────────────────────────────────────── */
-      .hobby-card {
-        background: #fff;
-        border: 4px solid rgba(255, 155, 185, 0.2);
-        box-shadow:
-          0 2px 6px rgba(0, 0, 0, 0.04),
-          0 8px 28px rgba(200, 100, 130, 0.1),
-          0 22px 52px rgba(200, 100, 130, 0.07);
-        position: relative;
-        overflow: visible;
-        transition:
-          transform 0.42s cubic-bezier(0.34, 1.56, 0.64, 1),
-          box-shadow 0.42s ease,
-          border-color 0.42s ease;
-      }
-      .hobby-card:hover {
-        transform: rotate(1.5deg);
-      }
-      /* Left-image cards tilt right; right-image cards tilt left — set via data attr */
-      .hobby-card[data-tilt="right"] {
-        transform: rotate(1deg);
-      }
-      .hobby-card[data-tilt="left"] {
-        transform: rotate(-1deg);
-      }
-
-      /* ─── Washi tape ────────────────────────────────────── */
-      .washi {
-        position: absolute;
-        top: -14px;
-        left: 45%;
-        width: 100px;
-        height: 30px;
-        border-radius: 3px;
-        z-index: 10;
-      }
-      .washi::after {
-        content: "";
-        position: absolute;
-        inset: 0;
-        border-radius: 3px;
-        background: repeating-linear-gradient(
-          90deg,
-          rgba(255, 255, 255, 0.22) 0,
-          rgba(255, 255, 255, 0.22) 5px,
-          transparent 5px,
-          transparent 10px
-        );
-      }
-      /* Per-card washi colours & micro-rotations */
-      .washi-1 {
-        background: rgba(255, 179, 198, 0.72);
-        transform: translateX(-50%) rotate(1.5deg);
-      }
-      .washi-2 {
-        background: rgba(248, 199, 216, 0.82);
-        transform: translateX(-50%) rotate(-1.5deg);
-      }
-      .washi-3 {
-        background: rgba(253, 216, 229, 0.9);
-        transform: translateX(-50%) rotate(1.5deg);
-      }
-      .washi-4 {
-        background: rgba(255, 224, 236, 0.92);
-        transform: translateX(-50%) rotate(-1.5deg);
-      }
-      .washi-5 {
-        background: rgba(255, 201, 221, 0.9);
-        transform: translateX(-50%) rotate(1.5deg);
-      }
-
-      /* ─── Polaroid ──────────────────────────────────────── */
-      .polaroid-col {
-        flex-shrink: 0;
-        width: 46%;
-        position: relative;
-        padding: 32px 28px 28px 32px;
-      }
-      .reversed .polaroid-col {
-        padding: 32px 32px 28px 28px;
-      }
-
-      .polaroid-frame {
-        background: #fff;
-        padding: 30px 30px 58px;
-        position: relative;
-        border: 2px solid rgba(255, 179, 198, 0.3);
-        box-shadow:
-          0 1px 4px rgba(0, 0, 0, 0.07),
-          0 6px 22px rgba(180, 80, 110, 0.13),
-          0 18px 40px rgba(180, 80, 110, 0.08);
-      }
-      .polaroid-photo {
-        width: 100%;
-        height: 220px;
-        overflow: hidden;
-        display: block;
-        transform: rotate(0.4deg);
-      }
-      .polaroid-photo img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        display: block;
-      }
-
-      .polaroid-corner-deco {
-        position: absolute;
-        top: -10px;
-        right: -10px;
-        width: 28px;
-        height: 28px;
-        border-radius: 50%;
-        background: #ffb3c6;
-        border: 3px solid #fff;
-        box-shadow: 0 2px 8px rgba(255, 143, 171, 0.45);
-        z-index: 6;
-      }
-      .photo-label {
-        position: absolute;
-        bottom: 14px;
-        left: 16px;
-        font-family: "Caveat", cursive;
-        font-size: 1.2rem;
-        color: #7a5c5c;
-        transform: rotate(0.3deg);
-      }
-      .since-pill {
-        position: absolute;
-        bottom: 14px;
-        right: 14px;
-        background: linear-gradient(135deg, #ff8fab, #ffb3c6);
-        color: #fff;
-        font-family: "Quicksand", sans-serif;
-        font-size: 11px;
-        font-weight: 700;
-        padding: 5px 16px;
-        border-radius: 999px;
-        border: 2.5px solid #fff;
-        box-shadow: 0 3px 12px rgba(255, 143, 171, 0.5);
-        white-space: nowrap;
-        z-index: 5;
-        letter-spacing: 0.03em;
-      }
-
-      /* ─── Content column ────────────────────────────────── */
-      .content-col {
-        flex: 1;
-        padding: 32px 32px 32px 8px;
-        display: flex;
-        flex-direction: column;
-        gap: 16px;
-      }
-      .reversed .content-col {
-        padding: 32px 8px 32px 32px;
-      }
-
-      /* ─── Icon circle ───────────────────────────────────── */
-      .icon-circle {
-        width: 52px;
-        height: 52px;
-        border-radius: 50%;
-        flex-shrink: 0;
-        background: linear-gradient(145deg, #ffd6e5 0%, #ffb3c6 100%);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        box-shadow:
-          0 0 0 6px rgba(255, 179, 198, 0.2),
-          0 4px 14px rgba(255, 143, 171, 0.3),
-          inset 0 1px 3px rgba(255, 255, 255, 0.5);
-        transition:
-          transform 0.3s ease,
-          box-shadow 0.3s ease;
-      }
-      .icon-circle img {
-        width: 22px;
-        height: 22px;
-      }
-      .icon-circle i {
-        font-size: 22px;
-        color: #fff;
-      }
-      .hobby-card:hover .icon-circle {
-        transform: scale(1.12);
-        box-shadow:
-          0 0 0 9px rgba(255, 179, 198, 0.22),
-          0 6px 18px rgba(255, 143, 171, 0.38),
-          inset 0 1px 3px rgba(255, 255, 255, 0.5);
-      }
-
-      /* ─── Desc box ──────────────────────────────────────── */
-      .desc-box {
-        background: rgba(255, 229, 236, 0.22);
-        border: 1.5px solid rgba(255, 179, 198, 0.2);
-        border-radius: 14px;
-        padding: 20px 22px;
-        flex: 1;
-      }
-      .desc-box p {
-        font-size: 14.5px;
-        line-height: 1.8;
-        color: #4a3a3a;
-      }
-
-      /* ─── Dot row ───────────────────────────────────────── */
-      .dot-row {
-        display: flex;
-        gap: 7px;
-        justify-content: flex-end;
-      }
-      .dot-row span {
-        width: 8px;
-        height: 8px;
-        border-radius: 50%;
-        background: rgba(255, 143, 171, 0.55);
-        display: inline-block;
-      }
-
-      /* ─── Quote box ─────────────────────────────────────── */
-      @keyframes quoteFloat {
-        0%,
-        100% {
-          transform: translateY(0) scale(1);
-        }
-        50% {
-          transform: translateY(-6px) scale(1.02);
-        }
-      }
-      .quote-box {
-        transition:
-          box-shadow 0.4s ease,
-          border-color 0.4s ease;
-        cursor: default;
-      }
-      .quote-box:hover {
-        animation: quoteFloat 0.8s ease-in-out forwards;
-        box-shadow:
-          0 12px 40px rgba(255, 143, 171, 0.22),
-          0 4px 16px rgba(255, 143, 171, 0.14) !important;
-        border-color: rgba(255, 143, 171, 0.45) !important;
-      }
-      .quote-box:hover .quote-text {
-        color: #c0607a;
-      }
-
-      /* ─── Footer links / social ─────────────────────────── */
-      .footer-links a {
-        display: block;
-        color: rgba(255, 255, 255, 0.65);
-        font-size: 13px;
-        margin-bottom: 8px;
-        text-decoration: none;
-        transition: color 0.2s;
-      }
-      .footer-links a:hover {
-        color: #ffb3c6;
-      }
-      .footer-social a {
-        width: 38px;
-        height: 38px;
-        border-radius: 10px;
-        border: 1.5px solid rgba(255, 179, 198, 0.5);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: rgba(255, 255, 255, 0.8);
-        font-size: 16px;
-        text-decoration: none;
-        transition: all 0.25s ease;
-      }
-      .footer-social a:hover {
-        background: #ffb3c6;
-        color: #fff;
-        border-color: #ffb3c6;
-      }
-
-      /* ─── Responsive ────────────────────────────────────── */
-      @media (max-width: 900px) {
-        /* Cards stack vertically */
-        .card-body,
-        .card-body.reversed {
-          flex-direction: column !important;
-        }
-        .polaroid-col,
-        .reversed .polaroid-col {
-          width: 100% !important;
-          max-width: 420px;
-          margin: 0 auto;
-          padding: 20px 20px 0 !important;
-        }
-        .content-col,
-        .reversed .content-col {
-          padding: 16px 20px 24px !important;
-        }
-        /* Suppress desktop tilt on mobile — JS hover also disabled via pointer */
-        .hobby-card[data-tilt] {
-          transform: none !important;
-        }
-        /* Nav */
-        .nav-tabs {
-          display: none !important;
-        }
-        .mobile-menu-btn {
-          display: flex !important;
-        }
-      }
-
-      @media (max-width: 480px) {
-        /* Heading scales down gracefully on very small phones */
-        .page-heading {
-          font-size: clamp(3rem, 14vw, 5.4rem) !important;
-        }
-        .card-title {
-          font-size: clamp(1.5rem, 6vw, 2.15rem) !important;
-        }
-        /* Quote box tighter on small phones */
-        .quote-box {
-          padding: 20px 24px !important;
-        }
-        /* Polaroid photo shorter on tiny screens */
-        .polaroid-photo {
-          height: 180px !important;
-        }
-        /* Desc text comfortable size */
-        .desc-box p {
-          font-size: 14px !important;
-        }
-        /* Heading sub-text */
-        .page-sub {
-          font-size: 1rem !important;
-        }
-      }
-    </style>
   </head>
   <body class="bg-page-bg text-brown font-quicksand overflow-x-hidden">
-    <!-- ════════════════ HEADER ════════════════ -->
     <header
-      class="fixed top-0 left-0 w-full z-[100] bg-white/85 backdrop-blur-md shadow-md h-16 flex items-center px-6 sm:px-8 justify-between"
+      class="fixed top-0 left-0 w-full z-[100] bg-white/85 backdrop-blur-md shadow-[0_2px_8px_rgba(0,0,0,0.08)] h-16 flex items-center px-8 justify-between"
     >
-      <img
-        src="images\valey-logo.webp"
-        alt="Valey"
-        class="h-11 object-contain"
-      />
+      <img src="images/valey-logo.webp" alt="Valey logo" class="h-11 object-contain" />
+
       <nav class="nav-tabs flex items-end gap-1">
         <a href="index.html" class="nav-tab inactive">Home</a>
         <a href="hobbies.html" class="nav-tab active">Hobbies</a>
+        <a href="projects.html" class="nav-tab inactive">Projects</a>
         <a href="gallery.html" class="nav-tab inactive">Gallery</a>
       </nav>
+
       <button
-        class="mobile-menu-btn hidden items-center justify-center bg-transparent border-0 cursor-pointer text-2xl text-pink"
+        class="mobile-menu-btn hidden items-center justify-center bg-transparent border-0 cursor-pointer text-2xl text-[#ffb3c6]"
         id="menuBtn"
       >
-        <i class="fas fa-bars"></i>
+        <i class="fa-solid fa-bars"></i>
       </button>
     </header>
 
     <div id="mobile-nav">
       <a href="index.html">Home</a>
       <a href="hobbies.html">Hobbies</a>
+      <a href="projects.html">Projects</a>
       <a href="gallery.html">Gallery</a>
     </div>
 
-    <!-- ════════════════ MAIN ════════════════ -->
     <main class="pt-24 pb-16 relative overflow-x-hidden">
-      <!-- Background floating deco (hidden on very small screens to reduce clutter) -->
-      <div
-        class="deco animate-float-a hidden sm:block"
-        style="
-          width: 46px;
-          height: 46px;
-          border-radius: 50%;
-          border: 2.5px solid rgba(255, 179, 198, 0.35);
-          top: 68px;
-          right: 7%;
-        "
-      ></div>
-      <div
-        class="deco animate-float-b hidden sm:block"
-        style="
-          width: 20px;
-          height: 20px;
-          border-radius: 50%;
-          background: rgba(255, 179, 198, 0.2);
-          top: 44px;
-          right: 13%;
-        "
-      ></div>
-      <div
-        class="deco animate-float-a hidden sm:block"
-        style="
-          width: 32px;
-          height: 32px;
-          border-radius: 50%;
-          background: rgba(255, 224, 236, 0.5);
-          top: 130px;
-          left: 5%;
-        "
-      ></div>
-      <div
-        class="deco animate-float-c hidden sm:block"
-        style="
-          width: 16px;
-          height: 16px;
-          background: rgba(255, 220, 234, 0.6);
-          top: 196px;
-          left: 3.5%;
-        "
-      ></div>
-      <div
-        class="deco animate-spin-slow hidden sm:block"
-        style="
-          width: 58px;
-          height: 58px;
-          border-radius: 50%;
-          border: 2px solid rgba(255, 179, 198, 0.22);
-          top: 218px;
-          right: 4.5%;
-        "
-      ></div>
-      <div
-        class="deco animate-pulse-a hidden sm:block"
-        style="
-          width: 10px;
-          height: 10px;
-          border-radius: 50%;
-          background: rgba(255, 143, 171, 0.4);
-          top: 166px;
-          right: 20%;
-        "
-      ></div>
+      <div class="deco animate-float-a hidden sm:block w-[46px] h-[46px] rounded-full border-[2.5px] border-[rgba(255,179,198,0.35)] top-[68px] right-[7%]"></div>
+      <div class="deco animate-float-b hidden sm:block w-[20px] h-[20px] rounded-full bg-[rgba(255,179,198,0.2)] top-[44px] right-[13%]"></div>
+      <div class="deco animate-float-a hidden sm:block w-[32px] h-[32px] rounded-full bg-[rgba(255,224,236,0.5)] top-[130px] left-[5%]"></div>
+      <div class="deco animate-float-c hidden sm:block w-[16px] h-[16px] bg-[rgba(255,220,234,0.6)] top-[196px] left-[3.5%]"></div>
+      <div class="deco animate-spin-slow hidden sm:block w-[58px] h-[58px] rounded-full border-[2px] border-[rgba(255,179,198,0.22)] top-[218px] right-[4.5%]"></div>
+      <div class="deco animate-pulse-a hidden sm:block w-[10px] h-[10px] rounded-full bg-[rgba(255,143,171,0.4)] top-[166px] right-[20%]"></div>
 
       <div class="max-w-[1100px] mx-auto px-4 sm:px-6 md:px-12">
-        <!-- ── Page heading ── -->
         <div class="text-center mb-14 sm:mb-20 reveal relative">
           <div
             class="absolute top-4 left-[22%] w-14 h-4 rounded-full bg-[rgba(255,179,198,0.4)] -rotate-45 opacity-70 hidden sm:block"
@@ -573,10 +63,7 @@
           <div
             class="absolute top-8 right-[24%] w-16 h-4 rounded-full bg-[rgba(255,179,198,0.4)] rotate-[40deg] opacity-70 hidden sm:block"
           ></div>
-          <h1
-            class="page-heading font-caveat font-medium text-brown mb-3"
-            style="font-size: 5.4rem"
-          >
+          <h1 class="page-heading font-caveat font-medium text-brown text-7xl mb-3 mt-">
             My Hobbies
           </h1>
           <p
@@ -599,44 +86,33 @@
           </div>
         </div>
 
-        <!-- ── Cards ── -->
         <div class="flex flex-col gap-10 sm:gap-14">
-          <!-- ══ CARD 1 — Crochet (image left) ══ -->
           <div class="hobby-card reveal" data-tilt="right">
             <div class="washi washi-1"></div>
-            <div
-              class="cd cd-ring animate-float-a"
-              style="width: 36px; height: 36px; top: -20px; right: 64px"
-            ></div>
-            <div
-              class="cd cd-circle animate-pulse-a"
-              style="width: 13px; height: 13px; top: -5px; right: 26px"
-            ></div>
+            <div class="cd cd-ring animate-float-a w-[36px] h-[36px] top-[-20px] right-[64px]"></div>
+            <div class="cd cd-circle animate-pulse-a w-[13px] h-[13px] top-[-5px] right-[26px]"></div>
             <div class="card-body flex items-center">
-              <div class="polaroid-col">
-                <div class="polaroid-frame">
-                  <div class="polaroid-corner-deco"></div>
-                  <div class="polaroid-photo">
-                    <img src="images\crochet.webp" alt="Crochet" />
+              <div class="polaroid-col flex-shrink-0 w-[46%] relative p-[32px_28px_28px_32px] sm:w-full sm:max-w-[420px] sm:mx-auto sm:p-[24px_24px_0]">
+                <div class="polaroid-frame bg-white p-[30px_30px_58px] relative border-[2px] border-[rgba(255,179,198,0.3)] shadow-[0_1px_4px_rgba(0,0,0,0.07),0_6px_22px_rgba(180,80,110,0.13),0_18px_40px_rgba(180,80,110,0.08)]">
+                  <div class="polaroid-corner-deco absolute top-[-10px] right-[-10px] w-[28px] h-[28px] rounded-full bg-[#ffb3c6] border-[3px] border-white shadow-[0_2px_8px_rgba(255,143,171,0.45)] z-[6]"></div>
+                  <div class="polaroid-photo w-full h-[220px] overflow-hidden block transform rotate-[0.4deg] sm:h-[180px]">
+                    <img src="images/crochet.webp" alt="Crochet" class="w-full h-full object-cover block" />
                   </div>
-                  <div class="photo-label">Crochet</div>
-                  <div class="since-pill">Since 2019</div>
+                  <div class="photo-label absolute bottom-[14px] left-[16px] font-caveat text-[1.2rem] text-[#7a5c5c] transform rotate-[0.3deg]">Crochet</div>
+                  <div class="since-pill absolute bottom-[14px] right-[14px] bg-gradient-to-r from-[#ff8fab] to-[#ffb3c6] text-white font-quicksand font-bold text-[11px] p-[5px_16px] rounded-full border-[2.5px] border-white shadow-[0_3px_12px_rgba(255,143,171,0.5)] whitespace-nowrap z-[5] tracking-[0.03em]">Since 2019</div>
                 </div>
               </div>
-              <div class="content-col">
+              <div class="content-col flex-1 p-[32px_32px_32px_8px] flex flex-col gap-[16px] sm:p-[24px_24px_32px]">
                 <div class="flex items-center gap-[14px]">
-                  <div class="icon-circle">
-                    <img src="icon\yarn-icon.svg" alt="yarn icon" />
+                  <div class="icon-circle w-[52px] h-[52px] rounded-full flex-shrink-0 bg-gradient-to-br from-[#ffd6e5] to-[#ffb3c6] flex items-center justify-center shadow-[0_0_0_6px_rgba(255,179,198,0.2),0_4px_14px_rgba(255,143,171,0.3),inset_0_1px_3px_rgba(255,255,255,0.5)] transition-transform duration-300 ease">
+                    <img src="icon/yarn-icon.svg" alt="yarn icon" class="w-[22px] h-[22px]" />
                   </div>
-                  <h2
-                    class="card-title font-caveat font-normal text-brown leading-[1.15]"
-                    style="font-size: 2.15rem"
-                  >
+                  <h2 class="card-title font-caveat font-normal text-brown leading-[1.15] text-[2.15rem]">
                     Crochet
                   </h2>
                 </div>
-                <div class="desc-box">
-                  <p>
+                <div class="desc-box bg-[rgba(255,229,236,0.22)] border-[1.5px] border-[rgba(255,179,198,0.2)] rounded-[14px] p-[20px_22px] flex-1">
+                  <p class="text-[14.5px] leading-[1.8] text-[#4a3a3a] sm:text-[14px]">
                     Crochet is one of my favorite hobbies because it helps me
                     relax and be creative. I enjoy working with yarn and slowly
                     turning it into something meaningful, from simple pieces to
@@ -646,49 +122,39 @@
                     a quiet moment—finishing a project always feels rewarding.
                   </p>
                 </div>
-                <div class="dot-row">
-                  <span></span><span></span><span></span>
+                <div class="dot-row flex gap-[7px] justify-end">
+                  <span class="w-[8px] h-[8px] rounded-full bg-[rgba(255,143,171,0.55)] inline-block"></span><span class="w-[8px] h-[8px] rounded-full bg-[rgba(255,143,171,0.55)] inline-block"></span><span class="w-[8px] h-[8px] rounded-full bg-[rgba(255,143,171,0.55)] inline-block"></span>
                 </div>
               </div>
             </div>
           </div>
 
-          <!-- ══ CARD 2 — Dancing (image right) ══ -->
-          <div class="hobby-card reveal rd1" data-tilt="left">
+          <div class="hobby-card reveal delay-[0.12s]" data-tilt="left">
             <div class="washi washi-2"></div>
-            <div
-              class="cd cd-ring animate-float-b"
-              style="width: 38px; height: 38px; top: -20px; left: 60px"
-            ></div>
-            <div
-              class="cd cd-circle animate-pulse-a"
-              style="width: 12px; height: 12px; top: -5px; left: 24px"
-            ></div>
+            <div class="cd cd-ring animate-float-b w-[38px] h-[38px] top-[-20px] left-[60px]"></div>
+            <div class="cd cd-circle animate-pulse-a w-[12px] h-[12px] top-[-5px] left-[24px]"></div>
             <div class="card-body reversed flex flex-row-reverse items-center">
-              <div class="polaroid-col">
-                <div class="polaroid-frame">
-                  <div class="polaroid-corner-deco"></div>
-                  <div class="polaroid-photo">
-                    <img src="images\dance.webp" alt="Dancing" />
+              <div class="polaroid-col flex-shrink-0 w-[46%] relative p-[32px_32px_28px_28px] sm:w-full sm:max-w-[420px] sm:mx-auto sm:p-[24px_24px_0]">
+                <div class="polaroid-frame bg-white p-[30px_30px_58px] relative border-[2px] border-[rgba(255,179,198,0.3)] shadow-[0_1px_4px_rgba(0,0,0,0.07),0_6px_22px_rgba(180,80,110,0.13),0_18px_40px_rgba(180,80,110,0.08)]">
+                  <div class="polaroid-corner-deco absolute top-[-10px] right-[-10px] w-[28px] h-[28px] rounded-full bg-[#ffb3c6] border-[3px] border-white shadow-[0_2px_8px_rgba(255,143,171,0.45)] z-[6]"></div>
+                  <div class="polaroid-photo w-full h-[220px] overflow-hidden block transform rotate-[0.4deg] sm:h-[180px]">
+                    <img src="images/dance.webp" alt="Dancing" class="w-full h-full object-cover block" />
                   </div>
-                  <div class="photo-label">Dancing</div>
-                  <div class="since-pill">Since 2018</div>
+                  <div class="photo-label absolute bottom-[14px] left-[16px] font-caveat text-[1.2rem] text-[#7a5c5c] transform rotate-[0.3deg]">Dancing</div>
+                  <div class="since-pill absolute bottom-[14px] right-[14px] bg-gradient-to-r from-[#ff8fab] to-[#ffb3c6] text-white font-quicksand font-bold text-[11px] p-[5px_16px] rounded-full border-[2.5px] border-white shadow-[0_3px_12px_rgba(255,143,171,0.5)] whitespace-nowrap z-[5] tracking-[0.03em]">Since 2018</div>
                 </div>
               </div>
-              <div class="content-col">
+              <div class="content-col flex-1 p-[32px_8px_32px_32px] flex flex-col gap-[16px] sm:p-[24px_24px_32px]">
                 <div class="flex items-center gap-[14px]">
-                  <div class="icon-circle">
-                    <i class="fas fa-music text-white"></i>
+                  <div class="icon-circle w-[52px] h-[52px] rounded-full flex-shrink-0 bg-gradient-to-br from-[#ffd6e5] to-[#ffb3c6] flex items-center justify-center shadow-[0_0_0_6px_rgba(255,179,198,0.2),0_4px_14px_rgba(255,143,171,0.3),inset_0_1px_3px_rgba(255,255,255,0.5)] transition-transform duration-300 ease">
+                    <i class="fas fa-music text-[22px] text-white"></i>
                   </div>
-                  <h2
-                    class="card-title font-caveat font-normal text-brown leading-[1.15]"
-                    style="font-size: 2.15rem"
-                  >
+                  <h2 class="card-title font-caveat font-normal text-brown leading-[1.15] text-[2.15rem]">
                     Dancing
                   </h2>
                 </div>
-                <div class="desc-box">
-                  <p>
+                <div class="desc-box bg-[rgba(255,229,236,0.22)] border-[1.5px] border-[rgba(255,179,198,0.2)] rounded-[14px] p-[20px_22px] flex-1">
+                  <p class="text-[14.5px] leading-[1.8] text-[#4a3a3a] sm:text-[14px]">
                     Dance is a way for me to express myself when words are not
                     enough. I enjoy exploring different styles, from
                     contemporary to hip-hop, as each one allows me to show
@@ -699,49 +165,39 @@
                     and self-expression through music and movement.
                   </p>
                 </div>
-                <div class="dot-row">
-                  <span></span><span></span><span></span>
+                <div class="dot-row flex gap-[7px] justify-end">
+                  <span class="w-[8px] h-[8px] rounded-full bg-[rgba(255,143,171,0.55)] inline-block"></span><span class="w-[8px] h-[8px] rounded-full bg-[rgba(255,143,171,0.55)] inline-block"></span><span class="w-[8px] h-[8px] rounded-full bg-[rgba(255,143,171,0.55)] inline-block"></span>
                 </div>
               </div>
             </div>
           </div>
 
-          <!-- ══ CARD 3 — Playing Mahjong (image left) ══ -->
-          <div class="hobby-card reveal rd2" data-tilt="right">
+          <div class="hobby-card reveal delay-[0.24s]" data-tilt="right">
             <div class="washi washi-3"></div>
-            <div
-              class="cd cd-ring animate-float-a"
-              style="width: 34px; height: 34px; top: -18px; right: 72px"
-            ></div>
-            <div
-              class="cd cd-circle animate-pulse-a"
-              style="width: 14px; height: 14px; top: -4px; right: 30px"
-            ></div>
+            <div class="cd cd-ring animate-float-a w-[34px] h-[34px] top-[-18px] right-[72px]"></div>
+            <div class="cd cd-circle animate-pulse-a w-[14px] h-[14px] top-[-4px] right-[30px]"></div>
             <div class="card-body flex items-center">
-              <div class="polaroid-col">
-                <div class="polaroid-frame">
-                  <div class="polaroid-corner-deco"></div>
-                  <div class="polaroid-photo">
-                    <img src="images\mahjong.webp" alt="Playing Mahjong" />
+              <div class="polaroid-col flex-shrink-0 w-[46%] relative p-[32px_28px_28px_32px] sm:w-full sm:max-w-[420px] sm:mx-auto sm:p-[24px_24px_0]">
+                <div class="polaroid-frame bg-white p-[30px_30px_58px] relative border-[2px] border-[rgba(255,179,198,0.3)] shadow-[0_1px_4px_rgba(0,0,0,0.07),0_6px_22px_rgba(180,80,110,0.13),0_18px_40px_rgba(180,80,110,0.08)]">
+                  <div class="polaroid-corner-deco absolute top-[-10px] right-[-10px] w-[28px] h-[28px] rounded-full bg-[#ffb3c6] border-[3px] border-white shadow-[0_2px_8px_rgba(255,143,171,0.45)] z-[6]"></div>
+                  <div class="polaroid-photo w-full h-[220px] overflow-hidden block transform rotate-[0.4deg] sm:h-[180px]">
+                    <img src="images/mahjong.webp" alt="Playing Mahjong" class="w-full h-full object-cover block" />
                   </div>
-                  <div class="photo-label">Playing Mahjong</div>
-                  <div class="since-pill">Since 2022</div>
+                  <div class="photo-label absolute bottom-[14px] left-[16px] font-caveat text-[1.2rem] text-[#7a5c5c] transform rotate-[0.3deg]">Playing Mahjong</div>
+                  <div class="since-pill absolute bottom-[14px] right-[14px] bg-gradient-to-r from-[#ff8fab] to-[#ffb3c6] text-white font-quicksand font-bold text-[11px] p-[5px_16px] rounded-full border-[2.5px] border-white shadow-[0_3px_12px_rgba(255,143,171,0.5)] whitespace-nowrap z-[5] tracking-[0.03em]">Since 2022</div>
                 </div>
               </div>
-              <div class="content-col">
+              <div class="content-col flex-1 p-[32px_32px_32px_8px] flex flex-col gap-[16px] sm:p-[24px_24px_32px]">
                 <div class="flex items-center gap-[14px]">
-                  <div class="icon-circle">
-                    <img src="icon\mahjong-icon.svg" alt="mahjong icon" />
+                  <div class="icon-circle w-[52px] h-[52px] rounded-full flex-shrink-0 bg-gradient-to-br from-[#ffd6e5] to-[#ffb3c6] flex items-center justify-center shadow-[0_0_0_6px_rgba(255,179,198,0.2),0_4px_14px_rgba(255,143,171,0.3),inset_0_1px_3px_rgba(255,255,255,0.5)] transition-transform duration-300 ease">
+                    <img src="icon/mahjong-icon.svg" alt="mahjong icon" class="w-[22px] h-[22px]" />
                   </div>
-                  <h2
-                    class="card-title font-caveat font-normal text-brown leading-[1.15]"
-                    style="font-size: 2.15rem"
-                  >
+                  <h2 class="card-title font-caveat font-normal text-brown leading-[1.15] text-[2.15rem]">
                     Playing Mahjong
                   </h2>
                 </div>
-                <div class="desc-box">
-                  <p>
+                <div class="desc-box bg-[rgba(255,229,236,0.22)] border-[1.5px] border-[rgba(255,179,198,0.2)] rounded-[14px] p-[20px_22px] flex-1">
+                  <p class="text-[14.5px] leading-[1.8] text-[#4a3a3a] sm:text-[14px]">
                     Playing Mahjong is a hobby I enjoy because it combines
                     strategy, focus, and social interaction. I like the
                     challenge of thinking ahead, making decisions, and
@@ -751,49 +207,39 @@
                     relax while keeping my mind active and engaged.
                   </p>
                 </div>
-                <div class="dot-row">
-                  <span></span><span></span><span></span>
+                <div class="dot-row flex gap-[7px] justify-end">
+                  <span class="w-[8px] h-[8px] rounded-full bg-[rgba(255,143,171,0.55)] inline-block"></span><span class="w-[8px] h-[8px] rounded-full bg-[rgba(255,143,171,0.55)] inline-block"></span><span class="w-[8px] h-[8px] rounded-full bg-[rgba(255,143,171,0.55)] inline-block"></span>
                 </div>
               </div>
             </div>
           </div>
 
-          <!-- ══ CARD 4 — Watching K-Dramas (image right) ══ -->
-          <div class="hobby-card reveal rd3" data-tilt="left">
+          <div class="hobby-card reveal delay-[0.36s]" data-tilt="left">
             <div class="washi washi-4"></div>
-            <div
-              class="cd cd-ring animate-float-b"
-              style="width: 38px; height: 38px; top: -20px; left: 60px"
-            ></div>
-            <div
-              class="cd cd-circle animate-pulse-a"
-              style="width: 12px; height: 12px; top: -5px; left: 26px"
-            ></div>
+            <div class="cd cd-ring animate-float-b w-[38px] h-[38px] top-[-20px] left-[60px]"></div>
+            <div class="cd cd-circle animate-pulse-a w-[12px] h-[12px] top-[-5px] left-[26px]"></div>
             <div class="card-body reversed flex flex-row-reverse items-center">
-              <div class="polaroid-col">
-                <div class="polaroid-frame">
-                  <div class="polaroid-corner-deco"></div>
-                  <div class="polaroid-photo">
-                    <img src="images\kdrama.webp" alt="Watching K-Dramas" />
+              <div class="polaroid-col flex-shrink-0 w-[46%] relative p-[32px_32px_28px_28px] sm:w-full sm:max-w-[420px] sm:mx-auto sm:p-[24px_24px_0]">
+                <div class="polaroid-frame bg-white p-[30px_30px_58px] relative border-[2px] border-[rgba(255,179,198,0.3)] shadow-[0_1px_4px_rgba(0,0,0,0.07),0_6px_22px_rgba(180,80,110,0.13),0_18px_40px_rgba(180,80,110,0.08)]">
+                  <div class="polaroid-corner-deco absolute top-[-10px] right-[-10px] w-[28px] h-[28px] rounded-full bg-[#ffb3c6] border-[3px] border-white shadow-[0_2px_8px_rgba(255,143,171,0.45)] z-[6]"></div>
+                  <div class="polaroid-photo w-full h-[220px] overflow-hidden block transform rotate-[0.4deg] sm:h-[180px]">
+                    <img src="images/kdrama.webp" alt="Watching K-Dramas" class="w-full h-full object-cover block" />
                   </div>
-                  <div class="photo-label">Watching K-Dramas</div>
-                  <div class="since-pill">Since 2020</div>
+                  <div class="photo-label absolute bottom-[14px] left-[16px] font-caveat text-[1.2rem] text-[#7a5c5c] transform rotate-[0.3deg]">Watching K-Dramas</div>
+                  <div class="since-pill absolute bottom-[14px] right-[14px] bg-gradient-to-r from-[#ff8fab] to-[#ffb3c6] text-white font-quicksand font-bold text-[11px] p-[5px_16px] rounded-full border-[2.5px] border-white shadow-[0_3px_12px_rgba(255,143,171,0.5)] whitespace-nowrap z-[5] tracking-[0.03em]">Since 2020</div>
                 </div>
               </div>
-              <div class="content-col">
+              <div class="content-col flex-1 p-[32px_8px_32px_32px] flex flex-col gap-[16px] sm:p-[24px_24px_32px]">
                 <div class="flex items-center gap-[14px]">
-                  <div class="icon-circle">
-                    <img src="icon\film-icon.svg" alt="film icon" />
+                  <div class="icon-circle w-[52px] h-[52px] rounded-full flex-shrink-0 bg-gradient-to-br from-[#ffd6e5] to-[#ffb3c6] flex items-center justify-center shadow-[0_0_0_6px_rgba(255,179,198,0.2),0_4px_14px_rgba(255,143,171,0.3),inset_0_1px_3px_rgba(255,255,255,0.5)] transition-transform duration-300 ease">
+                    <img src="icon/film-icon.svg" alt="film icon" class="w-[22px] h-[22px]" />
                   </div>
-                  <h2
-                    class="card-title font-caveat font-normal text-brown leading-[1.15]"
-                    style="font-size: 2.15rem"
-                  >
+                  <h2 class="card-title font-caveat font-normal text-brown leading-[1.15] text-[2.15rem]">
                     Watching K-Dramas
                   </h2>
                 </div>
-                <div class="desc-box">
-                  <p>
+                <div class="desc-box bg-[rgba(255,229,236,0.22)] border-[1.5px] border-[rgba(255,179,198,0.2)] rounded-[14px] p-[20px_22px] flex-1">
+                  <p class="text-[14.5px] leading-[1.8] text-[#4a3a3a] sm:text-[14px]">
                     K-dramas are my favorite way to relax and escape into
                     different stories and emotions. I enjoy following
                     interesting plots, beautiful visuals, and characters that
@@ -804,49 +250,39 @@
                     simple moments.
                   </p>
                 </div>
-                <div class="dot-row">
-                  <span></span><span></span><span></span>
+                <div class="dot-row flex gap-[7px] justify-end">
+                  <span class="w-[8px] h-[8px] rounded-full bg-[rgba(255,143,171,0.55)] inline-block"></span><span class="w-[8px] h-[8px] rounded-full bg-[rgba(255,143,171,0.55)] inline-block"></span><span class="w-[8px] h-[8px] rounded-full bg-[rgba(255,143,171,0.55)] inline-block"></span>
                 </div>
               </div>
             </div>
           </div>
 
-          <!-- ══ CARD 5 — Crafting & DIY (image left) ══ -->
-          <div class="hobby-card reveal rd4" data-tilt="right">
+          <div class="hobby-card reveal delay-[0.48s]" data-tilt="right">
             <div class="washi washi-5"></div>
-            <div
-              class="cd cd-ring animate-float-a"
-              style="width: 40px; height: 40px; top: -22px; right: 60px"
-            ></div>
-            <div
-              class="cd cd-circle animate-pulse-a"
-              style="width: 13px; height: 13px; top: -6px; right: 24px"
-            ></div>
+            <div class="cd cd-ring animate-float-a w-[40px] h-[40px] top-[-22px] right-[60px]"></div>
+            <div class="cd cd-circle animate-pulse-a w-[13px] h-[13px] top-[-6px] right-[24px]"></div>
             <div class="card-body flex items-center">
-              <div class="polaroid-col">
-                <div class="polaroid-frame">
-                  <div class="polaroid-corner-deco"></div>
-                  <div class="polaroid-photo">
-                    <img src="images\crafting.webp" alt="Crafting &amp; DIY" />
+              <div class="polaroid-col flex-shrink-0 w-[46%] relative p-[32px_28px_28px_32px] sm:w-full sm:max-w-[420px] sm:mx-auto sm:p-[24px_24px_0]">
+                <div class="polaroid-frame bg-white p-[30px_30px_58px] relative border-[2px] border-[rgba(255,179,198,0.3)] shadow-[0_1px_4px_rgba(0,0,0,0.07),0_6px_22px_rgba(180,80,110,0.13),0_18px_40px_rgba(180,80,110,0.08)]">
+                  <div class="polaroid-corner-deco absolute top-[-10px] right-[-10px] w-[28px] h-[28px] rounded-full bg-[#ffb3c6] border-[3px] border-white shadow-[0_2px_8px_rgba(255,143,171,0.45)] z-[6]"></div>
+                  <div class="polaroid-photo w-full h-[220px] overflow-hidden block transform rotate-[0.4deg] sm:h-[180px]">
+                    <img src="images/crafting.webp" alt="Crafting &amp; DIY" class="w-full h-full object-cover block" />
                   </div>
-                  <div class="photo-label">Crafting &amp; DIY</div>
-                  <div class="since-pill">Since 2018</div>
+                  <div class="photo-label absolute bottom-[14px] left-[16px] font-caveat text-[1.2rem] text-[#7a5c5c] transform rotate-[0.3deg]">Crafting &amp; DIY</div>
+                  <div class="since-pill absolute bottom-[14px] right-[14px] bg-gradient-to-r from-[#ff8fab] to-[#ffb3c6] text-white font-quicksand font-bold text-[11px] p-[5px_16px] rounded-full border-[2.5px] border-white shadow-[0_3px_12px_rgba(255,143,171,0.5)] whitespace-nowrap z-[5] tracking-[0.03em]">Since 2018</div>
                 </div>
               </div>
-              <div class="content-col">
+              <div class="content-col flex-1 p-[32px_32px_32px_8px] flex flex-col gap-[16px] sm:p-[24px_24px_32px]">
                 <div class="flex items-center gap-[14px]">
-                  <div class="icon-circle">
-                    <i class="fa-solid fa-scissors text-white"></i>
+                  <div class="icon-circle w-[52px] h-[52px] rounded-full flex-shrink-0 bg-gradient-to-br from-[#ffd6e5] to-[#ffb3c6] flex items-center justify-center shadow-[0_0_0_6px_rgba(255,179,198,0.2),0_4px_14px_rgba(255,143,171,0.3),inset_0_1px_3px_rgba(255,255,255,0.5)] transition-transform duration-300 ease">
+                    <i class="fa-solid fa-scissors text-[22px] text-white"></i>
                   </div>
-                  <h2
-                    class="card-title font-caveat font-normal text-brown leading-[1.15]"
-                    style="font-size: 2.15rem"
-                  >
+                  <h2 class="card-title font-caveat font-normal text-brown leading-[1.15] text-[2.15rem]">
                     Crafting &amp; DIY
                   </h2>
                 </div>
-                <div class="desc-box">
-                  <p>
+                <div class="desc-box bg-[rgba(255,229,236,0.22)] border-[1.5px] border-[rgba(255,179,198,0.2)] rounded-[14px] p-[20px_22px] flex-1">
+                  <p class="text-[14.5px] leading-[1.8] text-[#4a3a3a] sm:text-[14px]">
                     Crafting is something I truly enjoy because it allows me to
                     create meaningful things with my hands. From crocheting cozy
                     items to making handmade cards for friends, I love turning
@@ -856,16 +292,14 @@
                     care, and the joy of making something personal.
                   </p>
                 </div>
-                <div class="dot-row">
-                  <span></span><span></span><span></span>
+                <div class="dot-row flex gap-[7px] justify-end">
+                  <span class="w-[8px] h-[8px] rounded-full bg-[rgba(255,143,171,0.55)] inline-block"></span><span class="w-[8px] h-[8px] rounded-full bg-[rgba(255,143,171,0.55)] inline-block"></span><span class="w-[8px] h-[8px] rounded-full bg-[rgba(255,143,171,0.55)] inline-block"></span>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <!-- /cards -->
 
-        <!-- ── Quote box ── -->
         <div class="flex justify-center mt-14 sm:mt-20 reveal">
           <div
             class="quote-box relative bg-white border-4 border-[rgba(255,179,198,.3)] rounded-3xl shadow-[0_6px_28px_rgba(255,143,171,.10)] px-8 sm:px-[52px] py-7 text-center"
@@ -894,34 +328,41 @@
       </div>
     </main>
 
-    <!-- ════════════════ FOOTER ════════════════ -->
     <footer
-      class="text-white pt-12 sm:pt-16 pb-8 px-4 sm:px-6 md:px-12"
+      class="text-white pt-16 pb-8 px-6 md:px-12 bg-[linear-gradient(180deg,#111111_0%,#1a0a0a_55%,#2d1a1a_100%)]"
       style="
-        background: linear-gradient(180deg, #111 0%, #1a0a0a 55%, #2d1a1a 100%);
+        background: linear-gradient(
+          180deg,
+          #111111 0%,
+          #1a0a0a 55%,
+          #2d1a1a 100%
+        );
       "
     >
       <div
-        class="max-w-[1000px] mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 sm:gap-10 pb-8 sm:pb-10 border-b border-white/15"
+        class="footer-inner max-w-[1000px] mx-auto grid grid-cols-1 md:grid-cols-[1fr_160px_1fr] gap-10 pb-10 border-b border-white/15"
       >
-        <div>
+        <div class="footer-logo">
           <img
-            src="images\valey-logo-white.webp"
+            src="images/valey-logo-white.webp"
             alt="Valey logo"
-            class="h-12 sm:h-14 object-contain mb-4"
+            class="h-14 object-contain mb-4"
           />
           <p class="text-[13px] text-white/60 leading-[1.7] max-w-[260px]">
             Informatics student passionate about creativity, technology, and
             artistic expression. Exploring the intersection of code and craft.
           </p>
         </div>
+
         <nav class="footer-links">
           <h2 class="text-[15px] font-bold mb-4">Quick Links</h2>
           <a href="index.html">Home</a>
           <a href="hobbies.html">Hobby</a>
+          <a href="projects.html">Projects</a>
           <a href="gallery.html">Gallery</a>
         </nav>
-        <div>
+
+        <div class="footer-connect">
           <h2 class="text-[15px] font-bold mb-4">Connect</h2>
           <div class="footer-social flex gap-3 mb-3">
             <a
@@ -930,7 +371,7 @@
               ><i class="fab fa-instagram"></i
             ></a>
             <a href="https://github.com/hellohello823" title="GitHub"
-              ><i class="fab fa-github"></i
+              ><i class="fa-brands fa-github"></i
             ></a>
             <a href="mailto:marsha.valerie.wibowo@gmail.com" title="Gmail"
               ><i class="fas fa-envelope"></i
@@ -946,7 +387,8 @@
           </p>
         </div>
       </div>
-      <div class="max-w-[1000px] mx-auto pt-6 sm:pt-7 text-center">
+
+      <div class="max-w-[1000px] mx-auto pt-7 text-center">
         <p class="text-[13px] text-white/50">
           © 2026 Valey. All rights reserved.
         </p>
