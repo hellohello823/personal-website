@@ -14,14 +14,14 @@
       rel="stylesheet"
     />
     <link
-      rel="stylesheet"
+      rel="stylesheet"u
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
     />
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   </head>
   <body class="bg-[#fff5f7]">
     <header
-      class="fixed top-0 left-0 w-full z-[100] bg-white/85 backdrop-blur-md shadow-[0_2px_8px_rgba(0,0,0,0.08)] h-16 flex items-center px-8 justify-between"
+      class="fixed top-0 left-0 w-full z-[100] bg-white backdrop-blur-md shadow-[0_2px_8px_rgba(0,0,0,0.08)] h-16 flex items-center px-8 justify-between"
     >
       <img src="images/valey-logo.webp" alt="Valey logo" class="h-11 object-contain" />
 
@@ -213,7 +213,7 @@
               <div class="caption-title">
                 UX Design Competition in Purwokerto
               </div>
-              <div class="caption-date">Nov'24</div>
+              <div class="caption-date">Nov'25</div>
             </div>
           </div>
 
@@ -439,45 +439,121 @@
 
     <script>
       $(function () {
-        $("#menuBtn").on("click", function () {
-          $("#mobile-nav").toggleClass("open");
-        });
-        $("#mobile-nav a").on("click", function () {
-          $("#mobile-nav").removeClass("open");
-        });
-
-        var obs = new IntersectionObserver(
-          function (entries) {
-            entries.forEach(function (e) {
-              if (e.isIntersecting) $(e.target).addClass("visible");
-              else $(e.target).removeClass("visible");
-            });
-          },
-          { threshold: 0.06, rootMargin: "0px 0px -40px 0px" },
-        );
-        $(".g-reveal").each(function () {
-          obs.observe(this);
-        });
-
-        $(window).on("scroll", function () {
-          var s = $(this).scrollTop();
-          $(".layer-slow").css("transform", "translateY(" + s * 0.055 + "px)");
-          $(".layer-fast").css("transform", "translateY(" + s * 0.12 + "px)");
-        });
+      $("#menuBtn").on("click", function () {
+        $("#mobile-nav").toggleClass("open");
+      });
+      $("#mobile-nav a").on("click", function () {
+        $("#mobile-nav").removeClass("open");
       });
 
-      document.addEventListener("DOMContentLoaded", () => {
-        const cards = document.querySelectorAll(".polaroid-card");
-
-        cards.forEach((card) => {
-          card.addEventListener("mouseleave", () => {
-            card.classList.add("swing-effect");
-            setTimeout(() => {
-              card.classList.remove("swing-effect");
-            }, 700);
+      // Desktop: row-by-row reveal on scroll
+      var obs = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) $(e.target).addClass("visible");
+            else $(e.target).removeClass("visible");
           });
-        });
+        },
+        { threshold: 0.06, rootMargin: "0px 0px -40px 0px" }
+      );
+      $(".g-reveal").each(function () {
+        obs.observe(this);
       });
+
+      $(window).on("scroll", function () {
+        var s = $(this).scrollTop();
+        $(".layer-slow").css("transform", "translateY(" + s * 0.055 + "px)");
+        $(".layer-fast").css("transform", "translateY(" + s * 0.12 + "px)");
+      });
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+      var isMobile = window.innerWidth <= 560;
+
+      function attachHover(card) {
+        var matrix = new DOMMatrix(getComputedStyle(card).transform);
+        var rotDeg = Math.round(Math.atan2(matrix.b, matrix.a) * (180 / Math.PI));
+        card.dataset.rotDeg = rotDeg;
+        card.style.setProperty("--mob-rot", rotDeg + "deg");
+        card.style.setProperty("--base-rot", rotDeg + "deg");
+
+        var swingClass;
+        if (rotDeg > 0) swingClass = "g-swing-right";
+        else if (rotDeg < 0) swingClass = "g-swing-left";
+        else swingClass = "g-swing-center";
+
+        card.addEventListener("mouseenter", function () {
+          card.style.transform = "rotate(0deg) translateY(-8px)";
+          card.style.transition = "transform .38s cubic-bezier(.34,1.56,.64,1)";
+        });
+
+        card.addEventListener("mouseleave", function () {
+          card.style.transform = "";
+          card.style.transition = "";
+          card.classList.add(swingClass);
+          setTimeout(function () {
+            card.classList.remove(swingClass);
+          }, 700);
+        });
+      }
+
+      var allCards = document.querySelectorAll(".polaroid-card");
+      var firstRow = document.querySelector(".card-row");
+      var firstRowCards = firstRow ? firstRow.querySelectorAll(".polaroid-card") : [];
+      var otherCards = document.querySelectorAll(".card-row:not(:first-child) .polaroid-card");
+
+      if (isMobile) {
+        // Set CSS vars first before hiding
+        allCards.forEach(function (card) {
+          var matrix = new DOMMatrix(getComputedStyle(card).transform);
+          var rotDeg = Math.round(Math.atan2(matrix.b, matrix.a) * (180 / Math.PI));
+          card.style.setProperty("--mob-rot", rotDeg + "deg");
+          card.style.setProperty("--base-rot", rotDeg + "deg");
+          card.dataset.rotDeg = rotDeg;
+          card.classList.add("mob-hidden");
+        });
+
+        var mobObs = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) {
+              e.target.classList.add("mob-visible");
+            } else {
+              // Hide again when scrolled out so it re-animates on scroll back
+              e.target.classList.remove("mob-visible");
+            }
+          });
+        }, { threshold: 0.15, rootMargin: "0px 0px -30px 0px" });
+
+        allCards.forEach(function (card) {
+          mobObs.observe(card);
+        });
+      } else {
+        // Desktop: attach hover to other rows immediately
+        otherCards.forEach(function (card) {
+          attachHover(card);
+        });
+
+        // Desktop: first row bounce entrance, then enable hover
+        firstRowCards.forEach(function (card, i) {
+          card.style.opacity = "0";
+          card.style.transform = "rotate(0deg) translateY(-40px) scale(0.88)";
+
+          setTimeout(function () {
+            card.style.opacity = "";
+            card.style.transform = "";
+            card.classList.add("polaroid-drop");
+
+            card.addEventListener("animationend", function () {
+              card.style.opacity = "";
+              card.style.transform = "";
+              card.classList.remove("polaroid-drop");
+              attachHover(card);
+            }, { once: true });
+
+          }, 150 + i * 160);
+        });
+      }
+    });
     </script>
   </body>
 </html>

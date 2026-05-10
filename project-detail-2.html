@@ -1,0 +1,364 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Valey — UX Design · ITASE 6.0</title>
+  <link rel="icon" href="icon.webp"/>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Quicksand:wght@400;500;600;700&family=Indie+Flower&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <link rel="stylesheet" href="projects-2.css"/>
+</head>
+<body class="font-quick bg-[#fff5f7] overflow-x-hidden">
+
+<!-- HEADER -->
+<header class="fixed top-0 left-0 w-full z-[100] bg-white/85 backdrop-blur-md shadow-md h-16 flex items-center px-8 justify-between">
+  <img src="images/valey-logo.webp" alt="Valey" class="h-11 object-contain"/>
+  <nav class="nav-tabs flex items-end gap-1">
+    <a href="index.html"    class="nav-tab inactive">Home</a>
+    <a href="hobbies.html"  class="nav-tab inactive">Hobbies</a>
+    <a href="projects.html" class="nav-tab active">Projects</a>
+    <a href="gallery.html"  class="nav-tab inactive">Gallery</a>
+  </nav>
+  <button class="mobile-menu-btn hidden items-center justify-center bg-transparent border-0 cursor-pointer text-2xl text-[#ffb3c6]" id="menuBtn">
+    <i class="fas fa-bars"></i>
+  </button>
+</header>
+<div id="mobile-nav">
+  <a href="index.html">Home</a>
+  <a href="hobbies.html">Hobbies</a>
+  <a href="projects.html">Projects</a>
+  <a href="gallery.html">Gallery</a>
+</div>
+
+<main class="pt-24 pb-24 relative overflow-x-hidden">
+
+  <!-- BACKGROUND DECOS -->
+  <div class="page-deco ring-lg spin-slow" data-layer="slow" style="top:80px;right:6%"></div>
+  <div class="page-deco pill-h float-a" data-layer="slow" style="top:60px;left:8%"></div>
+  <div class="page-deco dot-sm pulse-a" data-layer="fast" style="top:140px;right:14%"></div>
+  <div class="page-deco ring-sm float-b" data-layer="fast" style="top:200px;left:4%"></div>
+
+  <div class="max-w-[960px] mx-auto px-5 md:px-10">
+
+    <!-- BACK BUTTON -->
+    <a href="projects.html" class="detail-back-btn reveal">
+      <i class="fas fa-arrow-left text-xs"></i> Back to Projects
+    </a>
+
+    <!-- ═══════════════════════════════
+         HERO IMAGE
+    ═══════════════════════════════ -->
+    <div class="detail-hero-wrap reveal mb-0">
+      <div class="detail-washi washi-peach"></div>
+      <img src="images/project-1.webp" alt="ITASE 6.0 UX Design" class="detail-hero"/>
+      <!-- floating badge -->
+      <div class="absolute top-5 right-5 z-10">
+        <span class="font-indie text-sm bg-[#ffb3c6] text-white px-4 py-2 rounded-full shadow-lg border-2 border-white">
+          ✦ 2nd Place National
+        </span>
+      </div>
+    </div>
+
+    <!-- META STRIP -->
+    <div class="bg-white border-x-[3px] border-b-[3px] border-[rgba(255,179,198,.14)] shadow-md px-8 py-5 mb-12 reveal">
+      <div class="flex flex-wrap gap-x-10 gap-y-3 items-center">
+        <div>
+          <div class="font-quick text-[0.65rem] font-bold text-[#ffb3c6] uppercase tracking-widest mb-1">Competition</div>
+          <div class="font-quick text-sm font-semibold text-[#5c4a4a]">ITASE 6.0 — National UX</div>
+        </div>
+        <div>
+          <div class="font-quick text-[0.65rem] font-bold text-[#ffb3c6] uppercase tracking-widest mb-1">Date</div>
+          <div class="font-quick text-sm font-semibold text-[#5c4a4a]">November 2024</div>
+        </div>
+        <div>
+          <div class="font-quick text-[0.65rem] font-bold text-[#ffb3c6] uppercase tracking-widest mb-1">Location</div>
+          <div class="font-quick text-sm font-semibold text-[#5c4a4a]">Purwokerto, Indonesia</div>
+        </div>
+        <div>
+          <div class="font-quick text-[0.65rem] font-bold text-[#ffb3c6] uppercase tracking-widest mb-1">Role</div>
+          <div class="font-quick text-sm font-semibold text-[#5c4a4a]">UX Designer · Solo</div>
+        </div>
+        <div class="ml-auto">
+          <div class="tag-row">
+            <span class="tag tag-pink">Figma</span>
+            <span class="tag tag-blue">UX Research</span>
+            <span class="tag tag-yellow">Prototyping</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════
+         MAIN CONTENT GRID
+    ═══════════════════════════════ -->
+    <div class="grid grid-cols-1 md:grid-cols-[1fr_280px] gap-10">
+
+      <!-- LEFT COLUMN -->
+      <div class="space-y-12">
+
+        <!-- OVERVIEW -->
+        <section class="reveal">
+          <div class="detail-section-tape">Overview</div>
+          <p class="font-quick text-[0.9rem] text-[#5c4a4a] leading-[1.85]">
+            ITASE 6.0 is an annual national-level Information Technology competition held in Purwokerto. I entered the UX Design category and designed <strong>Serenity</strong> — a mobile wellbeing app for university students experiencing academic stress. The project covered the full UX design lifecycle, from user research through to a polished interactive prototype.
+          </p>
+        </section>
+
+        <!-- PROCESS TIMELINE -->
+        <section class="reveal">
+          <div class="detail-section-tape">Design Process</div>
+          <div class="process-timeline space-y-6 mt-4">
+
+            <div class="relative">
+              <div class="ptl-dot"></div>
+              <div class="step-card">
+                <div class="step-num">01</div>
+                <h3 class="font-caveat text-[1.3rem] text-[#5c4a4a] mb-1">Empathize</h3>
+                <p class="font-quick text-[0.82rem] text-[#7a5c5c] leading-relaxed">
+                  Conducted 8 semi-structured user interviews and distributed a survey to 40+ university students to understand stress patterns, coping mechanisms, and existing tool gaps.
+                </p>
+              </div>
+            </div>
+
+            <div class="relative">
+              <div class="ptl-dot"></div>
+              <div class="step-card">
+                <div class="step-num">02</div>
+                <h3 class="font-caveat text-[1.3rem] text-[#5c4a4a] mb-1">Define</h3>
+                <p class="font-quick text-[0.82rem] text-[#7a5c5c] leading-relaxed">
+                  Synthesized research into two primary personas and identified a core HMW: "How might we help students build micro-wellness habits without disrupting their study flow?"
+                </p>
+              </div>
+            </div>
+
+            <div class="relative">
+              <div class="ptl-dot"></div>
+              <div class="step-card">
+                <div class="step-num">03</div>
+                <h3 class="font-caveat text-[1.3rem] text-[#5c4a4a] mb-1">Ideate</h3>
+                <p class="font-quick text-[0.82rem] text-[#7a5c5c] leading-relaxed">
+                  Ran solo crazy-8s sessions and mapped out an affinity diagram of 60+ ideas, narrowing to 3 concept directions before selecting the habit-stack companion model.
+                </p>
+              </div>
+            </div>
+
+            <div class="relative">
+              <div class="ptl-dot"></div>
+              <div class="step-card">
+                <div class="step-num">04</div>
+                <h3 class="font-caveat text-[1.3rem] text-[#5c4a4a] mb-1">Prototype</h3>
+                <p class="font-quick text-[0.82rem] text-[#7a5c5c] leading-relaxed">
+                  Built low-fi wireframes in Figma, iterated through two rounds of paper prototype testing, then produced a fully interactive hi-fi prototype with micro-animations.
+                </p>
+              </div>
+            </div>
+
+            <div class="relative">
+              <div class="ptl-dot"></div>
+              <div class="step-card">
+                <div class="step-num">05</div>
+                <h3 class="font-caveat text-[1.3rem] text-[#5c4a4a] mb-1">Test</h3>
+                <p class="font-quick text-[0.82rem] text-[#7a5c5c] leading-relaxed">
+                  Usability tested with 5 participants (think-aloud protocol). Measured task completion, SUS score (84 — Excellent), and collected qualitative feedback for iteration.
+                </p>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- SCRAPBOOK IMAGE GRID -->
+        <section class="reveal">
+          <div class="detail-section-tape">Snapshots</div>
+          <div class="grid grid-cols-2 gap-4 mt-4">
+            <img src="images/project-1.webp" alt="Research phase" class="scrapbook-img h-40 object-cover" style="transform:rotate(-1.2deg)"/>
+            <img src="images/project-2.webp" alt="Wireframes"     class="scrapbook-img h-40 object-cover" style="transform:rotate(1deg)"/>
+            <img src="images/project-3.webp" alt="Hi-fi screens"  class="scrapbook-img h-40 object-cover" style="transform:rotate(0.8deg)"/>
+            <img src="images/project-4.webp" alt="Presentation"   class="scrapbook-img h-40 object-cover" style="transform:rotate(-0.6deg)"/>
+          </div>
+        </section>
+
+        <!-- KEY LEARNINGS -->
+        <section class="reveal">
+          <div class="detail-section-tape">Key Learnings</div>
+          <div class="space-y-3 mt-4">
+            <div class="outcome-card">
+              <h4 class="font-caveat text-[1.1rem] text-[#5c4a4a] mb-1">Constraints sharpen creativity</h4>
+              <p class="font-quick text-[0.80rem] text-[#7a5c5c] leading-relaxed">A 48-hour design sprint forced ruthless prioritisation — every feature had to earn its place through research evidence.</p>
+            </div>
+            <div class="outcome-card">
+              <h4 class="font-caveat text-[1.1rem] text-[#5c4a4a] mb-1">Micro-interactions matter</h4>
+              <p class="font-quick text-[0.80rem] text-[#7a5c5c] leading-relaxed">Small, delightful animations in the prototype significantly boosted perceived usability in user testing (SUS +12 vs flat prototype).</p>
+            </div>
+            <div class="outcome-card">
+              <h4 class="font-caveat text-[1.1rem] text-[#5c4a4a] mb-1">Present the story, not the screens</h4>
+              <p class="font-quick text-[0.80rem] text-[#7a5c5c] leading-relaxed">Judges responded most strongly to the narrative arc — connecting research insight → design decision → validated outcome.</p>
+            </div>
+          </div>
+        </section>
+
+      </div>
+
+      <!-- RIGHT SIDEBAR -->
+      <div class="space-y-8">
+
+        <!-- STICKY NOTE — quick facts -->
+        <div class="sticky-note reveal">
+          <p class="font-caveat text-[1.2rem] text-[#7a5c5c] mb-4">Quick Facts ✦</p>
+          <ul class="font-quick text-[0.80rem] text-[#7a5c5c] space-y-2 leading-relaxed">
+            <li class="flex gap-2"><span class="text-[#ffb3c6]">✦</span> 48-hr competition sprint</li>
+            <li class="flex gap-2"><span class="text-[#ffb3c6]">✦</span> Solo entry</li>
+            <li class="flex gap-2"><span class="text-[#ffb3c6]">✦</span> 2nd Place out of 38 teams</li>
+            <li class="flex gap-2"><span class="text-[#ffb3c6]">✦</span> SUS Score: 84 / Excellent</li>
+            <li class="flex gap-2"><span class="text-[#ffb3c6]">✦</span> 8 user interviews</li>
+            <li class="flex gap-2"><span class="text-[#ffb3c6]">✦</span> 40+ survey responses</li>
+            <li class="flex gap-2"><span class="text-[#ffb3c6]">✦</span> 3 design iterations</li>
+          </ul>
+        </div>
+
+        <!-- TOOLS USED -->
+        <div class="bg-white border-[3px] border-[rgba(255,179,198,.14)] shadow-md p-5 reveal relative overflow-visible">
+          <div class="washi-tape washi-mint" style="top:-13px;left:28px;transform:translateX(0) rotate(-8deg)"></div>
+          <p class="font-caveat text-[1.15rem] text-[#5c4a4a] mb-3">Tools Used</p>
+          <div class="space-y-2">
+            <div class="flex items-center gap-2">
+              <i class="fab fa-figma text-[#a259ff] text-sm w-5"></i>
+              <span class="font-quick text-[0.78rem] text-[#5c4a4a]">Figma — Design & Prototype</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <i class="fas fa-sticky-note text-[#ffb3c6] text-sm w-5"></i>
+              <span class="font-quick text-[0.78rem] text-[#5c4a4a]">Notion — Research notes</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <i class="fab fa-google text-[#4285f4] text-sm w-5"></i>
+              <span class="font-quick text-[0.78rem] text-[#5c4a4a]">Google Forms — Survey</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <i class="fas fa-chart-bar text-[#ff8fab] text-sm w-5"></i>
+              <span class="font-quick text-[0.78rem] text-[#5c4a4a]">Excel — Data analysis</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- SKILLS BREAKDOWN -->
+        <div class="bg-white border-[3px] border-[rgba(255,179,198,.14)] shadow-md p-5 reveal">
+          <p class="font-caveat text-[1.15rem] text-[#5c4a4a] mb-4">Skills Applied</p>
+          <div class="space-y-3">
+            <div>
+              <div class="flex justify-between text-[0.68rem] font-quick font-bold text-[#7a5c5c] mb-1">
+                <span>User Research</span><span>90%</span>
+              </div>
+              <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:90%"></div></div>
+            </div>
+            <div>
+              <div class="flex justify-between text-[0.68rem] font-quick font-bold text-[#7a5c5c] mb-1">
+                <span>Figma Prototyping</span><span>85%</span>
+              </div>
+              <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:85%"></div></div>
+            </div>
+            <div>
+              <div class="flex justify-between text-[0.68rem] font-quick font-bold text-[#7a5c5c] mb-1">
+                <span>Visual Design</span><span>70%</span>
+              </div>
+              <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:70%"></div></div>
+            </div>
+            <div>
+              <div class="flex justify-between text-[0.68rem] font-quick font-bold text-[#7a5c5c] mb-1">
+                <span>Usability Testing</span><span>75%</span>
+              </div>
+              <div class="progress-bar-wrap"><div class="progress-bar-fill" style="width:75%"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- VIEW PROTOTYPE LINK -->
+        <div class="text-center reveal">
+          <a href="#" class="pin-btn font-indie text-base inline-block w-full text-center py-3">
+            View Prototype in Figma →
+          </a>
+        </div>
+
+        <!-- NEXT PROJECT -->
+        <div class="bg-white border-[3px] border-[rgba(255,179,198,.14)] shadow-md p-5 reveal">
+          <p class="font-quick text-[0.65rem] font-bold text-[#ffb3c6] uppercase tracking-widest mb-2">Next Project</p>
+          <p class="font-caveat text-[1.15rem] text-[#5c4a4a] mb-3">PULSE — Student Union Site</p>
+          <a href="project-detail.html" class="pin-btn font-indie text-sm">See it →</a>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer class="footer-gradient text-white pt-16 pb-8 px-6 md:px-12">
+  <div class="max-w-[1000px] mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 pb-10 border-b border-white/15">
+    <div>
+      <img src="images/valey-logo-white.webp" alt="Valey logo" class="h-14 object-contain mb-4"/>
+      <p class="font-quick text-[13px] text-white/60 leading-[1.7] max-w-[260px]">
+        Informatics student passionate about creativity, technology, and artistic expression.
+      </p>
+    </div>
+    <nav class="footer-links">
+      <h2 class="font-quick text-[15px] font-bold mb-4">Quick Links</h2>
+      <a href="index.html">Home</a>
+      <a href="hobbies.html">Hobby</a>
+      <a href="projects.html">Projects</a>
+      <a href="gallery.html">Gallery</a>
+    </nav>
+    <div>
+      <h2 class="font-quick text-[15px] font-bold mb-4">Connect</h2>
+      <div class="footer-social flex gap-3 mb-3">
+        <a href="https://www.instagram.com/marshavalerie_" title="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="https://github.com/hellohello823" title="GitHub"><i class="fab fa-github"></i></a>
+        <a href="mailto:marsha.valerie.wibowo@gmail.com" title="Gmail"><i class="fas fa-envelope"></i></a>
+        <a href="https://www.linkedin.com/in/marsha-valerie-wibowo-90baa137a/" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+      </div>
+      <p class="font-quick text-[12px] text-white/50">Follow along on my creative journey</p>
+    </div>
+  </div>
+  <div class="max-w-[1000px] mx-auto pt-7 text-center">
+    <p class="font-quick text-[13px] text-white/50">© 2026 Valey. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+$(function () {
+  $("#menuBtn").on("click", function () { $("#mobile-nav").toggleClass("open"); });
+  $("#mobile-nav a").on("click", function () { $("#mobile-nav").removeClass("open"); });
+
+  var revealObs = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) $(e.target).addClass("visible");
+      else $(e.target).removeClass("visible");
+    });
+  }, { threshold: 0.06, rootMargin: "0px 0px -40px 0px" });
+  $(".reveal").each(function () { revealObs.observe(this); });
+
+  $(window).on("scroll", function () {
+    var s = $(this).scrollTop();
+    $("[data-layer='slow']").css("transform", "translateY(" + (s * 0.04) + "px)");
+    $("[data-layer='fast']").css("transform", "translateY(" + (s * 0.09) + "px)");
+  });
+
+  var barObs = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) {
+        $(e.target).find(".progress-bar-fill").each(function () {
+          var w = $(this).css("width");
+          $(this).css("width", 0).animate({ width: w }, 1200);
+        });
+        barObs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  $(".sticky-note, .bg-white").each(function () { barObs.observe(this); });
+});
+</script>
+</body>
+</html>
