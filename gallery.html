@@ -23,7 +23,9 @@
     <header
       class="fixed top-0 left-0 w-full z-[100] bg-white backdrop-blur-md shadow-[0_2px_8px_rgba(0,0,0,0.08)] h-16 flex items-center px-8 justify-between"
     >
-      <img src="images/valey-logo.webp" alt="Valey logo" class="h-11 object-contain" />
+      <a href="index.html">
+        <img src="images/valey-logo.webp" alt="Valey logo" class="h-11 object-contain" />
+      </a>
 
       <nav class="nav-tabs flex items-end gap-1">
         <a href="index.html" class="nav-tab inactive">Home</a>
@@ -446,7 +448,6 @@
         $("#mobile-nav").removeClass("open");
       });
 
-      // Desktop: row-by-row reveal on scroll
       var obs = new IntersectionObserver(
         function (entries) {
           entries.forEach(function (e) {
@@ -503,7 +504,6 @@
       var otherCards = document.querySelectorAll(".card-row:not(:first-child) .polaroid-card");
 
       if (isMobile) {
-        // Set CSS vars first before hiding
         allCards.forEach(function (card) {
           var matrix = new DOMMatrix(getComputedStyle(card).transform);
           var rotDeg = Math.round(Math.atan2(matrix.b, matrix.a) * (180 / Math.PI));
@@ -518,7 +518,6 @@
             if (e.isIntersecting) {
               e.target.classList.add("mob-visible");
             } else {
-              // Hide again when scrolled out so it re-animates on scroll back
               e.target.classList.remove("mob-visible");
             }
           });
@@ -528,12 +527,10 @@
           mobObs.observe(card);
         });
       } else {
-        // Desktop: attach hover to other rows immediately
         otherCards.forEach(function (card) {
           attachHover(card);
         });
 
-        // Desktop: first row bounce entrance, then enable hover
         firstRowCards.forEach(function (card, i) {
           card.style.opacity = "0";
           card.style.transform = "rotate(0deg) translateY(-40px) scale(0.88)";

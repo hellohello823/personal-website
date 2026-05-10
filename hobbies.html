@@ -693,16 +693,7 @@
           $("#mobile-nav").removeClass("open");
         });
 
-        $(".hobby-card").each(function () {
-          $(this).on("mouseenter", function () {
-            if (window.innerWidth > 900) {
-              $(this).css({
-                transform: "rotate(0deg) translateY(-6px)",
-                transition: "transform .42s cubic-bezier(.34,1.56,.64,1)",
-              });
-            }
-          });
-        });
+
 
         var obs = new IntersectionObserver(
           function (entries) {
@@ -721,27 +712,43 @@
       document.addEventListener("DOMContentLoaded", () => {
         const cards = document.querySelectorAll(".hobby-card");
 
+        // Apply entrance animation only to the first card
+        const firstCard = document.querySelector(".hobby-card");
+        if (firstCard) {
+          firstCard.style.opacity = "0";
+          setTimeout(function () {
+            firstCard.classList.add("hobby-card-entrance");
+            firstCard.addEventListener(
+              "animationend",
+              function () {
+                firstCard.style.opacity = "";
+              },
+              { once: true },
+            );
+          }, 200);
+        }
+
         cards.forEach((card) => {
-          const firstCard = document.querySelector(".hobby-card");
-          if (firstCard) {
-            firstCard.style.opacity = "0";
-            setTimeout(function () {
-              firstCard.classList.add("hobby-card-entrance");
-              firstCard.addEventListener(
-                "animationend",
-                function () {
-                  firstCard.style.opacity = "";
-                },
-                { once: true },
-              );
-            }, 200);
-          }
           const tiltDir = card.dataset.tilt;
+          const tiltAngle = tiltDir === "left" ? "-2.2deg" : "2.2deg";
           const swingClass = tiltDir === "left" ? "swing-left" : "swing-right";
 
+          // Set the initial resting tilt for every card
+          card.style.transform = `rotate(${tiltAngle})`;
+          card.style.transition = "transform .42s cubic-bezier(.34,1.56,.64,1)";
+
+          // On hover: straighten and lift
+          card.addEventListener("mouseenter", () => {
+            if (window.innerWidth > 900) {
+              card.style.transform = "rotate(0deg) translateY(-6px)";
+              card.style.transition = "transform .42s cubic-bezier(.34,1.56,.64,1)";
+            }
+          });
+
+          // On leave: restore tilt with swing animation
           card.addEventListener("mouseleave", () => {
-            card.style.transform = "";
-            card.style.transition = "";
+            card.style.transform = `rotate(${tiltAngle})`;
+            card.style.transition = "transform .42s cubic-bezier(.34,1.56,.64,1)";
 
             card.classList.add(swingClass);
             setTimeout(() => {

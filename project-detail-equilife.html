@@ -1,0 +1,406 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Valey — EquiLife</title>
+    <link rel="icon" href="icon.webp" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Quicksand:wght@400;500;600;700&family=Indie+Flower&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  </head>
+  <body class="font-quick bg-[#fff5f7] overflow-x-hidden">
+    <header
+      class="fixed top-0 left-0 w-full z-[100] bg-white backdrop-blur-md shadow-[0_2px_8px_rgba(0,0,0,0.08)] h-16 flex items-center px-8 justify-between"
+    >
+      <a href="index.html">
+        <img
+          src="images/valey-logo.webp"
+          alt="Valey logo"
+          class="h-11 object-contain"
+        />
+      </a>
+
+      <nav class="nav-tabs flex items-end gap-1">
+        <a href="index.html" class="nav-tab inactive">Home</a>
+        <a href="hobbies.html" class="nav-tab inactive">Hobbies</a>
+        <a href="projects.html" class="nav-tab active">Projects</a>
+        <a href="gallery.html" class="nav-tab inactive">Gallery</a>
+      </nav>
+
+      <button
+        class="mobile-menu-btn hidden items-center justify-center bg-transparent border-0 cursor-pointer text-2xl text-[#ffb3c6]"
+        id="menuBtn"
+      >
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </header>
+
+    <div id="mobile-nav">
+      <a href="index.html">Home</a>
+      <a href="hobbies.html">Hobbies</a>
+      <a href="projects.html">Projects</a>
+      <a href="gallery.html">Gallery</a>
+    </div>
+
+    <main class="pt-24 pb-24 relative overflow-x-hidden">
+      <div
+        class="page-deco ring-lg spin-slow absolute top-[80px] right-[6%] z-0 pointer-events-none"
+        data-layer="slow"
+        role="presentation"
+      ></div>
+      <div
+        class="page-deco dot-sm pulse-a absolute top-[140px] right-[14%] z-0 pointer-events-none"
+        data-layer="fast"
+        role="presentation"
+      ></div>
+      <div
+        class="page-deco ring-sm float-b absolute top-[200px] left-[4%] z-0 pointer-events-none"
+        data-layer="fast"
+        role="presentation"
+      ></div>
+
+      <div class="max-w-[960px] mx-auto px-5 md:px-10">
+        <a
+          href="projects.html"
+          class="inline-flex items-center gap-2 mb-7 px-[18px] py-2 rounded text-sm font-semibold text-[#c0607a] bg-[#fff5f7] border-[1.5px] border-[rgba(255,179,198,.45)] shadow-[2px_2px_0_rgba(255,143,171,.22)] transition-all duration-200 hover:bg-[#ffb3c6] hover:text-white hover:shadow-[3px_3px_0_rgba(200,80,110,.22)] hover:-translate-y-0.5 reveal"
+        >
+          <i class="fas fa-arrow-left text-xs"></i> Back to Projects
+        </a>
+
+        <div
+          class="pb-detail-hero-wrap relative overflow-hidden border-[3px] border-[rgba(255,179,198,.16)] shadow-[0_8px_32px_rgba(0,0,0,.09),0_20px_56px_rgba(200,100,130,.09)] mb-0 reveal"
+        >
+          <div
+            class="pb-detail-washi absolute top-[-13px] left-[38px] w-[80px] h-[26px] rounded[3px] z-10 pointer-events-none bg-[rgba(255,224,188,.8)]"
+          ></div>
+          <img
+            src="images/equilife-team.webp"
+            alt="ITASE 6.0 UX Design"
+            class="w-full h-[480px] object-cover block"
+          />
+        </div>
+
+        <div
+          class="bg-white border-x-[3px] border-b-[3px] border-[rgba(255,179,198,.14)] shadow-md px-8 py-5 mb-12 reveal"
+        >
+          <div class="flex flex-wrap gap-x-10 gap-y-3 items-center">
+            <div>
+              <div
+                class="font-quick text-[0.65rem] font-bold text-[#ffb3c6] uppercase tracking-widest mb-1"
+              >
+                Description
+              </div>
+              <div class="font-quick text-sm font-semibold text-[#5c4a4a]">
+                EquiLife Team
+              </div>
+            </div>
+
+            <div>
+              <div
+                class="font-quick text-[0.65rem] font-bold text-[#ffb3c6] uppercase tracking-widest mb-1"
+              >
+                Date
+              </div>
+              <div class="font-quick text-sm font-semibold text-[#5c4a4a]">
+                November 2025
+              </div>
+            </div>
+            <div>
+              <div
+                class="font-quick text-[0.65rem] font-bold text-[#ffb3c6] uppercase tracking-widest mb-1"
+              >
+                Achievement
+              </div>
+              <div class="font-quick text-sm font-semibold text-[#5c4a4a]">
+                🥈 2nd Place - ITASE 6.0
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-[1fr_280px] gap-10">
+          <div class="space-y-12">
+            <section class="reveal">
+              <div
+                class="inline-block font-caveat text-[1.3rem] bg-[rgba(255,224,188,.8)] text-[#7a5c5c] px-5 py-1 rounded-[3px] mb-4 -rotate-1 shadow-[0_2px_6px_rgba(0,0,0,.07)]"
+              >
+                About EquiLife
+              </div>
+              <p class="font-quick text-[0.9rem] text-[#5c4a4a] leading-[1.85]">
+                EquiLife is a lifestyle and wellbeing app designed to help users
+                maintain healthier daily routines while balancing productivity
+                and personal wellness. The app allows users to monitor important
+                lifestyle activities such as sleep quality, hydration,
+                nutrition, physical activity, and overall wellness through an
+                organized and intuitive mobile interface. Users can also track
+                daily steps, log water intake, and analyze food nutrition using
+                image recognition features that provide detailed nutritional
+                insights. <br /><br />
+                To support healthier and more balanced habits, EquiLife
+                integrates AI-powered recommendations through EquiSense, which
+                analyzes user schedules and activity patterns to provide
+                personalized lifestyle suggestions. The app also includes
+                workout recommendations, weekly progress summaries, and a
+                Balance Meter visualization system that helps users better
+                understand their daily wellbeing. With all features accessible
+                in one platform, EquiLife encourages users to build more
+                sustainable and balanced lifestyles.
+              </p>
+            </section>
+
+            <section class="reveal">
+              <div
+                class="inline-block font-caveat text-[1.3rem] bg-[rgba(255,224,188,.8)] text-[#7a5c5c] px-5 py-1 rounded-[3px] mb-4 -rotate-1 shadow-[0_2px_6px_rgba(0,0,0,.07)]"
+              >
+                Preview
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
+                <img
+                  src="images/equilife-1.webp"
+                  alt="photo-1"
+                  class="pb-scrapbook-img w-full h-auto block shadow-[0_4px_16px_rgba(0,0,0,.07),0_12px_36px_rgba(200,100,130,.08)]"
+                />
+                <img
+                  src="images/equilife-2.webp"
+                  alt="photo-2"
+                  class="pb-scrapbook-img w-full h-auto block shadow-[0_4px_16px_rgba(0,0,0,.07),0_12px_36px_rgba(200,100,130,.08)]"
+                />
+                <img
+                  src="images/equilife-3.webp"
+                  alt="photo-3"
+                  class="pb-scrapbook-img w-full h-auto block shadow-[0_4px_16px_rgba(0,0,0,.07),0_12px_36px_rgba(200,100,130,.08)]"
+                />
+                <img
+                  src="images/equilife-4.webp"
+                  alt="photo-4"
+                  class="pb-scrapbook-img w-full h-auto block shadow-[0_4px_16px_rgba(0,0,0,.07),0_12px_36px_rgba(200,100,130,.08)]"
+                />
+              </div>
+            </section>
+          </div>
+
+          <div class="space-y-8">
+            <div
+              class="relative overflow-visible bg-white border-[3px] border-[rgba(255,179,198,.14)] shadow-md p-5 reveal"
+            >
+              <div
+                class="pb-detail-washi absolute top-[-13px] left-[28px] w-[68px] h-[24px] rounded-sm bg-[rgba(255,230,200,.72)] pointer-events-none transform -rotate-2"
+              ></div>
+              <p class="font-caveat text-[1.15rem] text-[#5c4a4a] mb-3">
+                Tools Used
+              </p>
+              <div class="space-y-2">
+                <div class="flex items-center gap-2">
+                  <img
+                    src="icon/figma-icon.webp"
+                    class="h-auto w-5"
+                    alt="Figma icon"
+                  />
+                  <span class="font-quick text-[0.78rem] text-[#5c4a4a]"
+                    >Figma — UI design & Prototype</span
+                  >
+                </div>
+                <div class="flex items-center gap-2">
+                  <img
+                    src="icon/gform-icon.webp"
+                    class="h-auto w-4"
+                    alt="gform icon"
+                  />
+                  <span class="font-quick text-[0.78rem] text-[#5c4a4a]"
+                    >Google Form — Survey</span
+                  >
+                </div>
+
+                <div class="flex items-center gap-2">
+                  <img
+                    src="icon/gsheets-icon.webp"
+                    class="h-auto w-4"
+                    alt="gsheets icon"
+                  />
+                  <span class="font-quick text-[0.78rem] text-[#5c4a4a]"
+                    >Google Sheets — Survey Analysis</span
+                  >
+                </div>
+              </div>
+            </div>
+
+            <div class="text-center reveal">
+              <a
+                href="https://www.figma.com/proto/coecbPCtPS5QSQbgUMYYKR/EquiLife?node-id=564-1822&t=drdQcr8In5NvhM78-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1&starting-point-node-id=243%3A937"
+                class="inline-block w-full text-center font-caveat text-lg bg-[#fff5f7] text-[#c0607a] px-[18px] py-3 rounded text-base border-2 border-[rgba(255,179,198,.45)] shadow-[2px_2px_0_rgba(255,143,171,.22)] transition-all duration-200 hover:bg-[#ffb3c6] hover:text-white hover:shadow-[3px_3px_0_rgba(200,80,110,.22)] hover:-translate-y-0.5"
+              >
+                View Prototype in Figma →
+              </a>
+            </div>
+
+            <div
+              class="bg-white border-[3px] border-[rgba(255,179,198,.14)] shadow-md p-5 reveal"
+            >
+              <p
+                class="font-quick text-[0.65rem] font-bold text-[#ffb3c6] uppercase tracking-widest mb-2"
+              >
+                Next Project
+              </p>
+              <p class="font-caveat text-[1.15rem] text-[#5c4a4a] mb-3">
+                AgriBuddy
+              </p>
+              <a
+                href="project-detail-agribuddy.html"
+                class="inline-block bg-[#fff5f7] text-[#c0607a] px-[18px] py-2 rounded text-base border-2 border-[rgba(255,179,198,.45)] shadow-[2px_2px_0_rgba(255,143,171,.22)] transition-all duration-200 hover:bg-[#ffb3c6] hover:text-white hover:shadow-[3px_3px_0_rgba(200,80,110,.22)] hover:-translate-y-0.5 font-caveat"
+                >See it →</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer
+      class="text-white pt-16 pb-8 px-6 md:px-12 bg-[linear-gradient(180deg,#111111_0%,#1a0a0a_55%,#2d1a1a_100%)]"
+    >
+      <div
+        class="max-w-[1000px] mx-auto grid grid-cols-1 md:grid-cols-[1fr_160px_1fr] gap-10 pb-10 border-b border-white/15"
+      >
+        <div>
+          <img
+            src="images/valey-logo-white.webp"
+            alt="Valey logo"
+            class="h-14 object-contain mb-4"
+          />
+          <p class="text-[13px] text-white/60 leading-[1.7] max-w-[260px]">
+            Informatics student passionate about creativity, technology, and
+            artistic expression. Exploring the intersection of code and craft.
+          </p>
+        </div>
+        <nav class="space-y-3">
+          <h2 class="text-[15px] font-bold mb-4">Quick Links</h2>
+          <a
+            href="index.html"
+            class="block text-white/65 text-sm transition hover:text-[#ffb3c6]"
+            >Home</a
+          >
+          <a
+            href="hobbies.html"
+            class="block text-white/65 text-sm transition hover:text-[#ffb3c6]"
+            >Hobby</a
+          >
+          <a
+            href="projects.html"
+            class="block text-white/65 text-sm transition hover:text-[#ffb3c6]"
+            >Projects</a
+          >
+          <a
+            href="gallery.html"
+            class="block text-white/65 text-sm transition hover:text-[#ffb3c6]"
+            >Gallery</a
+          >
+        </nav>
+        <div>
+          <h2 class="text-[15px] font-bold mb-4">Connect</h2>
+          <div class="flex gap-3 mb-3">
+            <a
+              href="https://www.instagram.com/marshavalerie_?igsh=NXNwZXV4bnZldGtt"
+              title="Instagram"
+              class="flex h-9 w-9 items-center justify-center rounded-[10px] border border-white/30 text-white/80 text-base transition hover:bg-[#ffb3c6] hover:text-white"
+              ><i class="fab fa-instagram"></i
+            ></a>
+            <a
+              href="https://github.com/hellohello823"
+              title="GitHub"
+              class="flex h-9 w-9 items-center justify-center rounded-[10px] border border-white/30 text-white/80 text-base transition hover:bg-[#ffb3c6] hover:text-white"
+              ><i class="fa-brands fa-github"></i
+            ></a>
+            <a
+              href="mailto:marsha.valerie.wibowo@gmail.com"
+              title="Gmail"
+              class="flex h-9 w-9 items-center justify-center rounded-[10px] border border-white/30 text-white/80 text-base transition hover:bg-[#ffb3c6] hover:text-white"
+              ><i class="fas fa-envelope"></i
+            ></a>
+            <a
+              href="https://www.linkedin.com/in/marsha-valerie-wibowo-90baa137a/"
+              title="LinkedIn"
+              class="flex h-9 w-9 items-center justify-center rounded-[10px] border border-white/30 text-white/80 text-base transition hover:bg-[#ffb3c6] hover:text-white"
+              ><i class="fab fa-linkedin-in"></i
+            ></a>
+          </div>
+          <p class="text-[12px] text-white/50">
+            Follow along on my creative journey
+          </p>
+        </div>
+      </div>
+      <div class="max-w-[1000px] mx-auto pt-7 text-center">
+        <p class="text-[13px] text-white/50">
+          © 2026 Valey. All rights reserved.
+        </p>
+      </div>
+    </footer>
+
+    <script>
+      $(function () {
+        $("#menuBtn").on("click", function () {
+          $("#mobile-nav").toggleClass("open");
+        });
+        $("#mobile-nav a").on("click", function () {
+          $("#mobile-nav").removeClass("open");
+        });
+
+        var revealObs = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (e) {
+              if (e.isIntersecting) $(e.target).addClass("visible");
+              else $(e.target).removeClass("visible");
+            });
+          },
+          { threshold: 0.06, rootMargin: "0px 0px -40px 0px" },
+        );
+        $(".reveal").each(function () {
+          revealObs.observe(this);
+        });
+
+        $(window).on("scroll", function () {
+          var s = $(this).scrollTop();
+          $("[data-layer='slow']").css(
+            "transform",
+            "translateY(" + s * 0.04 + "px)",
+          );
+          $("[data-layer='fast']").css(
+            "transform",
+            "translateY(" + s * 0.09 + "px)",
+          );
+        });
+
+        var barObs = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (e) {
+              if (e.isIntersecting) {
+                $(e.target)
+                  .find(".progress-bar-fill")
+                  .each(function () {
+                    var w = $(this).css("width");
+                    $(this).css("width", 0).animate({ width: w }, 1200);
+                  });
+                barObs.unobserve(e.target);
+              }
+            });
+          },
+          { threshold: 0.3 },
+        );
+        $(".sticky-note, .bg-white").each(function () {
+          barObs.observe(this);
+        });
+      });
+    </script>
+  </body>
+</html>

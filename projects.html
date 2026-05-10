@@ -1,40 +1,46 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Valey — Projects</title>
-  <link rel="icon" href="icon.webp"/>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="style.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/>
-  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Quicksand:wght@400;500;600;700&family=Indie+Flower&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
-  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-  <style>
-    @keyframes drawLine {
-      from { stroke-dashoffset: 2400; }
-      to   { stroke-dashoffset: 0; }
-    }
-    .pb-draw-line {
-      animation: drawLine 3s ease forwards;
-    }
-  </style>
-</head>
-<body class="font-quick bg-[#fff5f7] text-[#5c4a4a] overflow-x-hidden">
-<header
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Valey — Projects</title>
+    <link rel="icon" href="icon.webp" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Quicksand:wght@400;500;600;700&family=Indie+Flower&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <style></style>
+  </head>
+  <body class="bg-[#fff5f7] text-[#5c4a4a] overflow-x-hidden">
+    <header
       class="fixed top-0 left-0 w-full z-[100] bg-white backdrop-blur-md shadow-[0_2px_8px_rgba(0,0,0,0.08)] h-16 flex items-center px-8 justify-between"
     >
-      <img src="images/valey-logo.webp" alt="Valey logo" class="h-11 object-contain" />
-
+      <a href="index.html">
+        <img
+          src="images/valey-logo.webp"
+          alt="Valey logo"
+          class="h-11 object-contain"
+        />
+      </a>
       <nav class="nav-tabs flex items-end gap-1">
         <a href="index.html" class="nav-tab inactive">Home</a>
         <a href="hobbies.html" class="nav-tab inactive">Hobbies</a>
         <a href="projects.html" class="nav-tab active">Projects</a>
         <a href="gallery.html" class="nav-tab inactive">Gallery</a>
       </nav>
-
       <button
         class="mobile-menu-btn hidden items-center justify-center bg-transparent border-0 cursor-pointer text-2xl text-[#ffb3c6]"
         id="menuBtn"
@@ -49,284 +55,475 @@
       <a href="projects.html">Projects</a>
       <a href="gallery.html">Gallery</a>
     </div>
-<main class="pt-24 pb-24 relative overflow-x-hidden">
-  <div class="absolute top-[65px] right-[5%] z-0 pointer-events-none w-[52px] h-[16px] rounded-full bg-[rgba(255,179,198,.48)] -rotate-12" data-layer="fast"></div>
-  <div class="absolute top-[420px] left-[3%] z-0 pointer-events-none w-[48px] h-[48px] rounded-full border-[2.5px] border-[rgba(255,179,198,.35)]" data-layer="slow"></div>
-  <div class="absolute top-[680px] left-[6%] z-0 pointer-events-none w-[18px] h-[18px] rounded-full bg-[rgba(255,179,198,.22)]" data-layer="slow"></div>
-  <div class="absolute top-[1100px] left-[4%] z-0 pointer-events-none w-[26px] h-[26px] rounded-full border-2 border-[rgba(255,143,171,.30)]" data-layer="fast"></div>
-  <div class="absolute top-[1300px] right-[6%] z-0 pointer-events-none w-[10px] h-[10px] rounded-full bg-[rgba(255,143,171,.35)]" data-layer="slow"></div>
-  <div class="max-w-[1240px] mx-auto px-5 md:px-10">
-    <div class="relative text-center mb-20 reveal">
-      <span class="absolute left-[12%] top-[20px] text-[1.4rem] text-[rgba(255,143,171,.35)] font-caveat -rotate-12">✦</span>
-      <span class="absolute left-[7%] top-[55px] text-[0.8rem] text-[rgba(255,143,171,.28)] font-indie -rotate-8">✿</span>
-      <div class="absolute left-[18%] top-[30px] w-8 h-[10px] rounded-full bg-[rgba(255,179,198,.30)] -rotate-[32deg]"></div>
-      <span class="absolute right-[12%] top-[10px] text-[1.4rem] text-[rgba(255,143,171,.35)] font-caveat rotate-12">✦</span>
-      <span class="absolute right-[7%] top-[55px] text-[0.8rem] text-[rgba(255,143,171,.28)] font-indie rotate-10">✿</span>
-      <div class="absolute right-[18%] top-[30px] w-8 h-[10px] rounded-full bg-[rgba(255,179,198,.30)] rotate-[28deg]"></div>
-      <h1 class="relative inline-block font-caveat text-[4rem] md:text-[5rem] text-[#5c4a4a] mb-3 leading-tight">
-        <span class="absolute left-[-48px] top-1/2 -translate-y-1/2 text-[1.1rem] text-[rgba(255,143,171,.45)]">✦</span>
-        My Projects
-        <span class="absolute right-[-48px] top-1/2 -translate-y-1/2 text-[1.1rem] text-[rgba(255,143,171,.45)]">✦</span>
-      </h1>
-      <p class="font-quick text-base md:text-lg text-[#7a5c5c] max-w-lg mx-auto leading-relaxed">Things I've built — from design competitions to web dev experiments.</p>
-      <div class="flex justify-center gap-3 mt-5">
-        <span class="w-2 h-2 rounded-full bg-[#ffb3c6] opacity-60"></span>
-        <span class="w-2 h-2 rounded-full bg-[#ffb3c6] opacity-60"></span>
-        <span class="w-2 h-2 rounded-full bg-[#ffb3c6] opacity-60"></span>
-      </div>
-    </div>
-    <div class="flex items-center gap-3 mb-12 reveal">
-      <span class="w-3 h-3 rounded-full bg-[#ffb3c6] opacity-60"></span>
-      <span class="font-caveat text-[1.6rem] text-[#5c4a4a]">Highlighted Work</span>
-      <div class="h-px flex-1 bg-gradient-to-r from-[#ffb3c6]/50 to-transparent"></div>
-    </div>
-    <div class="relative flex flex-col gap-0" id="mainTimeline">
-      <div class="absolute left-1/2 top-0 bottom-0 w-[36px] -translate-x-1/2 pointer-events-none z-0 hidden md:block">
-        <svg viewBox="0 0 36 2600" preserveAspectRatio="none" class="w-full h-full overflow-visible">
-          <path class="pb-draw-line" d="M18 0 C 27 130, 9 260, 18 390 C 27 520, 9 650, 18 780 C 27 910, 9 1040, 18 1170 C 27 1300, 9 1430, 18 1560 C 27 1690, 9 1820, 18 1950 C 27 2080, 9 2200, 18 2600" fill="none" stroke="rgba(255,143,171,.50)" stroke-width="2.5" stroke-dasharray="8 5" stroke-linecap="round" stroke-dashoffset="2400"/>
-        </svg>
-      </div>
-      <div class="grid grid-cols-1 md:grid-cols-[1fr_36px_1fr] items-start relative mb-16 reveal rd1">
-        <div class="md:flex md:justify-end md:pr-8">
-          <article class="proj-card relative overflow-visible cursor-pointer w-full max-w-full md:max-w-[420px] bg-[#fffef5] border border-[rgba(200,180,120,.25)] shadow-[0_2px_8px_rgba(0,0,0,.05),_0_8px_28px_rgba(180,150,80,.08),_inset_0_0_0_1px_rgba(255,255,255,.6)] transition-transform duration-[450ms] ease-[cubic-bezier(.34,1.56,.64,1)] hover:-translate-y-1">
-            <div class="absolute left-8 top-0 bottom-0 w-[1.5px] bg-[rgba(255,179,198,.3)]"></div>
-            <div class="absolute inset-x-0 top-[200px] bottom-0 bg-[repeating-linear-gradient(transparent,transparent_27px,rgba(200,210,255,.12)_27px,rgba(200,210,255,.12)_28px)] pointer-events-none"></div>
-            <div class="absolute -top-3 left-8 w-[68px] h-[24px] rounded-sm bg-[rgba(255,238,165,.84)] pointer-events-none">
-              <div class="absolute inset-0 rounded-sm bg-[repeating-linear-gradient(90deg,rgba(255,255,255,.22)_0,rgba(255,255,255,.22)_4px,transparent_4px,transparent_9px)]"></div>
-            </div>
-            <div class="absolute top-2 left-2 w-[7px] h-[7px] rounded-full bg-[rgba(255,179,198,.32)] pointer-events-none"></div>
-            <div class="thumb overflow-hidden relative">
-              <img src="images/timelyne.webp" alt="Timelyne" class="w-full h-[200px] object-cover block transition-transform duration-500 ease-in-out" />
-            </div>
-            <div class="relative z-10 px-4 pb-4 pt-4 pl-11">
-              <div class="flex flex-wrap gap-2 mb-3">
-                <span class="rounded-full border border-[rgba(255,143,171,.35)] bg-[rgba(255,179,198,.22)] px-3 py-1 text-[11px] font-semibold tracking-[0.03em] text-[#c0607a]">Figma</span>
-                <span class="rounded-full border border-[rgba(100,160,240,.30)] bg-[rgba(189,215,255,.30)] px-3 py-1 text-[11px] font-semibold tracking-[0.03em] text-[#3a6ea8]">UI/UX Design</span>
-                <span class="rounded-full border border-[rgba(220,195,60,.35)] bg-[rgba(255,237,160,.35)] px-3 py-1 text-[11px] font-semibold tracking-[0.03em] text-[#8a6a00]">Prototyping</span>
-              </div>
-              <h2 class="font-caveat text-[1.45rem] font-semibold text-[#181818] leading-tight mb-2">Timelyne - Apple Foundation Program</h2>
-              <p class="text-sm text-[#7a5c5c] leading-7 mb-4">Timelyne is a student-focused productivity app that helps organize study tasks using smart prioritization, time-blocking, and Pomodoro sessions to improve focus and consistency.</p>
-              <div class="flex flex-wrap items-center gap-3">
-                <a href="project-detail.html" class="inline-flex items-center rounded-md border border-[rgba(255,179,198,.45)] bg-[#fff5f7] px-4 py-2 text-sm font-semibold text-[#c0607a] shadow-[2px_2px_0_rgba(255,143,171,.22)] transition duration-200 ease-in-out hover:bg-[#ffb3c6] hover:text-white hover:-translate-y-0.5">Read More →</a>
-              </div>
-            </div>
-            <div class="absolute bottom-2 right-3 text-[0.72rem] text-[rgba(255,143,171,.45)] pointer-events-none">✦</div>
-          </article>
+
+    <main class="pt-24 pb-24 relative overflow-x-hidden">
+      <div
+        class="absolute top-[65px] right-[5%] z-0 pointer-events-none w-[52px] h-[16px] rounded-full bg-[rgba(255,179,198,.48)] -rotate-12"
+        data-layer="fast"
+      ></div>
+      <div
+        class="absolute top-[420px] left-[3%] z-0 pointer-events-none w-[48px] h-[48px] rounded-full border-[2.5px] border-[rgba(255,179,198,.35)]"
+        data-layer="slow"
+      ></div>
+      <div
+        class="absolute top-[680px] left-[6%] z-0 pointer-events-none w-[18px] h-[18px] rounded-full bg-[rgba(255,179,198,.22)]"
+        data-layer="slow"
+      ></div>
+      <div
+        class="absolute top-[1100px] left-[4%] z-0 pointer-events-none w-[26px] h-[26px] rounded-full border-2 border-[rgba(255,143,171,.30)]"
+        data-layer="fast"
+      ></div>
+      <div
+        class="absolute top-[1300px] right-[6%] z-0 pointer-events-none w-[10px] h-[10px] rounded-full bg-[rgba(255,143,171,.35)]"
+        data-layer="slow"
+      ></div>
+
+      <div class="max-w-[1240px] mx-auto px-5 md:px-10">
+        <div class="relative text-center mb-20 reveal">
+          <span
+            class="absolute left-[12%] top-[20px] text-[1.4rem] text-[rgba(255,143,171,.35)] font-caveat -rotate-12"
+            >✦</span
+          >
+          <span
+            class="absolute left-[7%] top-[55px] text-[0.8rem] text-[rgba(255,143,171,.28)] font-indie -rotate-8"
+            >✿</span
+          >
+          <div
+            class="absolute left-[18%] top-[30px] w-8 h-[10px] rounded-full bg-[rgba(255,179,198,.30)] -rotate-[32deg]"
+          ></div>
+          <span
+            class="absolute right-[12%] top-[10px] text-[1.4rem] text-[rgba(255,143,171,.35)] font-caveat rotate-12"
+            >✦</span
+          >
+          <span
+            class="absolute right-[7%] top-[55px] text-[0.8rem] text-[rgba(255,143,171,.28)] font-indie rotate-10"
+            >✿</span
+          >
+          <div
+            class="absolute right-[18%] top-[30px] w-8 h-[10px] rounded-full bg-[rgba(255,179,198,.30)] rotate-[28deg]"
+          ></div>
+          <h1
+            class="relative inline-block font-caveat text-[4rem] md:text-[5rem] text-[#5c4a4a] mb-3 leading-tight"
+          >
+            <span
+              class="absolute left-[-48px] top-1/2 -translate-y-1/2 text-[1.1rem] text-[rgba(255,143,171,.45)]"
+              >✦</span
+            >
+            My Projects
+            <span
+              class="absolute right-[-48px] top-1/2 -translate-y-1/2 text-[1.1rem] text-[rgba(255,143,171,.45)]"
+              >✦</span
+            >
+          </h1>
+          <p
+            class="text-base md:text-lg text-[#7a5c5c] max-w-lg mx-auto leading-relaxed"
+          >
+            A showcase of projects I've designed and developed.
+          </p>
+          <div class="flex justify-center gap-3 mt-5">
+            <span class="w-2 h-2 rounded-full bg-[#ffb3c6] opacity-60"></span>
+            <span class="w-2 h-2 rounded-full bg-[#ffb3c6] opacity-60"></span>
+            <span class="w-2 h-2 rounded-full bg-[#ffb3c6] opacity-60"></span>
+          </div>
         </div>
-        <div class="flex justify-center pt-7">
-          <div class="w-[18px] h-[18px] rounded-full bg-[radial-gradient(circle_at_35%_35%,_#ffcad4,_#ff8fab)] border-[3px] border-[#fff5f7] shadow-[0_0_0_2.5px_rgba(255,179,198,.5),_0_2px_8px_rgba(255,143,171,.35)] flex-shrink-0"></div>
+
+        <div class="flex items-center gap-3 mb-20 reveal">
+          <span class="w-3 h-3 rounded-full bg-[#ffb3c6] opacity-60"></span>
+          <span class="font-caveat text-[1.6rem] text-[#5c4a4a]"
+            >Highlighted Work</span
+          >
+          <div
+            class="h-px flex-1 bg-gradient-to-r from-[#ffb3c6]/50 to-transparent"
+          ></div>
         </div>
-        <div class="md:pl-8">
-          <div class="relative bg-[#fffef5] border border-[rgba(200,180,120,.20)] rounded-[18px] p-5 max-w-[220px] shadow-[2px_3px_0_rgba(200,180,120,.12),_0_4px_16px_rgba(0,0,0,.04)]">
-            <div class="absolute left-5 top-0 bottom-0 w-px bg-[rgba(255,179,198,.25)]"></div>
-            <div class="absolute -top-[11px] left-1/2 -translate-x-1/2 w-12 h-4 rounded-sm bg-[rgba(255,196,216,.70)] pointer-events-none">
-              <div class="absolute inset-0 rounded-sm bg-[repeating-linear-gradient(90deg,rgba(255,255,255,.20)_0,rgba(255,255,255,.20)_4px,transparent_4px,transparent_9px)]"></div>
+
+        <div id="mainTimeline">
+          <svg
+            id="tl-line-svg"
+            viewBox="0 0 4 4000"
+            preserveAspectRatio="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              id="tl-line-path"
+              d="M2 0 L2 4000"
+              fill="none"
+              stroke="rgba(255,143,171,.55)"
+              stroke-width="2.5"
+              stroke-dasharray="8 5"
+              stroke-linecap="round"
+            />
+          </svg>
+
+          <div class="tl-row reveal-card">
+            <div class="tl-dot-wrap">
+              <div class="tl-dot"></div>
             </div>
-            <div class="font-indie text-[0.72rem] text-[rgba(192,96,122,.55)] tracking-[0.04em] mb-2">✎ about this project</div>
-            <div class="font-caveat text-[1.05rem] text-[rgba(74,50,40,.75)] leading-relaxed">Built during Apple Foundation Program'25 — focused on reducing student burnout through smarter scheduling.</div>
-            <div class="text-[0.8rem] text-[rgba(255,143,171,.40)] tracking-[0.2em] mt-2">✦ ✿ ✦</div>
+            <article class="proj-card">
+              <div
+                class="tape-tab"
+                style="background: rgba(255, 238, 165, 0.84)"
+              ></div>
+              <div class="corner-dot"></div>
+              <div class="margin-line"></div>
+              <div class="proj-card-inner">
+                <div class="thumb">
+                  <img src="images/timelyne.webp" alt="Timelyne" />
+                </div>
+                <div class="card-body">
+                  <div class="ruled-lines"></div>
+                  <div class="flex flex-wrap gap-2 mb-3">
+                    <span
+                      class="rounded-full border border-[rgba(255,143,171,.35)] bg-[rgba(255,179,198,.22)] px-3 py-1 text-[11px] font-semibold tracking-[0.03em] text-[#c0607a]"
+                      >Figma</span
+                    >
+                    <span
+                      class="rounded-full border border-[rgba(100,160,240,.30)] bg-[rgba(189,215,255,.30)] px-3 py-1 text-[11px] font-semibold tracking-[0.03em] text-[#3a6ea8]"
+                      >UI/UX Design</span
+                    >
+                    <span
+                      class="rounded-full border border-[rgba(220,195,60,.35)] bg-[rgba(255,237,160,.35)] px-3 py-1 text-[11px] font-semibold tracking-[0.03em] text-[#8a6a00]"
+                      >Prototyping</span
+                    >
+                  </div>
+                  <h2
+                    class="font-caveat text-[1.6rem] font-semibold text-[#181818] leading-tight mb-2"
+                  >
+                    Timelyne - Apple Foundation Program
+                  </h2>
+                  <p class="text-sm text-[#7a5c5c] leading-7 mb-5">
+                    Timelyne is a student-focused productivity app that helps
+                    organize study tasks using smart prioritization,
+                    time-blocking, and Pomodoro sessions to improve focus and
+                    consistency.
+                  </p>
+                  <a
+                    href="project-detail-timelyne.html"
+                    class="inline-flex items-center rounded-md border border-[rgba(255,179,198,.45)] bg-[#fff5f7] px-4 py-2 text-sm font-semibold text-[#c0607a] shadow-[2px_2px_0_rgba(255,143,171,.22)] transition duration-200 ease-in-out hover:bg-[#ffb3c6] hover:text-white hover:-translate-y-0.5"
+                    >Read More →</a
+                  >
+                </div>
+              </div>
+              <div class="sparkle">✦</div>
+            </article>
+          </div>
+
+          <div class="tl-row reveal-card">
+            <div class="tl-dot-wrap">
+              <div class="tl-dot"></div>
+            </div>
+            <article class="proj-card">
+              <div
+                class="tape-tab"
+                style="background: rgba(190, 235, 220, 0.82)"
+              ></div>
+              <div class="corner-dot"></div>
+              <div class="margin-line"></div>
+              <div
+                class="absolute top-3 right-3 rounded-full bg-[#ffb3c6] text-white text-[0.8rem] font-indie px-3 py-1 border border-white shadow-[0_3px_10px_rgba(255,143,171,.4)] z-20"
+              >
+                ✦ 2nd Place
+              </div>
+              <div class="proj-card-inner">
+                <div class="thumb">
+                  <img src="images/equilife.webp" alt="Equilife" />
+                </div>
+                <div class="card-body">
+                  <div class="ruled-lines"></div>
+                  <div class="flex flex-wrap gap-2 mb-3">
+                    <span
+                      class="rounded-full border border-[rgba(255,143,171,.35)] bg-[rgba(255,179,198,.22)] px-3 py-1 text-[11px] font-semibold tracking-[0.03em] text-[#c0607a]"
+                      >Figma</span
+                    >
+                    <span
+                      class="rounded-full border border-[rgba(100,160,240,.30)] bg-[rgba(189,215,255,.30)] px-3 py-1 text-[11px] font-semibold tracking-[0.03em] text-[#3a6ea8]"
+                      >UI/UX Design</span
+                    >
+                    <span
+                      class="rounded-full border border-[rgba(220,195,60,.35)] bg-[rgba(255,237,160,.35)] px-3 py-1 text-[11px] font-semibold tracking-[0.03em] text-[#8a6a00]"
+                      >Prototyping</span
+                    >
+                  </div>
+                  <h2
+                    class="font-caveat text-[1.6rem] font-semibold text-[#181818] leading-tight mb-2"
+                  >
+                    EquiLife – Work Hard, Rest Equi-ly
+                  </h2>
+                  <p class="text-sm text-[#7a5c5c] leading-7 mb-5">
+                    EquiLife is a lifestyle and wellbeing app that helps users
+                    maintain a healthier work-life balance through AI-powered
+                    lifestyle recommendations.
+                  </p>
+                  <a
+                    href="project-detail-equilife.html"
+                    class="inline-flex items-center rounded-md border border-[rgba(255,179,198,.45)] bg-[#fff5f7] px-4 py-2 text-sm font-semibold text-[#c0607a] shadow-[2px_2px_0_rgba(255,143,171,.22)] transition duration-200 ease-in-out hover:bg-[#ffb3c6] hover:text-white hover:-translate-y-0.5"
+                    >Read More →</a
+                  >
+                </div>
+              </div>
+              <div class="sparkle">✦</div>
+            </article>
+          </div>
+
+          <div class="tl-row reveal-card">
+            <div class="tl-dot-wrap">
+              <div class="tl-dot"></div>
+            </div>
+            <article class="proj-card">
+              <div
+                class="tape-tab"
+                style="background: rgba(180, 220, 255, 0.84)"
+              ></div>
+              <div class="corner-dot"></div>
+              <div class="margin-line"></div>
+              <div class="proj-card-inner">
+                <div class="thumb">
+                  <img src="images/agribuddy.webp" alt="Agribuddy" />
+                </div>
+                <div class="card-body">
+                  <div class="ruled-lines"></div>
+                  <div class="flex flex-wrap gap-2 mb-3">
+                    <span
+                      class="rounded-full border border-[rgba(255,143,171,.35)] bg-[rgba(255,179,198,.22)] px-3 py-1 text-[11px] font-semibold tracking-[0.03em] text-[#c0607a]"
+                      >Figma</span
+                    >
+                    <span
+                      class="rounded-full border border-[rgba(100,160,240,.30)] bg-[rgba(189,215,255,.30)] px-3 py-1 text-[11px] font-semibold tracking-[0.03em] text-[#3a6ea8]"
+                      >UI/UX Design</span
+                    >
+                    <span
+                      class="rounded-full border border-[rgba(220,195,60,.35)] bg-[rgba(255,237,160,.35)] px-3 py-1 text-[11px] font-semibold tracking-[0.03em] text-[#8a6a00]"
+                      >Prototyping</span
+                    >
+                  </div>
+                  <h2
+                    class="font-caveat text-[1.6rem] font-semibold text-[#181818] leading-tight mb-2"
+                  >
+                    Agribuddy
+                  </h2>
+                  <p class="text-sm text-[#7a5c5c] leading-7 mb-5">
+                    A mobile-based agriculture platform designed to support
+                    farmers through accessible digital information and smarter
+                    farming solutions.
+                  </p>
+                  <a
+                    href="project-detail-agribuddy.html"
+                    class="inline-flex items-center rounded-md border border-[rgba(255,179,198,.45)] bg-[#fff5f7] px-4 py-2 text-sm font-semibold text-[#c0607a] shadow-[2px_2px_0_rgba(255,143,171,.22)] transition duration-200 ease-in-out hover:bg-[#ffb3c6] hover:text-white hover:-translate-y-0.5"
+                    >Read More →</a
+                  >
+                </div>
+              </div>
+              <div class="sparkle">✦</div>
+            </article>
+          </div>
+
+          <div class="tl-row reveal-card">
+            <div class="tl-dot-wrap">
+              <div class="tl-dot"></div>
+            </div>
+            <article class="proj-card">
+              <div
+                class="tape-tab"
+                style="background: rgba(210, 190, 255, 0.8)"
+              ></div>
+              <div class="corner-dot"></div>
+              <div class="margin-line"></div>
+              <div class="proj-card-inner">
+                <div class="thumb">
+                  <img src="images/flip&learn.webp" alt="Flip & Learn" />
+                </div>
+                <div class="card-body">
+                  <div class="ruled-lines"></div>
+                  <div class="flex flex-wrap gap-2 mb-3">
+                    <span
+                      class="rounded-full border border-[rgba(255,143,171,.35)] bg-[rgba(255,179,198,.22)] px-3 py-1 text-[11px] font-semibold tracking-[0.03em] text-[#c0607a]"
+                      >Java</span
+                    >
+                    <span
+                      class="rounded-full border border-[rgba(100,160,240,.30)] bg-[rgba(189,215,255,.30)] px-3 py-1 text-[11px] font-semibold tracking-[0.03em] text-[#3a6ea8]"
+                      >Java Swing</span
+                    >
+                    <span
+                      class="rounded-full border border-[rgba(220,195,60,.35)] bg-[rgba(255,237,160,.35)] px-3 py-1 text-[11px] font-semibold tracking-[0.03em] text-[#8a6a00]"
+                      >JFrame</span
+                    >
+                    <span
+                      class="rounded-full border border-[rgba(180,150,240,.35)] bg-[rgba(210,190,255,.30)] px-3 py-1 text-[11px] font-semibold tracking-[0.03em] text-[#6a45a8]"
+                      >Educational Game</span
+                    >
+                  </div>
+                  <h2
+                    class="font-caveat text-[1.6rem] font-semibold text-[#181818] leading-tight mb-2"
+                  >
+                    Flip & Learn – Flip the Tiles, Unlock the Knowledge
+                  </h2>
+                  <p class="text-sm text-[#7a5c5c] leading-7 mb-5">
+                    Flip & Learn is a Java-based educational memory game
+                    designed to improve focus, memory, and cognitive skills
+                    through interactive gameplay while supporting SDG 4: Quality
+                    Education.
+                  </p>
+                  <a
+                    href="project-detail-flip&learn.html"
+                    class="inline-flex items-center rounded-md border border-[rgba(255,179,198,.45)] bg-[#fff5f7] px-4 py-2 text-sm font-semibold text-[#c0607a] shadow-[2px_2px_0_rgba(255,143,171,.22)] transition duration-200 ease-in-out hover:bg-[#ffb3c6] hover:text-white hover:-translate-y-0.5"
+                    >Read More →</a
+                  >
+                </div>
+              </div>
+              <div class="sparkle">✦</div>
+            </article>
           </div>
         </div>
       </div>
-      <div class="grid grid-cols-1 md:grid-cols-[1fr_36px_1fr] items-start relative mb-16 reveal rd2">
-        <div class="flex flex-col items-end md:pr-8">
-          <div class="relative bg-[#fffef5] border border-[rgba(200,180,120,.20)] rounded-[18px] p-5 max-w-[220px] shadow-[2px_3px_0_rgba(200,180,120,.12),_0_4px_16px_rgba(0,0,0,.04)] self-end">
-            <div class="absolute left-5 top-0 bottom-0 w-px bg-[rgba(255,179,198,.25)]"></div>
-            <div class="absolute -top-[11px] left-1/2 -translate-x-1/2 w-12 h-4 rounded-sm bg-[rgba(255,196,216,.70)] pointer-events-none">
-              <div class="absolute inset-0 rounded-sm bg-[repeating-linear-gradient(90deg,rgba(255,255,255,.20)_0,rgba(255,255,255,.20)_4px,transparent_4px,transparent_9px)]"></div>
-            </div>
-            <div class="font-indie text-[0.72rem] text-[rgba(192,96,122,.55)] tracking-[0.04em] mb-2">✎ achievement</div>
-            <div class="font-caveat text-[1.05rem] text-[rgba(74,50,40,.75)] leading-relaxed">Won 2nd Place at ITASE 6.0 — a national UI/UX competition held by Telkom University Purwokerto.</div>
-            <div class="text-[0.8rem] text-[rgba(255,143,171,.40)] tracking-[0.2em] mt-2">✦ ✿ ✦</div>
+    </main>
+
+    <footer
+      class="text-white pt-16 pb-8 px-6 md:px-12 bg-[linear-gradient(180deg,#111111_0%,#1a0a0a_55%,#2d1a1a_100%)]"
+    >
+      <div
+        class="max-w-[1000px] mx-auto grid grid-cols-1 md:grid-cols-[1fr_160px_1fr] gap-10 pb-10 border-b border-white/15"
+      >
+        <div>
+          <img
+            src="images/valey-logo-white.webp"
+            alt="Valey logo"
+            class="h-14 object-contain mb-4"
+          />
+          <p class="text-[13px] text-white/60 leading-[1.7] max-w-[260px]">
+            Informatics student passionate about creativity, technology, and
+            artistic expression. Exploring the intersection of code and craft.
+          </p>
+        </div>
+        <nav class="space-y-3">
+          <h2 class="text-[15px] font-bold mb-4">Quick Links</h2>
+          <a
+            href="index.html"
+            class="block text-white/65 text-sm transition hover:text-[#ffb3c6]"
+            >Home</a
+          >
+          <a
+            href="hobbies.html"
+            class="block text-white/65 text-sm transition hover:text-[#ffb3c6]"
+            >Hobby</a
+          >
+          <a
+            href="projects.html"
+            class="block text-white/65 text-sm transition hover:text-[#ffb3c6]"
+            >Projects</a
+          >
+          <a
+            href="gallery.html"
+            class="block text-white/65 text-sm transition hover:text-[#ffb3c6]"
+            >Gallery</a
+          >
+        </nav>
+        <div>
+          <h2 class="text-[15px] font-bold mb-4">Connect</h2>
+          <div class="flex gap-3 mb-3">
+            <a
+              href="https://www.instagram.com/marshavalerie_?igsh=NXNwZXV4bnZldGtt"
+              title="Instagram"
+              class="flex h-9 w-9 items-center justify-center rounded-[10px] border border-white/30 text-white/80 text-base transition hover:bg-[#ffb3c6] hover:text-white"
+              ><i class="fab fa-instagram"></i
+            ></a>
+            <a
+              href="https://github.com/hellohello823"
+              title="GitHub"
+              class="flex h-9 w-9 items-center justify-center rounded-[10px] border border-white/30 text-white/80 text-base transition hover:bg-[#ffb3c6] hover:text-white"
+              ><i class="fa-brands fa-github"></i
+            ></a>
+            <a
+              href="mailto:marsha.valerie.wibowo@gmail.com"
+              title="Gmail"
+              class="flex h-9 w-9 items-center justify-center rounded-[10px] border border-white/30 text-white/80 text-base transition hover:bg-[#ffb3c6] hover:text-white"
+              ><i class="fas fa-envelope"></i
+            ></a>
+            <a
+              href="https://www.linkedin.com/in/marsha-valerie-wibowo-90baa137a/"
+              title="LinkedIn"
+              class="flex h-9 w-9 items-center justify-center rounded-[10px] border border-white/30 text-white/80 text-base transition hover:bg-[#ffb3c6] hover:text-white"
+              ><i class="fab fa-linkedin-in"></i
+            ></a>
           </div>
-        </div>
-        <div class="flex justify-center pt-7">
-          <div class="w-[18px] h-[18px] rounded-full bg-[radial-gradient(circle_at_35%_35%,_#ffcad4,_#ff8fab)] border-[3px] border-[#fff5f7] shadow-[0_0_0_2.5px_rgba(255,179,198,.5),_0_2px_8px_rgba(255,143,171,.35)] flex-shrink-0"></div>
-        </div>
-        <div class="md:pl-8">
-          <article class="proj-card relative overflow-visible cursor-pointer w-full max-w-full md:max-w-[420px] bg-[#fffef5] border border-[rgba(200,180,120,.25)] shadow-[0_2px_8px_rgba(0,0,0,.05),_0_8px_28px_rgba(180,150,80,.08),_inset_0_0_0_1px_rgba(255,255,255,.6)] transition-transform duration-[450ms] ease-[cubic-bezier(.34,1.56,.64,1)] hover:-translate-y-1">
-            <div class="absolute left-8 top-0 bottom-0 w-[1.5px] bg-[rgba(255,179,198,.3)]"></div>
-            <div class="absolute inset-x-0 top-[200px] bottom-0 bg-[repeating-linear-gradient(transparent,transparent_27px,rgba(200,210,255,.12)_27px,rgba(200,210,255,.12)_28px)] pointer-events-none"></div>
-            <div class="absolute -top-3 left-8 w-[68px] h-[24px] rounded-sm bg-[rgba(190,235,220,.82)] pointer-events-none">
-              <div class="absolute inset-0 rounded-sm bg-[repeating-linear-gradient(90deg,rgba(255,255,255,.22)_0,rgba(255,255,255,.22)_4px,transparent_4px,transparent_9px)]"></div>
-            </div>
-            <div class="absolute top-2 left-2 w-[7px] h-[7px] rounded-full bg-[rgba(255,179,198,.32)] pointer-events-none"></div>
-            <div class="absolute top-3 right-3 rounded-full bg-[#ffb3c6] text-white text-[0.8rem] font-indie px-3 py-1 border border-white shadow-[0_3px_10px_rgba(255,143,171,.4)]">✦ 2nd Place</div>
-            <div class="thumb overflow-hidden relative">
-              <img src="images/equilife.webp" alt="Equilife" class="w-full h-[200px] object-cover block transition-transform duration-500 ease-in-out" />
-            </div>
-            <div class="relative z-10 px-4 pb-4 pt-4 pl-11">
-              <div class="flex flex-wrap gap-2 mb-3">
-                <span class="rounded-full border border-[rgba(255,143,171,.35)] bg-[rgba(255,179,198,.22)] px-3 py-1 text-[11px] font-semibold tracking-[0.03em] text-[#c0607a]">Figma</span>
-                <span class="rounded-full border border-[rgba(100,160,240,.30)] bg-[rgba(189,215,255,.30)] px-3 py-1 text-[11px] font-semibold tracking-[0.03em] text-[#3a6ea8]">UI/UX Design</span>
-                <span class="rounded-full border border-[rgba(220,195,60,.35)] bg-[rgba(255,237,160,.35)] px-3 py-1 text-[11px] font-semibold tracking-[0.03em] text-[#8a6a00]">Prototyping</span>
-              </div>
-              <h2 class="font-caveat text-[1.45rem] font-semibold text-[#181818] leading-tight mb-2">EquiLife – Work Hard, Rest Equi-ly</h2>
-              <p class="text-sm text-[#7a5c5c] leading-7 mb-4">EquiLife is a lifestyle and wellbeing app that helps users maintain a healthier work-life balance through AI-powered lifestyle recommendations.</p>
-              <a href="project-detail.html" class="inline-flex items-center rounded-md border border-[rgba(255,179,198,.45)] bg-[#fff5f7] px-4 py-2 text-sm font-semibold text-[#c0607a] shadow-[2px_2px_0_rgba(255,143,171,.22)] transition duration-200 ease-in-out hover:bg-[#ffb3c6] hover:text-white hover:-translate-y-0.5">Read More →</a>
-            </div>
-            <div class="absolute bottom-2 right-3 text-[0.72rem] text-[rgba(255,143,171,.45)] pointer-events-none">✦</div>
-          </article>
+          <p class="text-[12px] text-white/50">
+            Follow along on my creative journey
+          </p>
         </div>
       </div>
-      <div class="grid grid-cols-1 md:grid-cols-[1fr_36px_1fr] items-start relative mb-16 reveal">
-        <div class="md:flex md:justify-end md:pr-8">
-          <article class="proj-card relative overflow-visible cursor-pointer w-full max-w-full md:max-w-[420px] bg-[#fffef5] border border-[rgba(200,180,120,.25)] shadow-[0_2px_8px_rgba(0,0,0,.05),_0_8px_28px_rgba(180,150,80,.08),_inset_0_0_0_1px_rgba(255,255,255,.6)] transition-transform duration-[450ms] ease-[cubic-bezier(.34,1.56,.64,1)] hover:-translate-y-1">
-            <div class="absolute left-8 top-0 bottom-0 w-[1.5px] bg-[rgba(255,179,198,.3)]"></div>
-            <div class="absolute inset-x-0 top-[200px] bottom-0 bg-[repeating-linear-gradient(transparent,transparent_27px,rgba(200,210,255,.12)_27px,rgba(200,210,255,.12)_28px)] pointer-events-none"></div>
-            <div class="absolute -top-3 left-8 w-[68px] h-[24px] rounded-sm bg-[rgba(210,190,255,.80)] pointer-events-none">
-              <div class="absolute inset-0 rounded-sm bg-[repeating-linear-gradient(90deg,rgba(255,255,255,.22)_0,rgba(255,255,255,.22)_4px,transparent_4px,transparent_9px)]"></div>
-            </div>
-            <div class="absolute top-2 left-2 w-[7px] h-[7px] rounded-full bg-[rgba(255,179,198,.32)] pointer-events-none"></div>
-            <div class="thumb overflow-hidden relative">
-              <img src="images/flip&learn.webp" alt="flip&learn" class="w-full h-[200px] object-cover block transition-transform duration-500 ease-in-out" />
-            </div>
-            <div class="relative z-10 px-4 pb-4 pt-4 pl-11">
-              <div class="flex flex-wrap gap-2 mb-3">
-                <span class="rounded-full border border-[rgba(255,143,171,.35)] bg-[rgba(255,179,198,.22)] px-3 py-1 text-[11px] font-semibold tracking-[0.03em] text-[#c0607a]">Java</span>
-                <span class="rounded-full border border-[rgba(100,160,240,.30)] bg-[rgba(189,215,255,.30)] px-3 py-1 text-[11px] font-semibold tracking-[0.03em] text-[#3a6ea8]">Java Swing</span>
-                <span class="rounded-full border border-[rgba(220,195,60,.35)] bg-[rgba(255,237,160,.35)] px-3 py-1 text-[11px] font-semibold tracking-[0.03em] text-[#8a6a00]">JFrame</span>
-                <span class="rounded-full border border-[rgba(180,150,240,.35)] bg-[rgba(210,190,255,.30)] px-3 py-1 text-[11px] font-semibold tracking-[0.03em] text-[#6a45a8]">Educational Game</span>
-              </div>
-              <h2 class="font-caveat text-[1.45rem] font-semibold text-[#181818] leading-tight mb-2">Flip & Learn – Flip the Tiles, Unlock the Knowledge</h2>
-              <p class="text-sm text-[#7a5c5c] leading-7 mb-4">Flip & Learn is a Java-based educational memory game designed to improve focus, memory, and cognitive skills through interactive gameplay while supporting SDG 4: Quality Education.</p>
-              <a href="project-detail.html" class="inline-flex items-center rounded-md border border-[rgba(255,179,198,.45)] bg-[#fff5f7] px-4 py-2 text-sm font-semibold text-[#c0607a] shadow-[2px_2px_0_rgba(255,143,171,.22)] transition duration-200 ease-in-out hover:bg-[#ffb3c6] hover:text-white hover:-translate-y-0.5">Read More →</a>
-            </div>
-            <div class="absolute bottom-2 right-3 text-[0.72rem] text-[rgba(255,143,171,.45)] pointer-events-none">✦</div>
-          </article>
-        </div>
-        <div class="flex justify-center pt-7">
-          <div class="w-[18px] h-[18px] rounded-full bg-[radial-gradient(circle_at_35%_35%,_#ffcad4,_#ff8fab)] border-[3px] border-[#fff5f7] shadow-[0_0_0_2.5px_rgba(255,179,198,.5),_0_2px_8px_rgba(255,143,171,.35)] flex-shrink-0"></div>
-        </div>
-        <div class="md:pl-8">
-          <div class="relative bg-[#fffef5] border border-[rgba(200,180,120,.20)] rounded-[18px] p-5 max-w-[220px] shadow-[2px_3px_0_rgba(200,180,120,.12),_0_4px_16px_rgba(0,0,0,.04)]">
-            <div class="absolute left-5 top-0 bottom-0 w-px bg-[rgba(255,179,198,.25)]"></div>
-            <div class="absolute -top-[11px] left-1/2 -translate-x-1/2 w-12 h-4 rounded-sm bg-[rgba(255,196,216,.70)] pointer-events-none">
-              <div class="absolute inset-0 rounded-sm bg-[repeating-linear-gradient(90deg,rgba(255,255,255,.20)_0,rgba(255,255,255,.20)_4px,transparent_4px,transparent_9px)]"></div>
-            </div>
-            <div class="font-indie text-[0.72rem] text-[rgba(192,96,122,.55)] tracking-[0.04em] mb-2">✎ SDG goal</div>
-            <div class="font-caveat text-[1.05rem] text-[rgba(74,50,40,.75)] leading-relaxed">Supports SDG 4: Quality Education — making learning interactive and accessible for all.</div>
-            <div class="text-[0.8rem] text-[rgba(255,143,171,.40)] tracking-[0.2em] mt-2">✦ ✿ ✦</div>
-          </div>
-        </div>
+      <div class="max-w-[1000px] mx-auto pt-7 text-center">
+        <p class="text-[13px] text-white/50">
+          © 2026 Valey. All rights reserved.
+        </p>
       </div>
-      <div class="grid grid-cols-1 md:grid-cols-[1fr_36px_1fr] items-start relative mb-16 reveal delay-[400ms]">
-        <div class="flex flex-col items-end md:pr-8">
-          <div class="relative bg-[#fffef5] border border-[rgba(200,180,120,.20)] rounded-[18px] p-5 max-w-[220px] shadow-[2px_3px_0_rgba(200,180,120,.12),_0_4px_16px_rgba(0,0,0,.04)] self-end">
-            <div class="absolute left-5 top-0 bottom-0 w-px bg-[rgba(255,179,198,.25)]"></div>
-            <div class="absolute -top-[11px] left-1/2 -translate-x-1/2 w-12 h-4 rounded-sm bg-[rgba(255,196,216,.70)] pointer-events-none">
-              <div class="absolute inset-0 rounded-sm bg-[repeating-linear-gradient(90deg,rgba(255,255,255,.20)_0,rgba(255,255,255,.22)_4px,transparent_4px,transparent_9px)]"></div>
-            </div>
-            <div class="font-indie text-[0.72rem] text-[rgba(192,96,122,.55)] tracking-[0.04em] mb-2">✎ design focus</div>
-            <div class="font-caveat text-[1.05rem] text-[rgba(74,50,40,.75)] leading-relaxed">Low-literacy friendly UI — heavy use of icons, simple language, and clear navigation.</div>
-            <div class="text-[0.8rem] text-[rgba(255,143,171,.40)] tracking-[0.2em] mt-2">✦ ✿ ✦</div>
-          </div>
-        </div>
-        <div class="flex justify-center pt-7">
-          <div class="w-[18px] h-[18px] rounded-full bg-[radial-gradient(circle_at_35%_35%,_#ffcad4,_#ff8fab)] border-[3px] border-[#fff5f7] shadow-[0_0_0_2.5px_rgba(255,179,198,.5),_0_2px_8px_rgba(255,143,171,.35)] flex-shrink-0"></div>
-        </div>
-        <div class="md:pl-8">
-          <article class="proj-card relative overflow-visible cursor-pointer w-full max-w-full md:max-w-[420px] bg-[#fffef5] border border-[rgba(200,180,120,.25)] shadow-[0_2px_8px_rgba(0,0,0,.05),_0_8px_28px_rgba(180,150,80,.08),_inset_0_0_0_1px_rgba(255,255,255,.6)] transition-transform duration-[450ms] ease-[cubic-bezier(.34,1.56,.64,1)] hover:-translate-y-1">
-            <div class="absolute left-8 top-0 bottom-0 w-[1.5px] bg-[rgba(255,179,198,.3)]"></div>
-            <div class="absolute inset-x-0 top-[200px] bottom-0 bg-[repeating-linear-gradient(transparent,transparent_27px,rgba(200,210,255,.12)_27px,rgba(200,210,255,.12)_28px)] pointer-events-none"></div>
-            <div class="absolute -top-3 left-8 w-[68px] h-[24px] rounded-sm bg-[rgba(180,220,255,.84)] pointer-events-none">
-              <div class="absolute inset-0 rounded-sm bg-[repeating-linear-gradient(90deg,rgba(255,255,255,.22)_0,rgba(255,255,255,.22)_4px,transparent_4px,transparent_9px)]"></div>
-            </div>
-            <div class="absolute top-2 left-2 w-[7px] h-[7px] rounded-full bg-[rgba(255,179,198,.32)] pointer-events-none"></div>
-            <div class="thumb overflow-hidden relative">
-              <img src="images/agribuddy.webp" alt="agribuddy" class="w-full h-[200px] object-cover block transition-transform duration-500 ease-in-out" />
-            </div>
-            <div class="relative z-10 px-4 pb-4 pt-4 pl-11">
-              <div class="flex flex-wrap gap-2 mb-3">
-                <span class="rounded-full border border-[rgba(255,143,171,.35)] bg-[rgba(255,179,198,.22)] px-3 py-1 text-[11px] font-semibold tracking-[0.03em] text-[#c0607a]">Figma</span>
-                <span class="rounded-full border border-[rgba(100,160,240,.30)] bg-[rgba(189,215,255,.30)] px-3 py-1 text-[11px] font-semibold tracking-[0.03em] text-[#3a6ea8]">UI/UX Design</span>
-                <span class="rounded-full border border-[rgba(220,195,60,.35)] bg-[rgba(255,237,160,.35)] px-3 py-1 text-[11px] font-semibold tracking-[0.03em] text-[#8a6a00]">Prototyping</span>
-              </div>
-              <h2 class="font-caveat text-[1.45rem] font-semibold text-[#181818] leading-tight mb-2">Agribuddy</h2>
-              <p class="text-sm text-[#7a5c5c] leading-7 mb-4">A mobile-based agriculture platform designed to support farmers through accessible digital information and smarter farming solutions.</p>
-              <a href="project-detail.html" class="inline-flex items-center rounded-md border border-[rgba(255,179,198,.45)] bg-[#fff5f7] px-4 py-2 text-sm font-semibold text-[#c0607a] shadow-[2px_2px_0_rgba(255,143,171,.22)] transition duration-200 ease-in-out hover:bg-[#ffb3c6] hover:text-white hover:-translate-y-0.5">Read More →</a>
-            </div>
-            <div class="absolute bottom-2 right-3 text-[0.72rem] text-[rgba(255,143,171,.45)] pointer-events-none">✦</div>
-          </article>
-        </div>
-      </div>
-    </div>
-  </div>
-</main>
-<footer class="text-white pt-16 pb-8 px-6 md:px-12 bg-[linear-gradient(180deg,#111111_0%,#1a0a0a_55%,#2d1a1a_100%)]">
-  <div class="max-w-[1000px] mx-auto grid grid-cols-1 md:grid-cols-[1fr_160px_1fr] gap-10 pb-10 border-b border-white/15">
-    <div>
-      <img src="images/valey-logo-white.webp" alt="Valey logo" class="h-14 object-contain mb-4" />
-      <p class="text-[13px] text-white/60 leading-[1.7] max-w-[260px]">Informatics student passionate about creativity, technology, and artistic expression. Exploring the intersection of code and craft.</p>
-    </div>
-    <nav class="space-y-3">
-      <h2 class="text-[15px] font-bold mb-4">Quick Links</h2>
-      <a href="index.html" class="block text-white/65 text-sm transition hover:text-[#ffb3c6]">Home</a>
-      <a href="hobbies.html" class="block text-white/65 text-sm transition hover:text-[#ffb3c6]">Hobby</a>
-      <a href="projects.html" class="block text-white/65 text-sm transition hover:text-[#ffb3c6]">Projects</a>
-      <a href="gallery.html" class="block text-white/65 text-sm transition hover:text-[#ffb3c6]">Gallery</a>
-    </nav>
-    <div>
-      <h2 class="text-[15px] font-bold mb-4">Connect</h2>
-      <div class="flex gap-3 mb-3">
-        <a href="https://www.instagram.com/marshavalerie_?igsh=NXNwZXV4bnZldGtt" title="Instagram" class="flex h-9 w-9 items-center justify-center rounded-[10px] border border-white/30 text-white/80 text-base transition hover:bg-[#ffb3c6] hover:text-white"><i class="fab fa-instagram"></i></a>
-        <a href="https://github.com/hellohello823" title="GitHub" class="flex h-9 w-9 items-center justify-center rounded-[10px] border border-white/30 text-white/80 text-base transition hover:bg-[#ffb3c6] hover:text-white"><i class="fa-brands fa-github"></i></a>
-        <a href="mailto:marsha.valerie.wibowo@gmail.com" title="Gmail" class="flex h-9 w-9 items-center justify-center rounded-[10px] border border-white/30 text-white/80 text-base transition hover:bg-[#ffb3c6] hover:text-white"><i class="fas fa-envelope"></i></a>
-        <a href="https://www.linkedin.com/in/marsha-valerie-wibowo-90baa137a/" title="LinkedIn" class="flex h-9 w-9 items-center justify-center rounded-[10px] border border-white/30 text-white/80 text-base transition hover:bg-[#ffb3c6] hover:text-white"><i class="fab fa-linkedin-in"></i></a>
-      </div>
-      <p class="text-[12px] text-white/50">Follow along on my creative journey</p>
-    </div>
-  </div>
-  <div class="max-w-[1000px] mx-auto pt-7 text-center">
-    <p class="text-[13px] text-white/50">© 2026 Valey. All rights reserved.</p>
-  </div>
-</footer>
-<script>
-$(function () {
-  $("#menuBtn").on("click", function () { $("#mobile-nav").toggleClass("open"); });
-  $("#mobile-nav a").on("click", function () { $("#mobile-nav").removeClass("open"); });
+    </footer>
 
-  var revealObs = new IntersectionObserver(function (entries) {
-    entries.forEach(function (e) {
-      if (e.isIntersecting) $(e.target).addClass("visible");
-      else $(e.target).removeClass("visible");
-    });
-  }, { threshold: 0.08, rootMargin: "0px 0px -30px 0px" });
-
-  $(".reveal").each(function () { revealObs.observe(this); });
-
-  $(window).on("scroll", function () {
-    var s = $(this).scrollTop();
-    $("[data-layer='slow']").css("transform", "translateY(" + (s * 0.055) + "px)");
-    $("[data-layer='fast']").css("transform", "translateY(" + (s * 0.12) + "px)");
-  });
-
-  document.querySelectorAll(".proj-card").forEach(function(card) {
-    card.addEventListener("mouseenter", function() {
-      card.style.transform = "rotate(1.5deg)";
-    });
-    card.addEventListener("mouseleave", function() {
-      card.style.transform = "";
-      card.classList.add("swing-effect");
-      setTimeout(function() {
-        card.classList.remove("swing-effect");
-      }, 700);
-    });
-  });
-
-  var barObs = new IntersectionObserver(function (entries) {
-    entries.forEach(function (e) {
-      if (e.isIntersecting) {
-        $(e.target).find(".progress-bar-fill").each(function () {
-          var w = $(this).css("width");
-          $(this).css("width", 0).animate({ width: w }, 1200);
+    <script>
+      $(function () {
+        $("#menuBtn").on("click", function () {
+          $("#mobile-nav").toggleClass("open");
         });
-        barObs.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.35 });
-  $(".sticky-note").each(function () { barObs.observe(this); });
-});
-</script>
-</body>
+        $("#mobile-nav a").on("click", function () {
+          $("#mobile-nav").removeClass("open");
+        });
+
+        var tlPath = document.getElementById("tl-line-path");
+        var tlBox = document.getElementById("mainTimeline");
+        var DASH = 4000;
+
+        function updateLine() {
+          if (!tlPath || !tlBox) return;
+          var rect = tlBox.getBoundingClientRect();
+          var totalH = tlBox.offsetHeight;
+          var scrolled = Math.max(0, -rect.top + window.innerHeight * 0.5);
+          var progress = Math.min(1, scrolled / totalH);
+          tlPath.style.strokeDashoffset = DASH * (1 - progress);
+        }
+
+        var cardObs = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (e) {
+              if (e.isIntersecting) {
+                $(e.target).addClass("visible");
+                $(e.target).find(".tl-dot").addClass("visible");
+              }
+            });
+          },
+          { threshold: 0.1, rootMargin: "0px 0px -50px 0px" },
+        );
+
+        $(".reveal-card").each(function () {
+          cardObs.observe(this);
+        });
+
+        var genObs = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (e) {
+              if (e.isIntersecting) $(e.target).addClass("visible");
+              else $(e.target).removeClass("visible");
+            });
+          },
+          { threshold: 0.08, rootMargin: "0px 0px -30px 0px" },
+        );
+
+        $(".reveal").each(function () {
+          genObs.observe(this);
+        });
+
+        $(window).on("scroll", function () {
+          var s = $(this).scrollTop();
+          $("[data-layer='slow']").css(
+            "transform",
+            "translateY(" + s * 0.055 + "px)",
+          );
+          $("[data-layer='fast']").css(
+            "transform",
+            "translateY(" + s * 0.12 + "px)",
+          );
+          updateLine();
+        });
+
+        updateLine();
+      });
+    </script>
+  </body>
 </html>
