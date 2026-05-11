@@ -107,7 +107,7 @@
         </div>
 
         <div class="flex flex-col gap-10 sm:gap-14">
-          <div class="hobby-card reveal" data-tilt="right">
+          <div class="hobby-card" data-tilt="right">
             <div class="washi washi-1"></div>
             <div
               class="cd cd-ring animate-float-a w-[36px] h-[36px] top-[-20px] right-[64px]"
@@ -195,7 +195,7 @@
             </div>
           </div>
 
-          <div class="hobby-card reveal delay-[0.12s]" data-tilt="left">
+          <div class="hobby-card g-reveal delay-[0.12s]" data-tilt="left">
             <div class="washi washi-2"></div>
             <div
               class="cd cd-ring animate-float-b w-[38px] h-[38px] top-[-20px] left-[60px]"
@@ -280,7 +280,7 @@
             </div>
           </div>
 
-          <div class="hobby-card reveal delay-[0.24s]" data-tilt="right">
+          <div class="hobby-card g-reveal delay-[0.24s]" data-tilt="right">
             <div class="washi washi-3"></div>
             <div
               class="cd cd-ring animate-float-a w-[34px] h-[34px] top-[-18px] right-[72px]"
@@ -368,7 +368,7 @@
             </div>
           </div>
 
-          <div class="hobby-card reveal delay-[0.36s]" data-tilt="left">
+          <div class="hobby-card g-reveal delay-[0.36s]" data-tilt="left">
             <div class="washi washi-4"></div>
             <div
               class="cd cd-ring animate-float-b w-[38px] h-[38px] top-[-20px] left-[60px]"
@@ -457,7 +457,7 @@
             </div>
           </div>
 
-          <div class="hobby-card reveal delay-[0.48s]" data-tilt="right">
+          <div class="hobby-card g-reveal delay-[0.48s]" data-tilt="right">
             <div class="washi washi-5"></div>
             <div
               class="cd cd-ring animate-float-a w-[40px] h-[40px] top-[-22px] right-[60px]"
@@ -704,24 +704,33 @@
           },
           { threshold: 0.08, rootMargin: "0px 0px -40px 0px" },
         );
-        $(".reveal").each(function () {
+
+        // Only observe non-hobby-card reveals
+        $(".reveal:not(.hobby-card)").each(function () {
           obs.observe(this);
         });
       });
 
       document.addEventListener("DOMContentLoaded", () => {
         const cards = document.querySelectorAll(".hobby-card");
+        const firstCard = cards[0];
+        let firstCardReady = false;
 
-        // Apply entrance animation only to the first card
-        const firstCard = document.querySelector(".hobby-card");
         if (firstCard) {
+          const firstTilt = "2.2deg";
+          firstCard.style.setProperty("--tilt", firstTilt);
           firstCard.style.opacity = "0";
-          setTimeout(function () {
+
+          setTimeout(() => {
             firstCard.classList.add("hobby-card-entrance");
             firstCard.addEventListener(
               "animationend",
-              function () {
+              () => {
                 firstCard.style.opacity = "";
+                firstCard.style.transition =
+                  "transform 0.42s cubic-bezier(0.34,1.56,0.64,1)";
+                firstCard.style.transform = `rotate(${firstTilt})`;
+                firstCardReady = true; // now allow hover
               },
               { once: true },
             );
@@ -731,32 +740,74 @@
         cards.forEach((card) => {
           const tiltDir = card.dataset.tilt;
           const tiltAngle = tiltDir === "left" ? "-2.2deg" : "2.2deg";
-          const swingClass = tiltDir === "left" ? "swing-left" : "swing-right";
+          const swingClass =
+            tiltDir === "left" ? "h-swing-left" : "h-swing-right";
 
-          // Set the initial resting tilt for every card
-          card.style.transform = `rotate(${tiltAngle})`;
-          card.style.transition = "transform .42s cubic-bezier(.34,1.56,.64,1)";
+          card.style.setProperty("--tilt", tiltAngle);
 
-          // On hover: straighten and lift
-          card.addEventListener("mouseenter", () => {
-            if (window.innerWidth > 900) {
-              card.style.transform = "rotate(0deg) translateY(-6px)";
-              card.style.transition =
-                "transform .42s cubic-bezier(.34,1.56,.64,1)";
-            }
-          });
-
-          // On leave: restore tilt with swing animation
-          card.addEventListener("mouseleave", () => {
+          if (card !== firstCard) {
             card.style.transform = `rotate(${tiltAngle})`;
             card.style.transition =
-              "transform .42s cubic-bezier(.34,1.56,.64,1)";
+              "transform 0.42s cubic-bezier(0.34,1.56,0.64,1)";
+          }
 
-            card.classList.add(swingClass);
-            setTimeout(() => {
-              card.classList.remove(swingClass);
-            }, 700);
+          card.addEventListener("mouseenter", () => {
+            if (window.innerWidth <= 900) return;
+            if (card === firstCard && !firstCardReady) return; // block during entrance
+            card.classList.remove("h-swing-left", "h-swing-right");
+            card.style.transition =
+              "transform 0.42s cubic-bezier(0.34,1.56,0.64,1)";
+            card.style.transform = "rotate(0deg) translateY(-6px)";
           });
+
+          card.addEventListener("mouseleave", () => {
+            if (window.innerWidth <= 900) return;
+            if (card === firstCard && !firstCardReady) return;
+            card.style.transition = "none";
+            card.style.transform = "none";
+
+            requestAnimationFrame(() => {
+              requestAnimationFrame(() => {
+                card.classList.remove("h-swing-left", "h-swing-right");
+                void card.offsetWidth;
+                card.classList.add(swingClass);
+
+                setTimeout(() => {
+                  card.classList.remove("h-swing-left", "h-swing-right");
+                  card.style.transition =
+                    "transform 0.42s cubic-bezier(0.34,1.56,0.64,1)";
+                  card.style.transform = `rotate(${tiltAngle})`;
+                }, 900);
+              });
+            });
+          });
+        });
+
+        // Reveal cards 2-5, toggle on scroll up and down
+        const revealObs = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+                // Restore tilt when re-revealed
+                const tiltDir = entry.target.dataset.tilt;
+                const tiltAngle = tiltDir === "left" ? "-2.2deg" : "2.2deg";
+                entry.target.style.transition =
+                  "transform 0.42s cubic-bezier(0.34,1.56,0.64,1)";
+                entry.target.style.transform = `rotate(${tiltAngle})`;
+              } else {
+                entry.target.classList.remove("visible");
+                // Reset so it can re-animate from translateY
+                entry.target.style.transition = "none";
+                entry.target.style.transform = "";
+              }
+            });
+          },
+          { threshold: 0.1, rootMargin: "0px 0px -60px 0px" },
+        );
+
+        cards.forEach((card, i) => {
+          if (i !== 0) revealObs.observe(card);
         });
       });
     </script>
