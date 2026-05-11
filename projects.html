@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Valey — Projects</title>
-    <link rel="icon" href="icon.webp" />
+    <link rel="icon" href="icon/icon.webp" />
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="style.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -457,72 +457,12 @@
       </div>
     </footer>
 
-    <script>
-      $(function () {
-        $("#menuBtn").on("click", function () {
-          $("#mobile-nav").toggleClass("open");
+    <script src="script.js">
+      $("#menuBtn").on("click", function () {
+        $("#mobile-nav").toggleClass("open");
         });
         $("#mobile-nav a").on("click", function () {
           $("#mobile-nav").removeClass("open");
-        });
-
-        var tlPath = document.getElementById("tl-line-path");
-        var tlBox = document.getElementById("mainTimeline");
-        var DASH = 4000;
-
-        function updateLine() {
-          if (!tlPath || !tlBox) return;
-          var rect = tlBox.getBoundingClientRect();
-          var totalH = tlBox.offsetHeight;
-          var scrolled = Math.max(0, -rect.top + window.innerHeight * 0.5);
-          var progress = Math.min(1, scrolled / totalH);
-          tlPath.style.strokeDashoffset = DASH * (1 - progress);
-        }
-
-        var cardObs = new IntersectionObserver(
-          function (entries) {
-            entries.forEach(function (e) {
-              if (e.isIntersecting) {
-                $(e.target).addClass("visible");
-                $(e.target).find(".tl-dot").addClass("visible");
-              }
-            });
-          },
-          { threshold: 0.1, rootMargin: "0px 0px -50px 0px" },
-        );
-
-        $(".reveal-card").each(function () {
-          cardObs.observe(this);
-        });
-
-        var genObs = new IntersectionObserver(
-          function (entries) {
-            entries.forEach(function (e) {
-              if (e.isIntersecting) $(e.target).addClass("visible");
-              else $(e.target).removeClass("visible");
-            });
-          },
-          { threshold: 0.08, rootMargin: "0px 0px -30px 0px" },
-        );
-
-        $(".reveal").each(function () {
-          genObs.observe(this);
-        });
-
-        $(window).on("scroll", function () {
-          var s = $(this).scrollTop();
-          $("[data-layer='slow']").css(
-            "transform",
-            "translateY(" + s * 0.055 + "px)",
-          );
-          $("[data-layer='fast']").css(
-            "transform",
-            "translateY(" + s * 0.12 + "px)",
-          );
-          updateLine();
-        });
-
-        updateLine();
       });
     </script>
   </body>

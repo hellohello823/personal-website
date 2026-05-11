@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Valey — Timelyne</title>
-    <link rel="icon" href="icon.webp" />
+    <link rel="icon" href="icon/icon.webp" />
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="style.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -336,59 +336,12 @@
       </div>
     </footer>
 
-    <script>
-      $(function () {
-        $("#menuBtn").on("click", function () {
-          $("#mobile-nav").toggleClass("open");
-        });
-        $("#mobile-nav a").on("click", function () {
-          $("#mobile-nav").removeClass("open");
-        });
-
-        var revealObs = new IntersectionObserver(
-          function (entries) {
-            entries.forEach(function (e) {
-              if (e.isIntersecting) $(e.target).addClass("visible");
-              else $(e.target).removeClass("visible");
-            });
-          },
-          { threshold: 0.06, rootMargin: "0px 0px -40px 0px" },
-        );
-        $(".reveal").each(function () {
-          revealObs.observe(this);
-        });
-
-        $(window).on("scroll", function () {
-          var s = $(this).scrollTop();
-          $("[data-layer='slow']").css(
-            "transform",
-            "translateY(" + s * 0.04 + "px)",
-          );
-          $("[data-layer='fast']").css(
-            "transform",
-            "translateY(" + s * 0.09 + "px)",
-          );
-        });
-
-        var barObs = new IntersectionObserver(
-          function (entries) {
-            entries.forEach(function (e) {
-              if (e.isIntersecting) {
-                $(e.target)
-                  .find(".progress-bar-fill")
-                  .each(function () {
-                    var w = $(this).css("width");
-                    $(this).css("width", 0).animate({ width: w }, 1200);
-                  });
-                barObs.unobserve(e.target);
-              }
-            });
-          },
-          { threshold: 0.3 },
-        );
-        $(".sticky-note, .bg-white").each(function () {
-          barObs.observe(this);
-        });
+    <script src="script.js">
+      $("#menuBtn").on("click", function () {
+        $("#mobile-nav").toggleClass("open");
+      });
+      $("#mobile-nav a").on("click", function () {
+        $("#mobile-nav").removeClass("open");
       });
     </script>
   </body>
