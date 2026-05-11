@@ -142,7 +142,6 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-//gallery.page
 
 //projects page
 $(function () {
