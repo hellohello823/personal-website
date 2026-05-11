@@ -56,22 +56,18 @@ document.addEventListener("DOMContentLoaded", () => {
   if (firstCard) {
     const firstTilt = "2.2deg";
     firstCard.style.setProperty("--tilt", firstTilt);
-    firstCard.style.opacity = "0";
+    firstCard.classList.add("hobby-card-entrance");
 
-    setTimeout(() => {
-      firstCard.classList.add("hobby-card-entrance");
-      firstCard.addEventListener(
-        "animationend",
-        () => {
-          firstCard.style.opacity = "";
-          firstCard.style.transition =
-            "transform 0.42s cubic-bezier(0.34,1.56,0.64,1)";
-          firstCard.style.transform = `rotate(${firstTilt})`;
-          firstCardReady = true;
-        },
-        { once: true },
-      );
-    }, 200);
+    firstCard.addEventListener(
+      "animationend",
+      () => {
+        firstCard.style.opacity = "1";
+        firstCardReady = true;
+        firstCard.style.transform = `translateY(0) rotate(2.2deg) scale(1)`;
+        firstCard.classList.remove('hobby-card-entrance');
+      },
+      { once: true }
+    );
   }
 
   cards.forEach((card) => {
@@ -88,7 +84,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     card.addEventListener("mouseenter", () => {
       if (window.innerWidth <= 900) return;
-      if (card === firstCard && !firstCardReady) return;
+      if (/*card === firstCard &&*/ !firstCardReady) return;
       card.classList.remove("h-swing-left", "h-swing-right");
       card.style.transition = "transform 0.42s cubic-bezier(0.34,1.56,0.64,1)";
       card.style.transform = "rotate(0deg) translateY(-6px)";
@@ -96,7 +92,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     card.addEventListener("mouseleave", () => {
       if (window.innerWidth <= 900) return;
-      if (card === firstCard && !firstCardReady) return;
+      if (/*card === firstCard &&*/ !firstCardReady) return;
       card.style.transition = "none";
       card.style.transform = "none";
 
