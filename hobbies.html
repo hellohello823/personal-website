@@ -705,7 +705,6 @@
           { threshold: 0.08, rootMargin: "0px 0px -40px 0px" },
         );
 
-        // Only observe non-hobby-card reveals
         $(".reveal:not(.hobby-card)").each(function () {
           obs.observe(this);
         });
@@ -730,7 +729,7 @@
                 firstCard.style.transition =
                   "transform 0.42s cubic-bezier(0.34,1.56,0.64,1)";
                 firstCard.style.transform = `rotate(${firstTilt})`;
-                firstCardReady = true; // now allow hover
+                firstCardReady = true;
               },
               { once: true },
             );
@@ -753,7 +752,7 @@
 
           card.addEventListener("mouseenter", () => {
             if (window.innerWidth <= 900) return;
-            if (card === firstCard && !firstCardReady) return; // block during entrance
+            if (card === firstCard && !firstCardReady) return;
             card.classList.remove("h-swing-left", "h-swing-right");
             card.style.transition =
               "transform 0.42s cubic-bezier(0.34,1.56,0.64,1)";
@@ -783,13 +782,11 @@
           });
         });
 
-        // Reveal cards 2-5, toggle on scroll up and down
         const revealObs = new IntersectionObserver(
           (entries) => {
             entries.forEach((entry) => {
               if (entry.isIntersecting) {
                 entry.target.classList.add("visible");
-                // Restore tilt when re-revealed
                 const tiltDir = entry.target.dataset.tilt;
                 const tiltAngle = tiltDir === "left" ? "-2.2deg" : "2.2deg";
                 entry.target.style.transition =
@@ -797,7 +794,6 @@
                 entry.target.style.transform = `rotate(${tiltAngle})`;
               } else {
                 entry.target.classList.remove("visible");
-                // Reset so it can re-animate from translateY
                 entry.target.style.transition = "none";
                 entry.target.style.transform = "";
               }
