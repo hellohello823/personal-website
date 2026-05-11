@@ -23,11 +23,13 @@
     <header
       class="fixed top-0 left-0 w-full z-[100] bg-white backdrop-blur-md shadow-[0_2px_8px_rgba(0,0,0,0.08)] h-16 flex items-center px-8 justify-between"
     >
-      <img
-        src="images/valey-logo.webp"
-        alt="Valey logo"
-        class="h-11 object-contain"
-      />
+      <a href="index.html">
+        <img
+          src="images/valey-logo.webp"
+          alt="Valey logo"
+          class="h-11 object-contain"
+        />
+      </a>
 
       <nav class="nav-tabs flex items-end gap-1">
         <a href="index.html" class="nav-tab inactive">Home</a>
@@ -693,8 +695,6 @@
           $("#mobile-nav").removeClass("open");
         });
 
-
-
         var obs = new IntersectionObserver(
           function (entries) {
             entries.forEach(function (e) {
@@ -741,14 +741,16 @@
           card.addEventListener("mouseenter", () => {
             if (window.innerWidth > 900) {
               card.style.transform = "rotate(0deg) translateY(-6px)";
-              card.style.transition = "transform .42s cubic-bezier(.34,1.56,.64,1)";
+              card.style.transition =
+                "transform .42s cubic-bezier(.34,1.56,.64,1)";
             }
           });
 
           // On leave: restore tilt with swing animation
           card.addEventListener("mouseleave", () => {
             card.style.transform = `rotate(${tiltAngle})`;
-            card.style.transition = "transform .42s cubic-bezier(.34,1.56,.64,1)";
+            card.style.transition =
+              "transform .42s cubic-bezier(.34,1.56,.64,1)";
 
             card.classList.add(swingClass);
             setTimeout(() => {

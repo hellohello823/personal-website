@@ -231,6 +231,33 @@ body {
   }
 }
 
+@keyframes h-swing {
+  0% {
+    transform: rotate(1.5deg);
+  }
+  20% {
+    transform: rotate(-5deg);
+  }
+  40% {
+    transform: rotate(-1.5deg);
+  }
+  58% {
+    transform: rotate(-4deg);
+  }
+  72% {
+    transform: rotate(-2.4deg);
+  }
+  83% {
+    transform: rotate(-3.4deg);
+  }
+  92% {
+    transform: rotate(-2.8deg);
+  }
+  100% {
+    transform: rotate(-3deg);
+  }
+}
+
 @keyframes g-swingRight {
   0% {
     transform: rotate(4deg);
@@ -453,6 +480,10 @@ body {
   animation: swingLeft 0.7s ease-out forwards;
 }
 
+.h-swing-effect {
+  animation: h-swing 0.7s ease-in-out forwards;
+}
+
 .g-swing-right {
   animation: g-swingRight 0.7s ease-out forwards;
 }
@@ -567,12 +598,6 @@ body {
 }
 .polaroid-wrap img {
   filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.12));
-}
-
-.about-polaroid {
-  transition:
-    transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1),
-    filter 0.35s ease;
 }
 
 .hobby-card {
@@ -1042,6 +1067,7 @@ body {
   .polaroid-wrap img {
     width: 240px !important;
   }
+
   .hero-title {
     font-size: 56px !important;
   }
@@ -1057,20 +1083,89 @@ body {
   .about-polaroid img {
     width: 240px !important;
   }
+
   .timeline-line {
     display: none !important;
   }
 
+  #tl-line-svg {
+    display: none;
+  }
+
+  .tl-dot-wrap {
+    display: none;
+  }
+
+  #mainTimeline {
+    position: relative;
+    padding-left: 20px;
+  }
+
+  #mainTimeline::before {
+    content: "";
+    position: absolute;
+    left: 9px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: rgba(255, 143, 171, 0.45);
+    border-radius: 2px;
+  }
+
+  .tl-row {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    gap: 0;
+    margin-bottom: 32px;
+    padding-left: 20px;
+    position: relative;
+  }
+
+  .tl-row::after {
+    display: none;
+  }
+
+  .tl-row {
+    padding-left: 0; 
+  }
+
+  .proj-card::before {
+    content: "";
+    position: absolute;
+    left: -18px;
+    top: 14px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #ffcad4, #ff8fab);
+    border: 3px solid #fff5f7;
+    box-shadow: 0 0 0 2px rgba(255, 179, 198, 0.55);
+    z-index: 10;
+  }
+
   .proj-card-inner {
-    flex-direction: column;
     height: auto;
   }
+
   .proj-card .thumb {
-    flex: 0 0 200px;
-    width: 100%;
+    display: none;
   }
-  .proj-card .thumb img {
-    height: 200px;
+
+  .proj-card .card-body {
+    padding: 24px 18px 20px 18px;
+  }
+
+  .proj-card .tape-tab {
+    left: 16px;
+  }
+
+  .proj-card .margin-line {
+    display: none;
+  }
+
+  .proj-card .corner-dot {
+    left: 6px;
   }
 }
 
